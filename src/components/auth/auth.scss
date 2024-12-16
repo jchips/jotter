@@ -1,0 +1,60 @@
+@use "../../assets/colors";
+@use "sass:color";
+
+// $btnBg: #646cff;
+// $btnBg: #3b45ff;
+
+.auth-component h1 {
+  text-align: center;
+  margin-top: 60px;
+  font-weight: 600;
+}
+
+.login-form {
+  margin: 0 auto;
+  margin-top: 60px;
+  max-width: 27rem;
+  padding: 10px;
+  padding-top: 20px;
+}
+
+// card description
+.css-b9p74s {
+  color: colors.$themePurpleText;
+}
+
+// input box
+.css-1u9g43l {
+  width: 100%;
+}
+
+.navigate {
+  margin: 50px;
+  margin-top: 20px;
+  text-align: center;
+
+  p {
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  a {
+    font-size: 0.875rem;
+  }
+}
+
+.auth-btn {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.navigate-btn {
+  // background-color: $btnBg;
+  // border: 1px #646cff solid;
+  color: colors.$themePurple;
+
+  // &:hover {
+  //   // background-color: adjust-color($btnBg, $lightness: 10%);
+  //   background-color: color.adjust($btnBg, $lightness: -10%);
+  // }
+}

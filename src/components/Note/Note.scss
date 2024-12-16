@@ -1,0 +1,67 @@
+@use "../../assets/colors";
+
+.note-body {
+  display: flex;
+  height: 100vh;
+}
+
+.editor__wrap,
+.preview {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex: 1;
+  // padding: 1.875rem;
+}
+
+.editor {
+  width: 100%;
+  flex-grow: 1;
+  // color: #fff;
+  margin-bottom: 20px;
+  border: none;
+  outline: none;
+  appearance: none;
+  background: none;
+  resize: none;
+}
+
+// .preview {
+//   all: unset;
+//   font-size: inherit;
+//   font-family: inherit;
+//   color: inherit;
+// }
+
+.preview__scroll {
+  overflow: auto;
+  flex-grow: 1;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+  padding: 20px;
+  background-color: colors.$darkTheme;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s, background-color 0.2s;
+
+  justify-content: flex-end;
+
+  .save-btn {
+    color: colors.$themeWhite;
+    background-color: colors.$themePurple;
+  }
+}
+
+
+// .preview {
+//   width: '50%';
+//   height: '90vh';
+//   padding: '10px';
+//   border: '1px solid #ccc';
+//   overflow-y: 'auto';
+//   background-color: '#f9f9f9';
+// }
