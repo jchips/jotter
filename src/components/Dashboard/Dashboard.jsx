@@ -6,6 +6,7 @@ import Navbar from '../Navbars/DashboardNav';
 import Loading from '../Loading';
 import DisplayNotes from './DisplayNotes';
 import AddNoteTitle from '../modals/AddNoteTitle';
+import { useMarkdown } from '@/hooks/useMarkdown';
 import api from '@/util/api';
 import './Dashboard.scss';
 
@@ -17,10 +18,12 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [selectedOption, setSelectedOption] = useState('');
   const { user, logout, isLoggedIn } = useAuth();
+  const { setMarkdown } = useMarkdown();
   const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
+    setMarkdown('');
     const fetchRootNotes = async () => {
       try {
         setError('');
@@ -36,7 +39,7 @@ const Dashboard = () => {
     };
     fetchRootNotes();
     setLoading(false);
-  }, [logout]);
+  }, [logout, setMarkdown]);
 
   if (!notes) {
     return <Loading />;

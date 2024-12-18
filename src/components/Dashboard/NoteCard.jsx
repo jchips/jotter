@@ -10,7 +10,7 @@ const NoteCard = ({ note }) => {
       size='sm'
       className='note-card'
       // _hover={{ backgroundColor: '#f4f4f5' }}
-      onDoubleClick={() => navigate(`/editor/${note.id}`)}
+      onDoubleClick={() => navigate(`/preview/${note.id}`)}
     >
       <Card.Header>
         <Heading size='md'>{note.title}</Heading>

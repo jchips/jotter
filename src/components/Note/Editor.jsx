@@ -19,15 +19,19 @@ const Editor = () => {
   const { noteId } = useParams();
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   setNote(markdown);
+  // }, [markdown]);
+
   useEffect(() => {
     const getNote = async () => {
+      setLoading(true);
       try {
-        setLoading(true);
         setError('');
         let note = await api.getNote(noteId);
-        console.log('note:', note.data[0]); // delete later
-        setNote(note.data[0]);
-        setMarkdown(note.data[0].content);
+        console.log('note:', note.data); // delete later
+        setNote(note.data);
+        setMarkdown(note.data.content);
       } catch (err) {
         console.error(err);
         err.response.data.message === 'jwt expired'
@@ -84,17 +88,19 @@ const Editor = () => {
           <Alert status='error' title={error} />
         </div>
       )}
-      <div className='note-body'>
-        <div className='editor__wrap'>
-          <textarea
-            value={markdown}
-            className='editor'
-            onChange={update}
-            placeholder='Type Markdown here...'
-          />
+      {!loading && (
+        <div className='note-body'>
+          <div className='editor__wrap'>
+            <textarea
+              value={markdown}
+              className='editor'
+              onChange={update}
+              placeholder='Type Markdown here...'
+            />
+          </div>
+          <Preview markdown={markdown} />
         </div>
-        <Preview />
-      </div>
+      )}
       <div className='footer'>
         <HStack>
           <Button

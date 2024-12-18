@@ -60,10 +60,8 @@ export function AuthProvider({ children }) {
 
   const logout = async () => {
     try {
-      let token = getToken();
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      axios.defaults.headers.common['Content-Type'] = 'application/json';
-      await axios.post('/', {}, { withCredentials: true });
+      let requestUrl = `${import.meta.env.VITE_SERVER}/jotter/logout`;
+      await axios.post(requestUrl, {}, { withCredentials: true });
       setUser(null);
       setIsLoggedIn(false);
       clearToken();

@@ -8,6 +8,7 @@ import Signup from './components/auth/Signup';
 import Editor from './components/Note/Editor';
 import Preview from './components/Note/Preview';
 import './assets/App.scss';
+import View from './components/Note/View';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route
               exact
               path='/editor/:noteId'
+              // path='/editor'
               element={
                 <PrivateRoute>
                   <Editor />
@@ -47,7 +49,7 @@ function App() {
               path='/preview/:noteId'
               element={
                 <PrivateRoute>
-                  <Preview />
+                  <View />
                 </PrivateRoute>
               }
             />
