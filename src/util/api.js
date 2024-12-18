@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getToken, clearToken } from './authUtils';
+import { getToken, clearToken } from './authUtil';
 
 const api = axios.create({
   baseURL: `${import.meta.env.VITE_SERVER}/jotter`,
@@ -24,6 +24,7 @@ api.interceptors.request.use(
     const token = getToken();
     if (token) {
       apiConfig.headers['Authorization'] = `Bearer ${token}`;
+      apiConfig.withCredentials = true;
     }
     return apiConfig;
   }
@@ -43,6 +44,12 @@ api.interceptors.response.use(
 
 const apiService = {
   // setTokenGetter,
+  authenticate: () => api.get('/', { withCredentials: true }),
+  getRootNotes: () => api.get('/note'),
+  getNote: (noteId) => api.get(`/note/${noteId}`),
+  addNote: (body) => api.post('/note', body),
+  updateNote: (body, noteId) => api.patch(`/note/${noteId}`, body),
+  addFolder: (body) => api.post('/folder', body),
 }
 
 export default apiService;

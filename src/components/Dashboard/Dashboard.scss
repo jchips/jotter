@@ -1,0 +1,20 @@
+.dashboard {
+  margin: 20px;
+
+  .display {
+    margin: 20px;
+  }
+
+  .chakra-card__body {
+    p {
+      font-size: small;
+    }
+  }
+
+  .note-card {
+    &:hover {
+      filter: brightness(75%);
+      // background-color: adjust-color();
+    }
+  }
+}

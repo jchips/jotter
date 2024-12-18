@@ -1,0 +1,14 @@
+@use 'colors';
+
+// theme purple button
+.button1 {
+  color: colors.$themeWhite;
+  background-color: colors.$themePurple;
+  margin-left: 10px;
+
+  &:hover {
+    background-color: adjust-color($color: colors.$themePurple, $lightness: -10%);
+    // background-color: color.scale(colors.$themePurple, -16.2420382166%);
+    // background-color: darken($color: colors.$themePurple, $amount: 10);
+  }
+}

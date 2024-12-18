@@ -24,14 +24,8 @@
   appearance: none;
   background: none;
   resize: none;
+  white-space: pre-wrap;
 }
-
-// .preview {
-//   all: unset;
-//   font-size: inherit;
-//   font-family: inherit;
-//   color: inherit;
-// }
 
 .preview__scroll {
   overflow: auto;
@@ -53,6 +47,7 @@
   .save-btn {
     color: colors.$themeWhite;
     background-color: colors.$themePurple;
+    margin-left: 10px;
   }
 }
 

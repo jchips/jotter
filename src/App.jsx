@@ -3,10 +3,11 @@ import { AuthProvider } from './contexts/AuthProvider';
 import { MarkdownProvider } from '../src/contexts/MDProvider';
 import PrivateRoute from './components/auth/PrivateRoute';
 import Login from './components/auth/Login';
-import Dashboard from './components/Dashboard';
+import Dashboard from './components/Dashboard/Dashboard';
 import Signup from './components/auth/Signup';
-import Note from './components/Note/Note';
-import DisplayNote from './components/Note/DisplayNote';
+import Editor from './components/Note/Editor';
+import Preview from './components/Note/Preview';
+import './assets/App.scss';
 
 function App() {
   return (
@@ -34,19 +35,19 @@ function App() {
             />
             <Route
               exact
-              path='/editor'
+              path='/editor/:noteId'
               element={
                 <PrivateRoute>
-                  <Note />
+                  <Editor />
                 </PrivateRoute>
               }
             />
             <Route
               exact
-              path='/preview'
+              path='/preview/:noteId'
               element={
                 <PrivateRoute>
-                  <DisplayNote />
+                  <Preview />
                 </PrivateRoute>
               }
             />

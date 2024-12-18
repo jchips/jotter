@@ -8,9 +8,10 @@ import { useMarkdown } from '../../hooks/useMarkdown';
 import './Note.scss';
 import '../../assets/markdown.scss';
 
-const DisplayNote = () => {
+const Preview = () => {
   const { markdown, setMarkdown } = useMarkdown();
   return (
+    // <div className='preview-window'>
     <div className='preview'>
       <div className='preview__scroll'>
         <Box className='markdown-wrapper'>
@@ -40,7 +41,8 @@ const DisplayNote = () => {
         </Box>
       </div>
     </div>
+    // </div>
   );
 };
 
-export default DisplayNote;
+export default Preview;
