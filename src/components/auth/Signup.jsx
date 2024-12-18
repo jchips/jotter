@@ -175,7 +175,7 @@ const Signup = () => {
                 colorPalette={'gray'}
                 variant='solid'
                 onClick={handleSubmit(onSubmit)}
-                isDisabled={loading}
+                disabled={loading}
               >
                 Sign in
               </Button>
