@@ -17,10 +17,11 @@ import { Field } from '@/components/ui/field';
 import { useAuth } from '@/hooks/useAuth';
 import api from '@/util/api';
 
-const AddNoteTitle = (props) => {
+const AddTitle = (props) => {
   const { isOpen, setIsOpen, selectedOption, notes, setNotes, setFolders } =
     props;
   const [error, setError] = useState('');
+  const [saving, setSaving] = useState(false);
   const { user } = useAuth();
   const {
     control,
@@ -35,6 +36,7 @@ const AddNoteTitle = (props) => {
 
   const onSubmit = async (titleControl) => {
     try {
+      setSaving(true);
       setError('');
       let res;
       switch (selectedOption) {
@@ -59,6 +61,7 @@ const AddNoteTitle = (props) => {
           break;
       }
       console.log('res', res.data); // delete later
+      setIsOpen(false);
     } catch (err) {
       setError('Failed to create ' + selectedOption);
       console.error(err);
@@ -66,7 +69,7 @@ const AddNoteTitle = (props) => {
     reset({
       title: '',
     });
-    setIsOpen(false);
+    setSaving(false);
   };
   return (
     <DialogRoot modal={true} open={isOpen}>
@@ -105,7 +108,12 @@ const AddNoteTitle = (props) => {
                 Cancel
               </Button>
             </DialogActionTrigger>
-            <Button type='submit' className='button1' variant='solid'>
+            <Button
+              type='submit'
+              className='button1'
+              variant='solid'
+              disabled={saving}
+            >
               Create {selectedOption}
             </Button>
           </DialogFooter>
@@ -116,4 +124,4 @@ const AddNoteTitle = (props) => {
   );
 };
 
-export default AddNoteTitle;
+export default AddTitle;

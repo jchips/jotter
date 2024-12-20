@@ -4,20 +4,24 @@ import { Button, HStack } from '@chakra-ui/react';
 import { useAuth } from '@/hooks/useAuth';
 import { useMarkdown } from '../../hooks/useMarkdown';
 import Preview from './Preview';
+import Loading from '../Loading';
+import Title from '../Navbars/Title';
+import ChangeTitle from '../modals/ChangeTitle';
+import DeleteConfirmation from '../modals/DeleteConfirmation';
 import api from '@/util/api';
-import './Note.scss';
+import './Preview.scss';
 import '../../assets/markdown.scss';
 
 const View = () => {
   const [note, setNote] = useState();
   const [error, setError] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [delConfirmOpen, setDelConfirmOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const { markdown, setMarkdown } = useMarkdown('');
   const { logout } = useAuth();
   const { noteId } = useParams();
   const navigate = useNavigate();
-
-  console.log('noteId', noteId); // delete later
 
   useEffect(() => {
     const getNote = async () => {
@@ -45,27 +49,51 @@ const View = () => {
 
   const handleEdit = () => {
     navigate(`/editor/${noteId}`);
-    // navigate('/editor');
   };
 
   const handleExit = () => {
     navigate(-1);
     setMarkdown('');
   };
+
+  if (!note) {
+    return <Loading />;
+  }
+
   return (
     !loading && (
-      <div>
-        <Preview markdown={markdown} />
+      <div className='view'>
+        <Title
+          note={note}
+          setIsOpen={setIsOpen}
+          setDelConfirmOpen={setDelConfirmOpen}
+        />
+        <div className='preview__wrapper'>
+          <Preview markdown={markdown} />
+        </div>
         <div className='footer'>
           <HStack>
-            <Button variant='solid' onClick={handleExit}>
+            <Button className='button2' variant='solid' onClick={handleExit}>
               Exit
             </Button>
             <Button className='button1' variant='solid' onClick={handleEdit}>
-              Edit
+              Edit note
             </Button>
           </HStack>
         </div>
+        <ChangeTitle
+          note={note}
+          setNote={setNote}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          type={'note'}
+        />
+        <DeleteConfirmation
+          note={note}
+          delConfirmOpen={delConfirmOpen}
+          setDelConfirmOpen={setDelConfirmOpen}
+          type={'note'}
+        />
       </div>
     )
   );

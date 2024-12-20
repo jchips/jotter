@@ -1,0 +1,45 @@
+@use './note';
+
+.note-window {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.note-body {
+  display: flex;
+  overflow-y: auto;
+  margin-bottom: 60px;
+}
+
+.ͼ1.cm-focused {
+  outline: none;
+}
+
+// Hide gutters
+.cm-gutters,
+.cm-gutter {
+  display: none !important;
+}
+
+.editor__wrap {
+  flex-grow: 1;
+  overflow-y: scroll;
+  width: 50%;
+}
+
+.editor {
+  @include note.grid;
+  font-size: 1rem;
+  padding: 20px;
+  border: none;
+  outline: none;
+  appearance: none;
+  background: none;
+  resize: none;
+  white-space: pre-wrap;
+}
+
+.footer {
+  @include note.footer;
+}

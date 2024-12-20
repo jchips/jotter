@@ -1,35 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Button, Grid } from '@chakra-ui/react';
 import { Alert } from '@/components/ui/alert';
-// import Loading from '../Loading';
 import NoteCard from './NoteCard';
-// import api from '@/util/api';
 
 const DisplayNotes = ({ notes, error }) => {
-  // const [notes, setNotes] = useState();
-  // const [error, setError] = useState('');
-
-  // useEffect(() => {
-  //   const fetchRootNotes = async () => {
-  //     try {
-  //       setError('');
-  //       let res = await api.getRootNotes();
-  //       console.log('root notes:', res.data); // delete later
-  //       setNotes(res.data);
-  //     } catch (err) {
-  //       console.error(err);
-  //       err.response.data.message === 'jwt expired'
-  //         ? logout()
-  //         : setError('Could not fetch notes');
-  //     }
-  //   };
-  //   fetchRootNotes();
-  // }, [logout]);
-
-  // if (!notes) {
-  //   return <Loading />;
-  // }
-
   return (
     <div>
       {notes.length !== 0 ? (
@@ -46,7 +20,9 @@ const DisplayNotes = ({ notes, error }) => {
           </Grid>
         </div>
       ) : (
-        <p>No notes.</p>
+        <div className='display'>
+          <p>No notes.</p>
+        </div>
       )}
     </div>
   );

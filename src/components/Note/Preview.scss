@@ -1,0 +1,28 @@
+@use './note';
+
+.view {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.preview {
+  @include note.grid;
+}
+
+.preview__wrapper {
+  max-height: 100%;
+  margin: 80px 40px;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.preview__scroll {
+  overflow-y: auto;
+  flex-grow: 1;
+  width: 50%;
+}
+
+.footer {
+  @include note.footer;
+}

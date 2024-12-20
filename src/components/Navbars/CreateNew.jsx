@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Box, Stack, Button } from '@chakra-ui/react';
-import AddNoteTitle from '../modals/AddNoteTitle';
 import {
   HoverCardContent,
   HoverCardRoot,
@@ -57,11 +56,6 @@ const CreateNew = ({ setSelectedOption, setIsOpen }) => {
           </HoverCardRoot>
         </div>
       ))}
-      {/* <AddNoteTitle
-        selectedOption={selectedOption}
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-      /> */}
     </Stack>
   );
 };

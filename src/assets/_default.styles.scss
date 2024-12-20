@@ -1,0 +1,8 @@
+@use './colors';
+
+@mixin small-text {
+  font-size: smaller;
+  color: colors.$themePurpleText;
+  font-weight: 400;
+  width: fit-content;
+}
