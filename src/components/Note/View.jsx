@@ -5,13 +5,18 @@ import { useAuth } from '@/hooks/useAuth';
 import { useMarkdown } from '../../hooks/useMarkdown';
 import Preview from './Preview';
 import Loading from '../Loading';
+import Title from '../Navbars/Title';
+import ChangeTitle from '../modals/ChangeTitle';
+import DeleteConfirmation from '../modals/DeleteConfirmation';
 import api from '@/util/api';
-import './Note.scss';
+import './Preview.scss';
 import '../../assets/markdown.scss';
 
 const View = () => {
   const [note, setNote] = useState();
   const [error, setError] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [delConfirmOpen, setDelConfirmOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const { markdown, setMarkdown } = useMarkdown('');
   const { logout } = useAuth();
@@ -57,8 +62,15 @@ const View = () => {
 
   return (
     !loading && (
-      <div>
-        <Preview markdown={markdown} />
+      <div className='view'>
+        <Title
+          note={note}
+          setIsOpen={setIsOpen}
+          setDelConfirmOpen={setDelConfirmOpen}
+        />
+        <div className='preview__wrapper'>
+          <Preview markdown={markdown} />
+        </div>
         <div className='footer'>
           <HStack>
             <Button className='button2' variant='solid' onClick={handleExit}>
@@ -69,6 +81,19 @@ const View = () => {
             </Button>
           </HStack>
         </div>
+        <ChangeTitle
+          note={note}
+          setNote={setNote}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          type={'note'}
+        />
+        <DeleteConfirmation
+          note={note}
+          delConfirmOpen={delConfirmOpen}
+          setDelConfirmOpen={setDelConfirmOpen}
+          type={'note'}
+        />
       </div>
     )
   );

@@ -5,7 +5,7 @@ import { useAuth } from '@/hooks/useAuth';
 import Navbar from '../Navbars/DashboardNav';
 import Loading from '../Loading';
 import DisplayNotes from './DisplayNotes';
-import AddNoteTitle from '../modals/AddNoteTitle';
+import AddTitle from '../modals/AddTitle';
 import { useMarkdown } from '@/hooks/useMarkdown';
 import api from '@/util/api';
 import './Dashboard.scss';
@@ -60,7 +60,7 @@ const Dashboard = () => {
           setFolders={setFolders}
         />
         <DisplayNotes notes={notes} error={error} logout={logUserOut} />
-        <AddNoteTitle
+        <AddTitle
           user={user}
           selectedOption={selectedOption}
           isOpen={isOpen}

@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router';
+import { throttle } from 'lodash';
 import { Button, HStack } from '@chakra-ui/react';
 import { Alert } from '@/components/ui/alert';
 import CodeMirror from '@uiw/react-codemirror';
 import { markdown as md } from '@codemirror/lang-markdown';
+import { EditorView } from '@uiw/react-codemirror';
 import { useMarkdown } from '../../hooks/useMarkdown';
 import { useAuth } from '@/hooks/useAuth';
 import Preview from './Preview';
 import Loading from '../Loading';
 import api from '@/util/api';
-import './Note.scss';
+import './Editor.scss';
 import '../../assets/markdown.scss';
 
 const Editor = () => {
@@ -21,6 +23,7 @@ const Editor = () => {
   const { logout } = useAuth();
   const { noteId } = useParams();
   const navigate = useNavigate();
+  const previewRef = useRef(null);
 
   useEffect(() => {
     const getNote = async () => {
@@ -45,10 +48,37 @@ const Editor = () => {
     setLoading(false);
   }, [noteId, setMarkdown, logout, navigate]);
 
+  // sync the editor and preview scrollbars to each other
+  const editorRef = useCallback((node) => {
+    if (node) {
+      const editorView = node;
+      const syncScroll = throttle(() => {
+        const scrollRatio =
+          editorView.scrollTop /
+          (editorView.scrollHeight - editorView.clientHeight);
+        if (
+          previewRef.current &&
+          previewRef.current.scrollHeight > previewRef.current.clientHeight
+        ) {
+          previewRef.current.scrollTop =
+            scrollRatio *
+              (previewRef.current.scrollHeight -
+                previewRef.current.clientHeight) +
+            500;
+        }
+      }, 100);
+      editorView.addEventListener('scroll', syncScroll);
+      node.cleanup = () => editorView.removeEventListener('scroll', syncScroll);
+    } else {
+      editorRef.current?.cleanup?.();
+    }
+  }, []);
+
   const update = (value) => {
     setMarkdown(value);
   };
 
+  // Saves changes to the note
   const handleSave = async () => {
     try {
       setError('');
@@ -86,16 +116,19 @@ const Editor = () => {
       )}
       {!loading && (
         <div className='note-body'>
-          <div className='editor__wrap'>
+          <div className='editor__wrap' ref={editorRef}>
             <CodeMirror
               value={markdown}
               className='editor'
-              extensions={[md()]}
+              extensions={[md(), EditorView.lineWrapping]}
               placeholder='Type Markdown here...'
               onChange={update}
+              options={{
+                lineWrapping: true,
+              }}
             />
           </div>
-          <Preview markdown={markdown} />
+          <Preview markdown={markdown} previewRef={previewRef} />
         </div>
       )}
       <div className='footer'>

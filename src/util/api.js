@@ -49,6 +49,7 @@ const apiService = {
   getNote: (noteId) => api.get(`/note/${noteId}`),
   addNote: (body) => api.post('/note', body),
   updateNote: (body, noteId) => api.patch(`/note/${noteId}`, body),
+  deleteNote: (noteId) => api.delete(`/note/${noteId}`),
   addFolder: (body) => api.post('/folder', body),
 }
 

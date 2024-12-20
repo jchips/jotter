@@ -1,58 +1,22 @@
 @use "../../assets/colors";
 
-.note-body {
+@mixin grid {
   display: flex;
+  flex-direction: column;
   height: 100vh;
 }
 
-.ͼ1.cm-focused {
-  outline: none;
-}
 
-// Hide gutters
-.cm-gutters,
-.cm-gutter {
-  display: none !important;
-}
-
-.editor__wrap,
-.preview {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  flex: 1;
-  margin: 20px;
-  // padding: 1.875rem;
-}
-
-.editor {
-  width: 100%;
-  flex-grow: 1;
-  // color: #fff;
-  margin-bottom: 20px;
-  border: none;
-  outline: none;
-  appearance: none;
-  background: none;
-  resize: none;
-  white-space: pre-wrap;
-}
-
-.preview__scroll {
-  overflow: auto;
-  flex-grow: 1;
-}
-
-.footer {
+@mixin footer {
   position: fixed;
   bottom: 0;
   display: flex;
   width: 100%;
+  height: 60px;
   padding: 20px;
   background-color: colors.$darkTheme;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.2s, background-color 0.2s;
-
   justify-content: flex-end;
 }
 
@@ -68,6 +32,10 @@
 .ͼ2 .cm-activeLine {
   background-color: var(--editor-background-color) !important;
   color: var(--editor-text-color) !important;
+}
+
+.ͼ4 .cm-line {
+  caret-color: var(--editor-text-color) !important;
 }
 
 /* Applies light/dark background dynamically */

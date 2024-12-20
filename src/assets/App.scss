@@ -1,26 +1,38 @@
 @use 'sass:color';
 @use 'colors';
+@use './default.styles' as default;
 
 
-// $darken-themePurple: color.adjust()
-
-// theme purple button
-.button1 {
-  color: colors.$themeWhite;
-  background-color: colors.$themePurple;
-  margin-left: 10px;
+@mixin buttonColors($color, $bgColor) {
+  color: $color;
+  background-color: $bgColor;
+  margin-left: 5px;
 
   &:hover {
-    background-color: color.adjust(colors.$themePurple, $lightness: -10%);
+    background-color: color.adjust($bgColor, $lightness: -10%);
   }
 }
 
-.button2 {
-  color: #000;
-  background-color: colors.$themeWhite;
-  margin-left: 10px;
+// theme purple button
+.button1 {
+  @include buttonColors(colors.$themeWhite, colors.$themePurple);
+}
 
-  &:hover {
-    background-color: color.adjust(colors.$themeWhite, $lightness: -10%);
-  }
+// theme white button
+.button2 {
+  @include buttonColors(#000, colors.$themeWhite);
+}
+
+// black button
+.button3 {
+  @include buttonColors(colors.$themeWhite, #000);
+}
+
+// delete button
+.button4 {
+  @include buttonColors(colors.$themeWhite, #dc3545);
+}
+
+.small-text {
+  @include default.small-text;
 }
