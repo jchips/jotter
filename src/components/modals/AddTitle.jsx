@@ -27,8 +27,8 @@ const AddTitle = (props) => {
     folders,
     setNotes,
     setFolders,
-    currentFolder,
   } = props;
+  let { currentFolder } = props;
   const {
     control,
     handleSubmit,
@@ -45,19 +45,23 @@ const AddTitle = (props) => {
 
   /**
    * Adds a title to either a note or a folder
+   * If `currentFolder` is null (not in root or any other), exits function
    * @param {Object} titleControl - The input the user types as a title
    * @returns - nothing
    */
   const onSubmit = async (titleControl) => {
+    currentFolder = currentFolder?.data || currentFolder;
     console.log('currentFolder:', currentFolder); // delete later
-    // If not in any folder at all (so, not in root or any other)
     if (currentFolder === null) return;
     const path = [...currentFolder.path];
 
     // Adds current folder to the path
     if (currentFolder !== ROOT_FOLDER) {
       console.log('path:', path); // delete later
-      path.push({ id: currentFolder.id, title: currentFolder.title });
+      path.push({
+        id: currentFolder.id,
+        title: currentFolder.title,
+      });
     }
     try {
       setSaving(true);

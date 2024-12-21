@@ -80,7 +80,9 @@ const Dashboard = () => {
           currentFolder={folder?.data}
         />
         {folders && <DisplayFolders folders={folders} error={error} />}
-        {notes && <DisplayNotes notes={notes} error={error} />}
+        {notes && (
+          <DisplayNotes notes={notes} folders={folders} error={error} />
+        )}
         <AddTitle
           user={user}
           selectedOption={selectedOption}
@@ -91,7 +93,7 @@ const Dashboard = () => {
           setNotes={setNotes}
           setFolders={setFolders}
           // folderId={folderId}
-          currentFolder={folder?.data}
+          currentFolder={folder}
         />
       </div>
     )

@@ -1,22 +1,11 @@
-import { useState, createContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Buffer } from 'buffer';
-import { getToken, setToken, clearToken } from '@/util/authUtil';
 import { AuthContext } from './AuthContext';
-import logInUser from '@/util/logInUser';
+import { setToken, clearToken } from '@/util/authUtil';
 import api from '@/util/api';
 
-// export const AuthContext = createContext();
-
 export function AuthProvider({ children }) {
-  // const [user, setUser] = useState(() => {
-  //   const token = getToken();
-  //   return token ? jwtDecode(token) : null;
-  // });
-  // const [isLoggedIn, setIsLoggedIn] = useState(() => {
-  //   const token = getToken();
-  //   return token ? true : false;
-  // });
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -54,9 +43,9 @@ export function AuthProvider({ children }) {
       res = err;
     }
     return res;
-    // return encodedLogin;
   };
 
+  // Logs user out
   const logout = async () => {
     try {
       let requestUrl = `${import.meta.env.VITE_SERVER}/jotter/logout`;
@@ -81,4 +70,3 @@ export function AuthProvider({ children }) {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
-// export { AuthContext };

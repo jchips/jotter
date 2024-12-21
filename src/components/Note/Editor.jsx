@@ -84,7 +84,7 @@ const Editor = () => {
   };
 
   // Saves changes to the note
-  const handleSave = async () => {
+  const handleSave = useCallback(async () => {
     try {
       setError('');
       setSaving(true);
@@ -93,7 +93,7 @@ const Editor = () => {
           content: markdown,
           updatedAt: Date.now(),
         },
-        note.id
+        noteId
       );
       console.log('updated note:', res.data); // delete later
     } catch (err) {
@@ -101,7 +101,21 @@ const Editor = () => {
       console.error(err);
     }
     setSaving(false);
-  };
+  }, [markdown, noteId]);
+
+  // If user presses ctrl-s, the file saves it's changes
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        handleSave();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [markdown, handleSave]);
 
   const handleSaveAndExit = () => {
     handleSave();

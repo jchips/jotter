@@ -47,8 +47,19 @@
   }
 
   ul {
-    list-style-type: disc;
+    list-style-type: disc; // For top-level <ul> (not nested)
+
+    >li>ul {
+      list-style-type: circle;
+      margin-top: 8px;
+      margin-bottom: 8px;
+
+      >li>ul {
+        list-style-type: square; // For grandchild <ul>
+      }
+    }
   }
+
 
   ol {
     list-style-type: decimal;
@@ -71,6 +82,15 @@
     font-size: 1rem;
     line-height: 1.5;
   }
+
+  // ul>ul {
+  //   list-style-type: circle;
+
+  //   &>ul {
+  //     list-style-type: square;
+  //   }
+  // }
+
 
   table {
     border-spacing: 0 !important;

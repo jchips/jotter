@@ -3,10 +3,14 @@ import { Button, Grid } from '@chakra-ui/react';
 import { Alert } from '@/components/ui/alert';
 import NoteCard from './NoteCard';
 
-const DisplayNotes = ({ notes, error }) => {
+const DisplayNotes = ({ notes, folders, error }) => {
   return (
     <div>
-      {notes.length !== 0 ? (
+      {notes.length === 0 && folders.length === 0 ? (
+        <div className='display'>
+          <p>No notes.</p>
+        </div>
+      ) : (
         <div className='display'>
           {error ? (
             <div>
@@ -18,10 +22,6 @@ const DisplayNotes = ({ notes, error }) => {
               <NoteCard note={note} key={note.id} />
             ))}
           </Grid>
-        </div>
-      ) : (
-        <div className='display'>
-          <p>No notes.</p>
         </div>
       )}
     </div>
