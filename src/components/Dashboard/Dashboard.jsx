@@ -10,6 +10,7 @@ import Navbar from '../Navbars/DashboardNav';
 import DisplayFolders from './DisplayFolders';
 import api from '@/util/api';
 import './Dashboard.scss';
+import FolderBreadcrumb from './FolderBreadcrumb';
 
 const Dashboard = () => {
   const [notes, setNotes] = useState();
@@ -78,6 +79,7 @@ const Dashboard = () => {
           setFolders={setFolders}
           currentFolder={folder?.data}
         />
+        {folderId && <FolderBreadcrumb currentFolder={folder} />}
         {folders && <DisplayFolders folders={folders} error={error} />}
         {notes && (
           <DisplayNotes notes={notes} folders={folders} error={error} />
