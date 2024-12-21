@@ -15,7 +15,10 @@
   .folder-card {
     &:hover {
       filter: brightness(75%);
-      // background-color: adjust-color();
     }
+  }
+
+  .breadcrumb {
+    margin-top: 20px;
   }
 }

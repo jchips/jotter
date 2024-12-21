@@ -45,14 +45,17 @@ const AddTitle = (props) => {
 
   /**
    * Adds a title to either a note or a folder
-   * If `currentFolder` is null (not in root or any other), exits function
+   * If `currentFolder` is null (not in root or any other), exit function
    * @param {Object} titleControl - The input the user types as a title
    * @returns - nothing
    */
   const onSubmit = async (titleControl) => {
-    currentFolder = currentFolder?.data ? currentFolder.data : currentFolder;
     if (currentFolder === null) return;
-    const path = [...currentFolder.path];
+    currentFolder = currentFolder?.data ? currentFolder.data : currentFolder;
+    let path = currentFolder === ROOT_FOLDER ? [] : [ROOT_FOLDER];
+    let currentFolderPath =
+      currentFolder !== ROOT_FOLDER ? JSON.parse(currentFolder.path) : path; // parse from db
+    path = [...currentFolderPath];
 
     // Adds current folder to the path
     if (currentFolder !== ROOT_FOLDER) {

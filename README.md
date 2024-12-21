@@ -6,7 +6,7 @@ Users can log in to accounts and write notes with markdown.
 
 ## Creator & developer: Jelani R
 
-## Version: 0.2.0
+## Version: 0.2.1
 
 ## Architecture
 
@@ -31,6 +31,7 @@ Users can log in to accounts and write notes with markdown.
 
 ## Changelog
 
+- 0.2.1 (2024-12-21, 4:33am) - Folder breadcrumbs.
 - 0.2.0 (2024-12-20, 8:56pm) - Folder support, ctrl/cmd-s in editor.
 - 0.1.1 (2024-12-20, 2:04am) - Users can delete notes. Also, added some styling and an editor/preview scrolling sync (sort of).
 - 0.1.0 (2024-12-18, 3:11pm) - Users can create notes that support markdown, edit, and save them.

@@ -42,7 +42,7 @@ const DashboardNav = (props) => {
             textStyle='2xl'
             fontWeight={700}
           >
-            {currentFolder ? currentFolder.title : 'Home'}
+            {currentFolder ? currentFolder.title : 'Jotter'}
           </Text>
         </Flex>
 
