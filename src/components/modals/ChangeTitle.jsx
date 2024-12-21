@@ -46,7 +46,6 @@ const ChangeTitle = (props) => {
             },
             note.id
           );
-          console.log('updated note:', res.data); // delete later
           setNote(res.data);
           break;
         case 'folder':

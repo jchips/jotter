@@ -103,7 +103,7 @@ const Editor = () => {
     setSaving(false);
   }, [markdown, noteId]);
 
-  // If user presses ctrl-s, the file saves it's changes
+  // If user presses ctrl-s, the note saves it's changes
   useEffect(() => {
     const handleKeyDown = (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 's') {
@@ -117,11 +117,13 @@ const Editor = () => {
     };
   }, [markdown, handleSave]);
 
+  // Saves the note and exits
   const handleSaveAndExit = () => {
     handleSave();
-    navigate(-1);
+    navigate(`/preview/${noteId}`);
   };
 
+  // Loading circle
   if (!note) {
     return <Loading />;
   }
@@ -147,7 +149,9 @@ const Editor = () => {
               }}
             />
           </div>
-          <Preview markdown={markdown} previewRef={previewRef} />
+          <div className='preview__scroll' ref={previewRef}>
+            <Preview markdown={markdown} />
+          </div>
         </div>
       )}
       <div className='footer'>

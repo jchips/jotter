@@ -6,3 +6,8 @@
   font-weight: 400;
   width: fit-content;
 }
+
+@mixin medium-text {
+  font-size: medium;
+  width: fit-content;
+}

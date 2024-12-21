@@ -50,14 +50,12 @@ const AddTitle = (props) => {
    * @returns - nothing
    */
   const onSubmit = async (titleControl) => {
-    currentFolder = currentFolder?.data || currentFolder;
-    console.log('currentFolder:', currentFolder); // delete later
+    currentFolder = currentFolder?.data ? currentFolder.data : currentFolder;
     if (currentFolder === null) return;
     const path = [...currentFolder.path];
 
     // Adds current folder to the path
     if (currentFolder !== ROOT_FOLDER) {
-      console.log('path:', path); // delete later
       path.push({
         id: currentFolder.id,
         title: currentFolder.title,
@@ -68,6 +66,7 @@ const AddTitle = (props) => {
       setError('');
       let res;
       switch (selectedOption) {
+        // add note
         case 'note':
           res = await api.addNote({
             title: titleControl.title,
@@ -77,6 +76,7 @@ const AddTitle = (props) => {
           });
           setNotes([...notes, res.data]);
           break;
+        // add folder
         case 'folder':
           res = await api.addFolder({
             title: titleControl.title,
@@ -87,7 +87,6 @@ const AddTitle = (props) => {
           setFolders([...folders, res.data]);
           break;
       }
-      console.log('res', res.data); // delete later
       setIsOpen(false);
     } catch (err) {
       setError('Failed to create ' + selectedOption);

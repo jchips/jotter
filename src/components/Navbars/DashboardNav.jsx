@@ -31,7 +31,10 @@ const DashboardNav = (props) => {
           align='center'
         >
           {currentFolder ? (
-            <LuChevronLeft className='back-btn' onClick={() => navigate(-1)} />
+            <LuChevronLeft
+              className='back-btn'
+              onClick={() => navigate(`/folder/${currentFolder.parentId}`)}
+            />
           ) : null}
           <Text
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}

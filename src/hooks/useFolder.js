@@ -1,3 +1,6 @@
+/**
+ * Code inspiration from "How To Build A Google Drive Clone With Firebase" by Web Dev Simplified.
+*/
 import { useEffect, useReducer } from 'react';
 import api from '@/util/api';
 
@@ -56,8 +59,9 @@ export function useFolder(folderId = null, folder = null) {
     });
   }, [folderId, folder]);
 
+  // updates folder with it's data from database
   useEffect(() => {
-    if (folderId === null) { // then we are in the root folder
+    if (folderId === 'null' || folderId === null) { // in the root folder
       return dispatch({
         type: ACTIONS.UPDATE_FOLDER,
         payload: { folder: ROOT_FOLDER }

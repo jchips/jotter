@@ -54,12 +54,10 @@ const Signup = () => {
         password: formData.password,
       };
       let requestUrl = `${import.meta.env.VITE_SERVER}/jotter/signup`;
-      let response = await axios.post(requestUrl, signupInfo);
-      console.log('response:', response.data); // delete later
-      if (response.data.message) {
-        return setError(response.data.message);
+      let res = await axios.post(requestUrl, signupInfo);
+      if (res.data.message) {
+        return setError(res.data.message);
       }
-      console.log('signed up successfully'); // delete later
       await login(signupInfo.email, signupInfo.password); // log user in
       if (getToken()) {
         navigate('/');

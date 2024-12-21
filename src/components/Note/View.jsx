@@ -23,13 +23,13 @@ const View = () => {
   const { noteId } = useParams();
   const navigate = useNavigate();
 
+  // fetches the note
   useEffect(() => {
     const getNote = async () => {
       try {
         setLoading(true);
         setError('');
         let note = await api.getNote(noteId);
-        console.log('note:', note.data); // delete later
         setNote(note.data);
         setMarkdown(note.data.content);
       } catch (err) {
@@ -47,15 +47,18 @@ const View = () => {
     setLoading(false);
   }, [noteId, setMarkdown, logout, navigate]);
 
+  // Navigates to the editor
   const handleEdit = () => {
     navigate(`/editor/${noteId}`);
   };
 
+  // Navigates one page back
   const handleExit = () => {
-    navigate(-1);
+    note.folderId ? navigate(`/folder/${note.folderId}`) : navigate('/');
     setMarkdown('');
   };
 
+  // Loading circle
   if (!note) {
     return <Loading />;
   }

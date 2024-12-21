@@ -28,8 +28,6 @@ const Dashboard = () => {
     pathState.folder
   );
 
-  // let folder_id = folderId === undefined ? null : folderId;
-
   // Fetch folders and notes
   useEffect(() => {
     const fetchContent = async () => {
@@ -42,8 +40,6 @@ const Dashboard = () => {
           api.getFolders(folder_id),
           folder_id ? api.getNotes(folder_id) : api.getRootNotes(),
         ]);
-        console.log('folders:', foldersRes.data); // delete later
-        console.log('notes:', notesRes.data); // delete later
         setFolders(foldersRes.data);
         setNotes(notesRes.data);
       } catch (err) {
@@ -60,14 +56,17 @@ const Dashboard = () => {
     fetchContent();
   }, [logout, setMarkdown, folderId]);
 
+  // Loading circle
   if (loading) {
     return <Loading />;
   }
 
+  // logs user out
   const logUserOut = () => {
     navigate('/login');
     logout();
   };
+
   return (
     !loading && (
       <div className='dashboard'>
@@ -92,7 +91,6 @@ const Dashboard = () => {
           folders={folders}
           setNotes={setNotes}
           setFolders={setFolders}
-          // folderId={folderId}
           currentFolder={folder}
         />
       </div>
