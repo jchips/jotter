@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Button } from '@chakra-ui/react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams, useLocation } from 'react-router';
 import { useAuth } from '@/hooks/useAuth';
-import Navbar from '../Navbars/DashboardNav';
-import Loading from '../Loading';
-import DisplayNotes from './DisplayNotes';
-import AddTitle from '../modals/AddTitle';
+import { useFolder } from '@/hooks/useFolder';
 import { useMarkdown } from '@/hooks/useMarkdown';
+import Loading from '../Loading';
+import AddTitle from '../modals/AddTitle';
+import DisplayNotes from './DisplayNotes';
+import Navbar from '../Navbars/DashboardNav';
+import DisplayFolders from './DisplayFolders';
 import api from '@/util/api';
 import './Dashboard.scss';
 
@@ -17,38 +18,55 @@ const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [selectedOption, setSelectedOption] = useState('');
-  const { user, logout, isLoggedIn } = useAuth();
+  const { user, logout } = useAuth();
   const { setMarkdown } = useMarkdown();
+  const { folderId } = useParams();
   const navigate = useNavigate();
+  const { pathState = {} } = useLocation();
+  const { folder, childFolders, childFiles } = useFolder(
+    folderId,
+    pathState.folder
+  );
 
+  // Fetch folders and notes
   useEffect(() => {
-    setLoading(true);
-    setMarkdown('');
-    const fetchRootNotes = async () => {
+    const fetchContent = async () => {
+      setLoading(true);
+      setMarkdown('');
+      let folder_id = folderId === undefined ? null : folderId;
       try {
         setError('');
-        let res = await api.getRootNotes();
-        console.log('root notes:', res.data); // delete later
-        setNotes(res.data);
+        const [foldersRes, notesRes] = await Promise.all([
+          api.getFolders(folder_id),
+          folder_id ? api.getNotes(folder_id) : api.getRootNotes(),
+        ]);
+        setFolders(foldersRes.data);
+        setNotes(notesRes.data);
       } catch (err) {
         console.error(err);
-        err.response.data.message === 'jwt expired'
-          ? logout()
-          : setError('Could not fetch notes');
+        if (err.response?.data?.message === 'jwt expired') {
+          logout();
+        } else {
+          setError('Could not fetch content');
+        }
+      } finally {
+        setLoading(false);
       }
     };
-    fetchRootNotes();
-    setLoading(false);
-  }, [logout, setMarkdown]);
+    fetchContent();
+  }, [logout, setMarkdown, folderId]);
 
-  if (!notes) {
+  // Loading circle
+  if (loading) {
     return <Loading />;
   }
 
+  // logs user out
   const logUserOut = () => {
     navigate('/login');
     logout();
   };
+
   return (
     !loading && (
       <div className='dashboard'>
@@ -58,16 +76,22 @@ const Dashboard = () => {
           setIsOpen={setIsOpen}
           setNotes={setNotes}
           setFolders={setFolders}
+          currentFolder={folder?.data}
         />
-        <DisplayNotes notes={notes} error={error} logout={logUserOut} />
+        {folders && <DisplayFolders folders={folders} error={error} />}
+        {notes && (
+          <DisplayNotes notes={notes} folders={folders} error={error} />
+        )}
         <AddTitle
           user={user}
           selectedOption={selectedOption}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           notes={notes}
+          folders={folders}
           setNotes={setNotes}
           setFolders={setFolders}
+          currentFolder={folder}
         />
       </div>
     )

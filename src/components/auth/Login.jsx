@@ -8,14 +8,13 @@ import { InputGroup } from '@/components/ui/input-group';
 import { PasswordInput } from '@/components/ui/password-input';
 import { LuLock, LuMail } from 'react-icons/lu';
 import { useAuth } from '@/hooks/useAuth';
-// import logInUser from '@/util/logInUser';
-import { setToken, getToken } from '@/util/authUtil';
+import { getToken } from '@/util/authUtil';
 import './auth.scss';
 
 const Login = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login, setIsLoggedIn, setUser, user } = useAuth();
+  const { login, setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
   const fieldRequired = 'This field is required';
   const {
@@ -30,30 +29,24 @@ const Login = () => {
     },
   });
 
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     navigate('/');
-  //   }
-  // }, [isLoggedIn, navigate]);
-
+  // Navigate user to signup page
   const navigateToSignUp = () => {
     navigate('/signup');
   };
 
+  /**
+   * Logs user into Jotter
+   * @param {Object} formData - The form data the user submits (email and password)
+   */
   const onSubmit = async (formData) => {
     try {
       setLoading(true);
       setError('');
-      // await logInUser(
-      //   login,
-      //   formData,
-      //   setLoading,
-      //   setError,
-      //   setUser,
-      //   setToken,
-      //   setIsLoggedIn
-      // );
-      await login(formData.email, formData.password);
+      let res = await login(formData.email, formData.password);
+      if (res?.response?.data === 'Invalid login') {
+        setIsLoggedIn(false);
+        setError('Incorrect email or password');
+      }
       if (getToken()) {
         navigate('/');
       }

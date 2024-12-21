@@ -15,14 +15,20 @@ import {
 } from '@/components/ui/dialog';
 import { Field } from '@/components/ui/field';
 import { useAuth } from '@/hooks/useAuth';
+import { ROOT_FOLDER } from '@/hooks/useFolder';
 import api from '@/util/api';
 
 const AddTitle = (props) => {
-  const { isOpen, setIsOpen, selectedOption, notes, setNotes, setFolders } =
-    props;
-  const [error, setError] = useState('');
-  const [saving, setSaving] = useState(false);
-  const { user } = useAuth();
+  const {
+    isOpen,
+    setIsOpen,
+    selectedOption,
+    notes,
+    folders,
+    setNotes,
+    setFolders,
+  } = props;
+  let { currentFolder } = props;
   const {
     control,
     handleSubmit,
@@ -33,34 +39,54 @@ const AddTitle = (props) => {
       title: '',
     },
   });
+  const [error, setError] = useState('');
+  const [saving, setSaving] = useState(false);
+  const { user } = useAuth();
 
+  /**
+   * Adds a title to either a note or a folder
+   * If `currentFolder` is null (not in root or any other), exits function
+   * @param {Object} titleControl - The input the user types as a title
+   * @returns - nothing
+   */
   const onSubmit = async (titleControl) => {
+    currentFolder = currentFolder?.data ? currentFolder.data : currentFolder;
+    if (currentFolder === null) return;
+    const path = [...currentFolder.path];
+
+    // Adds current folder to the path
+    if (currentFolder !== ROOT_FOLDER) {
+      path.push({
+        id: currentFolder.id,
+        title: currentFolder.title,
+      });
+    }
     try {
       setSaving(true);
       setError('');
       let res;
       switch (selectedOption) {
+        // add note
         case 'note':
-          console.log('user', user); // delete later
           res = await api.addNote({
             title: titleControl.title,
             content: '',
             userId: user.id,
-            // folderId:
+            folderId: currentFolder.id,
           });
           setNotes([...notes, res.data]);
           break;
+        // add folder
         case 'folder':
           res = await api.addFolder({
             title: titleControl.title,
             userId: user.id,
-            // parentId:
-            // path:{}
+            parentId: currentFolder.id,
+            path,
           });
-          // setFolders(res.data);
+          setFolders([...folders, res.data]);
           break;
       }
-      console.log('res', res.data); // delete later
       setIsOpen(false);
     } catch (err) {
       setError('Failed to create ' + selectedOption);
@@ -71,6 +97,7 @@ const AddTitle = (props) => {
     });
     setSaving(false);
   };
+
   return (
     <DialogRoot modal={true} open={isOpen}>
       <DialogContent>

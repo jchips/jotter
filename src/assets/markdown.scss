@@ -48,6 +48,16 @@
 
   ul {
     list-style-type: disc;
+
+    >li>ul {
+      list-style-type: circle;
+      margin-top: 8px;
+      margin-bottom: 8px;
+
+      >li>ul {
+        list-style-type: square;
+      }
+    }
   }
 
   ol {

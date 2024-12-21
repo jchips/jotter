@@ -25,6 +25,7 @@ const Editor = () => {
   const navigate = useNavigate();
   const previewRef = useRef(null);
 
+  // fetch the note
   useEffect(() => {
     const getNote = async () => {
       setLoading(true);
@@ -64,7 +65,7 @@ const Editor = () => {
             scrollRatio *
               (previewRef.current.scrollHeight -
                 previewRef.current.clientHeight) +
-            500;
+            10;
         }
       }, 100);
       editorView.addEventListener('scroll', syncScroll);
@@ -74,12 +75,16 @@ const Editor = () => {
     }
   }, []);
 
+  /**
+   * Updates the markdown state with the current markdown content
+   * @param {String} value - The markdown content that user types
+   */
   const update = (value) => {
     setMarkdown(value);
   };
 
   // Saves changes to the note
-  const handleSave = async () => {
+  const handleSave = useCallback(async () => {
     try {
       setError('');
       setSaving(true);
@@ -88,7 +93,7 @@ const Editor = () => {
           content: markdown,
           updatedAt: Date.now(),
         },
-        note.id
+        noteId
       );
       console.log('updated note:', res.data); // delete later
     } catch (err) {
@@ -96,13 +101,29 @@ const Editor = () => {
       console.error(err);
     }
     setSaving(false);
-  };
+  }, [markdown, noteId]);
 
+  // If user presses ctrl-s, the note saves it's changes
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        handleSave();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [markdown, handleSave]);
+
+  // Saves the note and exits
   const handleSaveAndExit = () => {
     handleSave();
-    navigate(-1);
+    navigate(`/preview/${noteId}`);
   };
 
+  // Loading circle
   if (!note) {
     return <Loading />;
   }
@@ -128,7 +149,9 @@ const Editor = () => {
               }}
             />
           </div>
-          <Preview markdown={markdown} previewRef={previewRef} />
+          <div className='preview__scroll' ref={previewRef}>
+            <Preview markdown={markdown} />
+          </div>
         </div>
       )}
       <div className='footer'>

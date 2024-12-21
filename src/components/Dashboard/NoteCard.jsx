@@ -1,5 +1,5 @@
-import { Card, Heading } from '@chakra-ui/react';
 import { useNavigate } from 'react-router';
+import { Card, Heading } from '@chakra-ui/react';
 import formatDate from '@/util/formatDate';
 
 const NoteCard = ({ note }) => {
@@ -9,7 +9,6 @@ const NoteCard = ({ note }) => {
     <Card.Root
       size='sm'
       className='note-card'
-      // _hover={{ backgroundColor: '#f4f4f5' }}
       onDoubleClick={() => navigate(`/preview/${note.id}`)}
     >
       <Card.Header>

@@ -57,7 +57,9 @@ const Title = ({ note, setIsOpen, setDelConfirmOpen }) => {
             <PopoverContent className='details-popover'>
               <PopoverArrow />
               <PopoverBody>
-                <h2>{note.title} - details</h2>
+                <h2>
+                  {note.title} <span className='medium-text'>- details</span>
+                </h2>
                 <p>Date created: {formatDate(note.createdAt)}</p>
                 <p>Last edited: {formatDate(note.updatedAt)}</p>
               </PopoverBody>

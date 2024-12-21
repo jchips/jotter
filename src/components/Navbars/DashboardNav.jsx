@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 import {
   Box,
   Flex,
@@ -7,10 +8,13 @@ import {
   Stack,
   useBreakpointValue,
 } from '@chakra-ui/react';
+import { LuChevronLeft } from 'react-icons/lu';
 import CreateNew from './CreateNew';
+import './Navbar.scss';
 
 const DashboardNav = (props) => {
-  const { logout, setSelectedOption, setIsOpen } = props;
+  const { logout, setSelectedOption, setIsOpen, currentFolder } = props;
+  const navigate = useNavigate();
   return (
     <Box>
       <Flex
@@ -19,18 +23,26 @@ const DashboardNav = (props) => {
         px={{ base: 4 }}
         borderBottom={1}
         borderStyle={'solid'}
-        // borderColor={}
         align={'center'}
       >
-        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
+        <Flex
+          flex={{ base: 1 }}
+          justify={{ base: 'center', md: 'start' }}
+          align='center'
+        >
+          {currentFolder ? (
+            <LuChevronLeft
+              className='back-btn'
+              onClick={() => navigate(`/folder/${currentFolder.parentId}`)}
+            />
+          ) : null}
           <Text
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
             fontFamily={'heading'}
-            // color={'#646cff'}
             textStyle='2xl'
             fontWeight={700}
           >
-            Dashboard
+            {currentFolder ? currentFolder.title : 'Home'}
           </Text>
         </Flex>
 

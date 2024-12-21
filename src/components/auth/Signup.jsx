@@ -1,25 +1,23 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import axios from 'axios';
+import { LuLock, LuMail } from 'react-icons/lu';
 import { useForm, Controller } from 'react-hook-form';
 import { Button, Card, Input, Stack } from '@chakra-ui/react';
 import { Alert } from '@/components/ui/alert';
 import { Field } from '@/components/ui/field';
 import { InputGroup } from '@/components/ui/input-group';
 import { PasswordInput } from '@/components/ui/password-input';
-import { LuLock, LuMail } from 'react-icons/lu';
 import { useAuth } from '@/hooks/useAuth';
-import logInUser from '@/util/logInUser';
-import { setToken, getToken } from '@/util/authUtil';
+import { getToken } from '@/util/authUtil';
 import './auth.scss';
 
 const Signup = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { login, setIsLoggedIn, setUser } = useAuth();
+  const { login, setIsLoggedIn } = useAuth();
   const fieldRequired = 'This field is required';
-
   const {
     control,
     handleSubmit,
@@ -33,10 +31,16 @@ const Signup = () => {
     },
   });
 
+  // Navigate user to login page
   const navigateToSignUp = () => {
     navigate('/login');
   };
 
+  /**
+   * Creates a Jotter account for the user with their inputted credentials
+   * @param {Object} formData - The form data the user submits (email and password)
+   * @returns {Function} - Sets the error message
+   */
   const onSubmit = async (formData) => {
     try {
       setLoading(true);
@@ -49,30 +53,18 @@ const Signup = () => {
         email: formData.email,
         password: formData.password,
       };
-      console.log('signupInfo:', signupInfo); // delete later
-
       let requestUrl = `${import.meta.env.VITE_SERVER}/jotter/signup`;
-      let response = await axios.post(requestUrl, signupInfo);
-      console.log('response:', response.data); // delete later
-      if (response.data.message) {
-        return setError(response.data.message);
+      let res = await axios.post(requestUrl, signupInfo);
+      if (res.data.message) {
+        return setError(res.data.message);
       }
-      console.log('signed up successfully'); // delete later
-      await logInUser(
-        login,
-        formData,
-        setLoading,
-        setError,
-        setUser,
-        setToken,
-        setIsLoggedIn
-      );
+      await login(signupInfo.email, signupInfo.password); // log user in
       if (getToken()) {
         navigate('/');
       }
     } catch (err) {
       setIsLoggedIn(false);
-      setError('Incorrect email or password');
+      setError('There has been a server error :( Please try again.');
       console.error(err);
     } finally {
       reset({
@@ -177,7 +169,7 @@ const Signup = () => {
                 onClick={handleSubmit(onSubmit)}
                 disabled={loading}
               >
-                Sign in
+                Sign up
               </Button>
             </Stack>
           </form>
