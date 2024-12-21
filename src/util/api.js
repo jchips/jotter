@@ -47,10 +47,14 @@ const apiService = {
   authenticate: () => api.get('/', { withCredentials: true }),
   getRootNotes: () => api.get('/note'),
   getNote: (noteId) => api.get(`/note/${noteId}`),
+  getNotes: (folderId) => api.get(`/note/f/${folderId}`),
   addNote: (body) => api.post('/note', body),
   updateNote: (body, noteId) => api.patch(`/note/${noteId}`, body),
   deleteNote: (noteId) => api.delete(`/note/${noteId}`),
+  getFolder: (folderId) => api.get(`/folder/${folderId}`),
+  getFolders: (parentId) => api.get(`/folder/f/${parentId}`),
   addFolder: (body) => api.post('/folder', body),
+  updateFolder: (body, folderId) => api.patch(`folder/${folderId}`, body),
 }
 
 export default apiService;

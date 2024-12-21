@@ -25,6 +25,7 @@ const Editor = () => {
   const navigate = useNavigate();
   const previewRef = useRef(null);
 
+  // fetch the note
   useEffect(() => {
     const getNote = async () => {
       setLoading(true);
@@ -64,7 +65,7 @@ const Editor = () => {
             scrollRatio *
               (previewRef.current.scrollHeight -
                 previewRef.current.clientHeight) +
-            500;
+            10;
         }
       }, 100);
       editorView.addEventListener('scroll', syncScroll);
@@ -74,6 +75,10 @@ const Editor = () => {
     }
   }, []);
 
+  /**
+   * Updates the markdown state with the current markdown content
+   * @param {String} value - The markdown content that user types
+   */
   const update = (value) => {
     setMarkdown(value);
   };

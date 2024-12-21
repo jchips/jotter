@@ -8,7 +8,6 @@ import { InputGroup } from '@/components/ui/input-group';
 import { PasswordInput } from '@/components/ui/password-input';
 import { LuLock, LuMail } from 'react-icons/lu';
 import { useAuth } from '@/hooks/useAuth';
-// import logInUser from '@/util/logInUser';
 import { setToken, getToken } from '@/util/authUtil';
 import './auth.scss';
 
@@ -30,12 +29,6 @@ const Login = () => {
     },
   });
 
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     navigate('/');
-  //   }
-  // }, [isLoggedIn, navigate]);
-
   const navigateToSignUp = () => {
     navigate('/signup');
   };
@@ -44,15 +37,6 @@ const Login = () => {
     try {
       setLoading(true);
       setError('');
-      // await logInUser(
-      //   login,
-      //   formData,
-      //   setLoading,
-      //   setError,
-      //   setUser,
-      //   setToken,
-      //   setIsLoggedIn
-      // );
       await login(formData.email, formData.password);
       if (getToken()) {
         navigate('/');

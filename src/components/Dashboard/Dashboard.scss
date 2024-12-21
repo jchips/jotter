@@ -11,7 +11,8 @@
     }
   }
 
-  .note-card {
+  .note-card,
+  .folder-card {
     &:hover {
       filter: brightness(75%);
       // background-color: adjust-color();

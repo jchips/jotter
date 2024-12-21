@@ -9,17 +9,10 @@
   position: fixed;
   top: 0;
   right: 0;
-  // width: 100%;
   height: 60px;
   left: 0;
   z-index: 2;
-
-  // background-color: colors.$themeWhite;
   color: colors.$themePurple;
-
-  details {
-    @include default.small-text;
-  }
 }
 
 .details-text {
@@ -39,4 +32,12 @@
   p {
     @include default.small-text;
   }
+}
+
+.back-btn {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+  color: colors.$themeWhite;
+  cursor: pointer;
 }

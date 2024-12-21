@@ -1,10 +1,9 @@
-import { Box, Stack, Text, Flex, Icon, Button } from '@chakra-ui/react';
+import { Box, Stack, Text, Flex, Button } from '@chakra-ui/react';
 import { LuChevronRight, LuFolder, LuStickyNote } from 'react-icons/lu';
 
 const CreateNewOptions = ({
   label,
   subLabel,
-  isOpen,
   setIsOpen,
   setSelectedOption,
 }) => {
