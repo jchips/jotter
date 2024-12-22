@@ -32,7 +32,8 @@ Users can log in to accounts and write notes with markdown.
 
 ## Changelog
 
-- 0.2.2 (2024-12) - Added word count. Improved editor. Support for HTML code rendering.
+- 0.2.3 (2024-12-22, 1:23am) - Added temporary sort for notes and folders.
+- 0.2.2 (2024-12-21, 9:31pm) - Added word count. Improved editor. Support for HTML code rendering.
 - 0.2.1 (2024-12-21, 4:33am) - Folder breadcrumbs.
 - 0.2.0 (2024-12-20, 8:56pm) - Folder support, ctrl/cmd-s in editor.
 - 0.1.1 (2024-12-20, 2:04am) - Users can delete notes. Also, added some styling and an editor/preview scrolling sync (sort of).
