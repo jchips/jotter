@@ -6,11 +6,11 @@ import { useMarkdown } from '@/hooks/useMarkdown';
 import Loading from '../Loading';
 import AddTitle from '../modals/AddTitle';
 import DisplayNotes from './DisplayNotes';
-import Navbar from '../Navbars/DashboardNav';
+import Navbar from '../Navbars/Navbar';
 import DisplayFolders from './DisplayFolders';
+import FolderBreadcrumbs from './FolderBreadcrumbs';
 import api from '@/util/api';
 import './Dashboard.scss';
-import FolderBreadcrumb from './FolderBreadcrumb';
 
 const Dashboard = () => {
   const [notes, setNotes] = useState();
@@ -79,7 +79,9 @@ const Dashboard = () => {
           setFolders={setFolders}
           currentFolder={folder?.data}
         />
-        {folderId && <FolderBreadcrumb currentFolder={folder} />}
+        {folderId && folderId !== 'null' && (
+          <FolderBreadcrumbs currentFolder={folder} />
+        )}
         {folders && <DisplayFolders folders={folders} error={error} />}
         {notes && (
           <DisplayNotes notes={notes} folders={folders} error={error} />

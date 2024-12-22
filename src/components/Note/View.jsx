@@ -5,16 +5,18 @@ import { useAuth } from '@/hooks/useAuth';
 import { useMarkdown } from '../../hooks/useMarkdown';
 import Preview from './Preview';
 import Loading from '../Loading';
-import Title from '../Navbars/Title';
+import TitleBar from '../Navbars/TitleBar';
 import ChangeTitle from '../modals/ChangeTitle';
-import DeleteConfirmation from '../modals/DeleteConfirmation';
+import DeleteConfirmation from '../modals/DeleteNote';
+import getWordCount from '@/util/getWordCount';
 import api from '@/util/api';
 import './Preview.scss';
-import '../../assets/markdown.scss';
+import './markdown.scss';
 
 const View = () => {
   const [note, setNote] = useState();
   const [error, setError] = useState('');
+  const [words, setWords] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [delConfirmOpen, setDelConfirmOpen] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -32,6 +34,7 @@ const View = () => {
         let note = await api.getNote(noteId);
         setNote(note.data);
         setMarkdown(note.data.content);
+        setWords(getWordCount(note.data.content));
       } catch (err) {
         console.error(err);
         err.response.data.message === 'jwt expired'
@@ -66,24 +69,23 @@ const View = () => {
   return (
     !loading && (
       <div className='view'>
-        <Title
+        <TitleBar
           note={note}
           setIsOpen={setIsOpen}
           setDelConfirmOpen={setDelConfirmOpen}
+          words={words}
         />
         <div className='preview__wrapper'>
           <Preview markdown={markdown} />
         </div>
-        <div className='footer'>
-          <HStack>
-            <Button className='button2' variant='solid' onClick={handleExit}>
-              Exit
-            </Button>
-            <Button className='button1' variant='solid' onClick={handleEdit}>
-              Edit note
-            </Button>
-          </HStack>
-        </div>
+        <HStack className='footer'>
+          <Button className='button2' variant='solid' onClick={handleExit}>
+            Exit
+          </Button>
+          <Button className='button1' variant='solid' onClick={handleEdit}>
+            Edit note
+          </Button>
+        </HStack>
         <ChangeTitle
           note={note}
           setNote={setNote}

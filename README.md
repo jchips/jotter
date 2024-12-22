@@ -6,7 +6,7 @@ Users can log in to accounts and write notes with markdown.
 
 ## Creator & developer: Jelani R
 
-## Version: 0.2.1
+## Version: 0.2.2
 
 ## Architecture
 
@@ -20,9 +20,10 @@ Users can log in to accounts and write notes with markdown.
 - [React-markdown](https://www.npmjs.com/package/react-markdown)
 - [React Syntax Highlighter](https://github.com/react-syntax-highlighter/react-syntax-highlighter)
 - [remark-gfm](https://github.com/remarkjs/remark-gfm)
+- [rehype-raw](https://www.npmjs.com/package/rehype-raw)
 - [React Hook Form](https://react-hook-form.com/)
 - [React Icons](https://react-icons.github.io/react-icons/)
-- [react-codemirror](https://uiwjs.github.io/react-codemirror/)
+- [React-codemirror](https://uiwjs.github.io/react-codemirror/)
 - [Chakra](https://www.chakra-ui.com/docs/get-started/installation)
 - [Chakra templates](https://chakra-templates.vercel.app/navigation/navbar)
 - [Table styling](https://dev.to/letsbsocial1/how-to-add-tables-to-react-markdown-21lc)
@@ -31,6 +32,7 @@ Users can log in to accounts and write notes with markdown.
 
 ## Changelog
 
+- 0.2.2 (2024-12) - Added word count. Improved editor. Support for HTML code rendering.
 - 0.2.1 (2024-12-21, 4:33am) - Folder breadcrumbs.
 - 0.2.0 (2024-12-20, 8:56pm) - Folder support, ctrl/cmd-s in editor.
 - 0.1.1 (2024-12-20, 2:04am) - Users can delete notes. Also, added some styling and an editor/preview scrolling sync (sort of).

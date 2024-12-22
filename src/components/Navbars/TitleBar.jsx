@@ -17,21 +17,17 @@ import {
 import formatDate from '@/util/formatDate';
 import './Navbar.scss';
 
-const Title = ({ note, setIsOpen, setDelConfirmOpen }) => {
+const TitleBar = ({ note, setIsOpen, setDelConfirmOpen, words }) => {
   const [openPopver, setOpenPopover] = useState(false);
   return (
     <Box className='navbar'>
       <Flex minH={'60px'} py={{ base: 2 }} px={{ base: 4 }} align={'center'}>
-        <Flex
-          flex={{ base: 1 }}
-          justify={{ base: 'center', md: 'start' }}
-          // direction='column'
-        >
+        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
           <Text
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
             fontFamily={'heading'}
             textStyle='lg'
-            fontWeight={500}
+            fontWeight={600}
           >
             {note.title}
           </Text>
@@ -58,10 +54,11 @@ const Title = ({ note, setIsOpen, setDelConfirmOpen }) => {
               <PopoverArrow />
               <PopoverBody>
                 <h2>
-                  {note.title} <span className='medium-text'>- details</span>
+                  {note.title} <span className='medium-text'>details</span>
                 </h2>
                 <p>Date created: {formatDate(note.createdAt)}</p>
                 <p>Last edited: {formatDate(note.updatedAt)}</p>
+                <p>Word count: {words}</p>
               </PopoverBody>
             </PopoverContent>
           </PopoverRoot>
@@ -77,4 +74,4 @@ const Title = ({ note, setIsOpen, setDelConfirmOpen }) => {
   );
 };
 
-export default Title;
+export default TitleBar;

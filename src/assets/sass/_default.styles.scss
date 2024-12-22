@@ -1,0 +1,31 @@
+@use './colors';
+
+@mixin small-text {
+  font-size: smaller;
+  color: colors.$themePurpleText;
+  font-weight: 400;
+  width: fit-content;
+}
+
+@mixin medium-text {
+  font-size: medium;
+  width: fit-content;
+}
+
+$backgroundColor: var(--editor-background-color);
+$textColor: var(--editor-text-color);
+
+/* Applies light/dark background dynamically */
+@media (prefers-color-scheme: light) {
+  :root {
+    --editor-background-color: #ffffff;
+    --editor-text-color: #213547;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --editor-background-color: #242424;
+    --editor-text-color: rgba(255, 255, 255, 0.87);
+  }
+}

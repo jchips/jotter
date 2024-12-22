@@ -6,9 +6,8 @@ import Login from './components/auth/Login';
 import Dashboard from './components/Dashboard/Dashboard';
 import Signup from './components/auth/Signup';
 import Editor from './components/Note/Editor';
-import Preview from './components/Note/Preview';
-import './assets/App.scss';
 import View from './components/Note/View';
+import './assets/sass/App.scss';
 
 function App() {
   return (

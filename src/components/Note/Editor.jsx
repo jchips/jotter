@@ -1,24 +1,28 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { throttle } from 'lodash';
-import { Button, HStack } from '@chakra-ui/react';
+import { Button, HStack, Text, Box } from '@chakra-ui/react';
 import { Alert } from '@/components/ui/alert';
 import CodeMirror from '@uiw/react-codemirror';
 import { markdown as md } from '@codemirror/lang-markdown';
 import { EditorView } from '@uiw/react-codemirror';
 import { useMarkdown } from '../../hooks/useMarkdown';
 import { useAuth } from '@/hooks/useAuth';
+import ExitNote from '../modals/ExitNote';
 import Preview from './Preview';
 import Loading from '../Loading';
 import api from '@/util/api';
+import getWordCount from '@/util/getWordCount';
 import './Editor.scss';
-import '../../assets/markdown.scss';
+import './markdown.scss';
 
 const Editor = () => {
   const [note, setNote] = useState();
   const [error, setError] = useState('');
+  const [words, setWords] = useState(0);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [openExit, setOpenExit] = useState(false);
   const { markdown, setMarkdown } = useMarkdown();
   const { logout } = useAuth();
   const { noteId } = useParams();
@@ -34,6 +38,7 @@ const Editor = () => {
         let note = await api.getNote(noteId);
         setNote(note.data);
         setMarkdown(note.data.content);
+        setWords(getWordCount(note.data.content));
       } catch (err) {
         console.error(err);
         err.response.data.message === 'jwt expired'
@@ -49,7 +54,7 @@ const Editor = () => {
     setLoading(false);
   }, [noteId, setMarkdown, logout, navigate]);
 
-  // sync the editor and preview scrollbars to each other
+  // Syncs the editor and preview scrollbars to each other
   const editorRef = useCallback((node) => {
     if (node) {
       const editorView = node;
@@ -63,9 +68,7 @@ const Editor = () => {
         ) {
           previewRef.current.scrollTop =
             scrollRatio *
-              (previewRef.current.scrollHeight -
-                previewRef.current.clientHeight) +
-            10;
+            (previewRef.current.scrollHeight - previewRef.current.clientHeight);
         }
       }, 100);
       editorView.addEventListener('scroll', syncScroll);
@@ -81,6 +84,7 @@ const Editor = () => {
    */
   const update = (value) => {
     setMarkdown(value);
+    setWords(getWordCount(value));
   };
 
   // Saves changes to the note
@@ -95,7 +99,7 @@ const Editor = () => {
         },
         noteId
       );
-      console.log('updated note:', res.data); // delete later
+      setNote(res.data);
     } catch (err) {
       setError('Failed to save note');
       console.error(err);
@@ -121,6 +125,15 @@ const Editor = () => {
   const handleSaveAndExit = () => {
     handleSave();
     navigate(`/preview/${noteId}`);
+  };
+
+  // Exits the editor without saving
+  const handleExit = () => {
+    if (note.content !== markdown) {
+      setOpenExit(true);
+    } else {
+      navigate(`/preview/${noteId}`);
+    }
   };
 
   // Loading circle
@@ -154,8 +167,12 @@ const Editor = () => {
           </div>
         </div>
       )}
-      <div className='footer'>
-        <HStack>
+      <HStack className='footer'>
+        <Button className='button1' variant='solid' onClick={handleExit}>
+          Exit editor
+        </Button>
+        <Text>{words} words</Text>
+        <Box>
           <Button
             className='button1'
             variant='solid'
@@ -171,8 +188,9 @@ const Editor = () => {
           >
             Save changes
           </Button>
-        </HStack>
-      </div>
+        </Box>
+      </HStack>
+      <ExitNote openExit={openExit} setOpenExit={setOpenExit} noteId={noteId} />
     </div>
   );
 };

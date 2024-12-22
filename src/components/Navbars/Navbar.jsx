@@ -12,7 +12,7 @@ import { LuChevronLeft } from 'react-icons/lu';
 import CreateNew from './CreateNew';
 import './Navbar.scss';
 
-const DashboardNav = (props) => {
+const Navbar = (props) => {
   const { logout, setSelectedOption, setIsOpen, currentFolder } = props;
   const navigate = useNavigate();
   return (
@@ -65,4 +65,4 @@ const DashboardNav = (props) => {
   );
 };
 
-export default DashboardNav;
+export default Navbar;
