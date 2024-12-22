@@ -75,6 +75,8 @@ const Dashboard = () => {
           logout={logUserOut}
           setSelectedOption={setSelectedOption}
           setIsOpen={setIsOpen}
+          notes={notes}
+          folders={folders}
           setNotes={setNotes}
           setFolders={setFolders}
           currentFolder={folder?.data}
