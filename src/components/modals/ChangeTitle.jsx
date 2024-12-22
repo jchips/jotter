@@ -14,14 +14,13 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Field } from '@/components/ui/field';
-import { useAuth } from '@/hooks/useAuth';
 import api from '@/util/api';
 
 const ChangeTitle = (props) => {
   const { isOpen, setIsOpen, type, notes, setNote, setFolders, note, folder } =
     props;
   const [error, setError] = useState('');
-  const { user } = useAuth();
+  const [saving, setSaving] = useState(false);
   const {
     control,
     handleSubmit,
@@ -36,6 +35,7 @@ const ChangeTitle = (props) => {
   const onSubmit = async (titleControl) => {
     try {
       setError('');
+      setSaving(true);
       let res;
       switch (type) {
         case 'note':
@@ -60,6 +60,7 @@ const ChangeTitle = (props) => {
       title: '',
     });
     setIsOpen(false);
+    setSaving(false);
   };
   return (
     <DialogRoot modal={true} open={isOpen}>
@@ -98,7 +99,12 @@ const ChangeTitle = (props) => {
                 Cancel
               </Button>
             </DialogActionTrigger>
-            <Button type='submit' className='button1' variant='solid'>
+            <Button
+              type='submit'
+              className='button1'
+              variant='solid'
+              disabled={saving}
+            >
               Rename {type}
             </Button>
           </DialogFooter>

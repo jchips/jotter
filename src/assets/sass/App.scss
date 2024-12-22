@@ -13,25 +13,29 @@
   }
 }
 
-// theme purple button
+/* Buttons---------------- */
+
+// theme purple
 .button1 {
   @include buttonColors(colors.$themeWhite, colors.$themePurple);
 }
 
-// theme white button
+// theme white
 .button2 {
   @include buttonColors(#000, colors.$themeWhite);
 }
 
-// black button
+// black
 .button3 {
   @include buttonColors(colors.$themeWhite, #000);
 }
 
-// delete button
+// delete
 .button4 {
   @include buttonColors(colors.$themeWhite, #dc3545);
 }
+
+/* Text---------------- */
 
 .small-text {
   @include default.small-text;

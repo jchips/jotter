@@ -6,7 +6,7 @@ import {
 } from '@/components/ui/breadcrumb';
 import { ROOT_FOLDER } from '../../hooks/useFolder';
 
-const FolderBreadcrumb = ({ currentFolder }) => {
+const FolderBreadcrumbs = ({ currentFolder }) => {
   currentFolder = currentFolder?.data || currentFolder;
   let path = currentFolder === ROOT_FOLDER ? [] : [ROOT_FOLDER];
   let currentFolderPath =
@@ -33,4 +33,4 @@ const FolderBreadcrumb = ({ currentFolder }) => {
   );
 };
 
-export default FolderBreadcrumb;
+export default FolderBreadcrumbs;

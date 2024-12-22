@@ -1,6 +1,6 @@
 @use 'sass:color';
-@use '../../assets/colors';
-@use '../../assets/default.styles' as default;
+@use '../../assets/sass/colors';
+@use '../../assets/sass/default.styles' as default;
 
 .navbar {
   border-bottom: 1px;
@@ -38,6 +38,6 @@
   height: 30px;
   width: 30px;
   margin-right: 10px;
-  color: colors.$themeWhite;
+  color: default.$textColor;
   cursor: pointer;
 }
