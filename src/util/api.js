@@ -48,7 +48,7 @@ const apiService = {
   getFolder: (folderId) => api.get(`/folder/${folderId}`),
   getFolders: (parentId) => api.get(`/folder/f/${parentId}`),
   addFolder: (body) => api.post('/folder', body),
-  updateFolder: (body, folderId) => api.patch(`folder/${folderId}`, body),
+  updateFolder: (body, folderId) => api.patch(`/folder/${folderId}`, body),
 }
 
 export default apiService;

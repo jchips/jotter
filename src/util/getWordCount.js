@@ -7,7 +7,7 @@ const getWordCount = (str) => {
   if (!str) {
     return 0;
   }
-  return str.match(/(\w+)/g).length;
+  return str.match(/(\w+)/g)?.length;
 };
 
 export default getWordCount;
