@@ -20,9 +20,9 @@ import api from '@/util/api';
 
 const AddTitle = (props) => {
   const {
-    isOpen,
-    setIsOpen,
-    selectedOption,
+    addTitleOpen,
+    setAddTitleOpen,
+    selectedCreate,
     notes,
     folders,
     setNotes,
@@ -68,7 +68,7 @@ const AddTitle = (props) => {
       setSaving(true);
       setError('');
       let res;
-      switch (selectedOption) {
+      switch (selectedCreate) {
         // add note
         case 'note':
           res = await api.addNote({
@@ -90,9 +90,9 @@ const AddTitle = (props) => {
           setFolders([...folders, res.data]);
           break;
       }
-      setIsOpen(false);
+      setAddTitleOpen(false);
     } catch (err) {
-      setError('Failed to create ' + selectedOption);
+      setError('Failed to create ' + selectedCreate);
       console.error(err);
     }
     reset({
@@ -102,10 +102,10 @@ const AddTitle = (props) => {
   };
 
   return (
-    <DialogRoot modal={true} open={isOpen}>
+    <DialogRoot modal={true} open={addTitleOpen}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add {selectedOption}</DialogTitle>
+          <DialogTitle>Add {selectedCreate}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogBody>
@@ -126,7 +126,7 @@ const AddTitle = (props) => {
                     type='text'
                     value={value}
                     onChange={onChange}
-                    placeholder={`Give ${selectedOption} a title`}
+                    placeholder={`Give ${selectedCreate} a title`}
                   />
                 )}
               />
@@ -134,7 +134,7 @@ const AddTitle = (props) => {
           </DialogBody>
           <DialogFooter>
             <DialogActionTrigger asChild>
-              <Button variant='outline' onClick={() => setIsOpen(false)}>
+              <Button variant='outline' onClick={() => setAddTitleOpen(false)}>
                 Cancel
               </Button>
             </DialogActionTrigger>
@@ -144,11 +144,11 @@ const AddTitle = (props) => {
               variant='solid'
               disabled={saving}
             >
-              Create {selectedOption}
+              Create {selectedCreate}
             </Button>
           </DialogFooter>
         </form>
-        <DialogCloseTrigger onClick={() => setIsOpen(false)} />
+        <DialogCloseTrigger onClick={() => setAddTitleOpen(false)} />
       </DialogContent>
     </DialogRoot>
   );

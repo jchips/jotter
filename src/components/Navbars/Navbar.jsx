@@ -6,12 +6,15 @@ import CreateNew from './CreateNew';
 import SortSelect from '../Dashboard/SortSelect';
 import './Navbar.scss';
 import api from '@/util/api';
+import OptionsBtn from './Options/OptionsBtn';
 
 const Navbar = (props) => {
   const {
     logout,
-    setSelectedOption,
-    setIsOpen,
+    setSelectedCreate,
+    setAddTitleOpen,
+    setDeleteOpen,
+    setError,
     currentFolder,
     notes,
     setNotes,
@@ -32,11 +35,27 @@ const Navbar = (props) => {
       updatedAt: Date.now(),
     };
     try {
+      setError('');
       setSaving(true);
       await api.updateFolder(updateData, currentFolder.id);
       currentFolder.title = folderTitle;
       setShowRenameBtn(false);
     } catch (err) {
+      setError('Failed to change folder title');
+      console.error(err);
+    }
+    setSaving(false);
+  };
+
+  // Delete folder (not using)
+  const handleDeleteFolder = async () => {
+    try {
+      setError('');
+      setSaving(true);
+      await api.deleteFolder(currentFolder.id);
+      navigate(`/folder/${currentFolder.parentId}`);
+    } catch (err) {
+      setError('Failed to delete folder');
       console.error(err);
     }
     setSaving(false);
@@ -110,6 +129,13 @@ const Navbar = (props) => {
           direction={'row'}
           spacing={6}
         >
+          {currentFolder && (
+            <OptionsBtn
+              setSelectedCreate={setSelectedCreate}
+              setDeleteOpen={setDeleteOpen}
+              type='folder'
+            />
+          )}
           <SortSelect
             notes={notes}
             folders={folders}
@@ -120,8 +146,8 @@ const Navbar = (props) => {
             Log out
           </Button>
           <CreateNew
-            setSelectedOption={setSelectedOption}
-            setIsOpen={setIsOpen}
+            setSelectedCreate={setSelectedCreate}
+            setAddTitleOpen={setAddTitleOpen}
           />
         </Stack>
       </Flex>

@@ -17,7 +17,7 @@ import {
 import formatDate from '@/util/formatDate';
 import './Navbar.scss';
 
-const TitleBar = ({ note, setIsOpen, setDelConfirmOpen, words }) => {
+const TitleBar = ({ note, setIsOpen, setDeleteOpen, words }) => {
   const [openPopver, setOpenPopover] = useState(false);
   return (
     <Box className='navbar'>
@@ -65,7 +65,7 @@ const TitleBar = ({ note, setIsOpen, setDelConfirmOpen, words }) => {
           <Button className='button1' onClick={() => setIsOpen(true)}>
             Rename
           </Button>
-          <Button className='button2' onClick={() => setDelConfirmOpen(true)}>
+          <Button className='button2' onClick={() => setDeleteOpen(true)}>
             Delete
           </Button>
         </Stack>

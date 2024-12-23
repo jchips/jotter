@@ -14,66 +14,96 @@ import {
 } from '@/components/ui/dialog';
 import api from '@/util/api';
 
-const DeleteConfirmation = (props) => {
-  const { delConfirmOpen, setDelConfirmOpen, type, note, folder } = props;
+const DeleteModal = (props) => {
+  const { deleteOpen, setDeleteOpen, type, note, folder } = props;
   const [error, setError] = useState('');
+  const [saving, setSaving] = useState(false);
   const navigate = useNavigate();
 
-  // deletes note
+  // deletes note or folder
   const onSubmit = async () => {
     try {
       setError('');
-      let res;
+      setSaving(true);
       switch (type) {
         case 'note':
-          res = await api.deleteNote(note.id);
-          console.log(res.data);
+          await api.deleteNote(note.id);
+          navigate(`/folder/${note.folderId ? note.folderId : 'null'}`);
           break;
         case 'folder':
+          await api.deleteFolder(folder.id);
+          navigate(`/folder/${folder.parentId ? folder.parentId : 'null'}`);
           break;
       }
-      navigate(-1);
+      setDeleteOpen(false);
     } catch (err) {
-      setError('Failed to delete' + type);
+      setError('Failed to delete ' + type);
       console.error(err);
     }
-    setDelConfirmOpen(false);
+    setSaving(false);
   };
   return (
-    <DialogRoot modal={true} open={delConfirmOpen}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Delete {type}</DialogTitle>
-        </DialogHeader>
-        <DialogBody>
-          {error ? (
-            <div>
-              <Alert status='error' title={error} />
-            </div>
-          ) : null}
-          Are you sure that you want to delete{' '}
-          <span style={{ fontWeight: 'bold' }}>
-            {type === 'note' ? note.title : folder.title}
-          </span>
-          ?
-          <br />
-          <br />
-          <span className='small-text'>This action cannot be undone.</span>
-        </DialogBody>
-        <DialogFooter>
-          <DialogActionTrigger asChild>
-            <Button variant='outline' onClick={() => setDelConfirmOpen(false)}>
-              Cancel
+    (note || folder) && (
+      <DialogRoot modal={true} open={deleteOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Delete {type}</DialogTitle>
+          </DialogHeader>
+          <DialogBody>
+            {error ? (
+              <div style={{ marginBottom: '20px' }}>
+                <Alert status='error' title={error} />
+              </div>
+            ) : null}
+            Are you sure that you want to delete{' '}
+            <span style={{ fontWeight: 'bold' }}>
+              {type === 'note' ? note.title : folder.title}
+            </span>
+            ?
+            <br />
+            {type === 'folder' ? (
+              <>
+                <br />
+                <span className='small-text'>
+                  This will delete all folders and notes stored in{' '}
+                  <strong>{folder.title}</strong>.
+                </span>
+              </>
+            ) : null}
+            <br />
+            <span className='small-text'>This action cannot be undone.</span>
+          </DialogBody>
+          <DialogFooter>
+            <DialogActionTrigger asChild>
+              <Button
+                variant='outline'
+                onClick={() => {
+                  setDeleteOpen(false);
+                  setError('');
+                }}
+              >
+                Cancel
+              </Button>
+            </DialogActionTrigger>
+            <Button
+              className='button4'
+              variant='solid'
+              onClick={onSubmit}
+              disabled={saving}
+            >
+              Delete
             </Button>
-          </DialogActionTrigger>
-          <Button className='button4' variant='solid' onClick={onSubmit}>
-            Delete
-          </Button>
-        </DialogFooter>
-        <DialogCloseTrigger onClick={() => setDelConfirmOpen(false)} />
-      </DialogContent>
-    </DialogRoot>
+          </DialogFooter>
+          <DialogCloseTrigger
+            onClick={() => {
+              setDeleteOpen(false);
+              setError('');
+            }}
+          />
+        </DialogContent>
+      </DialogRoot>
+    )
   );
 };
 
-export default DeleteConfirmation;
+export default DeleteModal;
