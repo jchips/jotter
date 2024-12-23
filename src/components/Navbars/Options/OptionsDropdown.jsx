@@ -1,13 +1,7 @@
 import { Box, Stack, Text, Flex, Button } from '@chakra-ui/react';
 import { LuChevronRight, LuFolderOutput, LuTrash } from 'react-icons/lu';
 
-const OptionsDropdown = ({
-  label,
-  subLabel,
-  setDeleteOpen,
-  setMoveOpen,
-  setSelectedCreate,
-}) => {
+const OptionsDropdown = ({ label, subLabel, setDeleteOpen, setMoveOpen }) => {
   const iconStyle = {
     height: '20px',
     width: '20px',

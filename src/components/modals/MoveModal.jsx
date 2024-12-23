@@ -41,7 +41,7 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
     let parentId = note?.folderId || folder?.parentId;
     const getAllFolders = async () => {
       try {
-        let res = await api.getAllFolders(folderId);
+        let res = await api.getAllFolders(folderId ? folderId : 'null');
         let formatFolders = res.data
           .map((folder) => {
             return {
@@ -108,7 +108,7 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
         case 'note':
           await api.updateNote(
             {
-              folderId: moveFolderId,
+              folderId: moveFolderId[0] === 'null' ? null : moveFolderId,
             },
             note.id
           );
@@ -204,7 +204,8 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
             >
               <SelectLabel>
                 Select folder to move{' '}
-                <strong>{type === 'note' ? note.title : folder.title}</strong>
+                <strong>{type === 'note' ? note.title : folder.title}</strong>{' '}
+                to
               </SelectLabel>
               <SelectTrigger>
                 <SelectValueText placeholder='Select folder' />

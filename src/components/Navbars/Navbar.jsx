@@ -4,9 +4,9 @@ import { Box, Flex, Text, Button, Stack, Editable } from '@chakra-ui/react';
 import { LuChevronLeft } from 'react-icons/lu';
 import CreateNew from './CreateNew';
 import SortSelect from '../Dashboard/SortSelect';
-import './Navbar.scss';
-import api from '@/util/api';
 import OptionsBtn from './Options/OptionsBtn';
+import api from '@/util/api';
+import './Navbar.scss';
 
 const Navbar = (props) => {
   const {
@@ -130,6 +130,12 @@ const Navbar = (props) => {
           direction={'row'}
           spacing={6}
         >
+          <SortSelect
+            notes={notes}
+            folders={folders}
+            setNotes={setNotes}
+            setFolders={setFolders}
+          />
           {currentFolder && (
             <OptionsBtn
               setSelectedCreate={setSelectedCreate}
@@ -138,12 +144,6 @@ const Navbar = (props) => {
               type='folder'
             />
           )}
-          <SortSelect
-            notes={notes}
-            folders={folders}
-            setNotes={setNotes}
-            setFolders={setFolders}
-          />
           <Button fontSize={'sm'} fontWeight={400} onClick={logout}>
             Log out
           </Button>

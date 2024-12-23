@@ -14,10 +14,11 @@ import {
   PopoverRoot,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import OptionsBtn from './Options/OptionsBtn';
 import formatDate from '@/util/formatDate';
 import './Navbar.scss';
 
-const TitleBar = ({ note, setIsOpen, setDeleteOpen, words }) => {
+const TitleBar = ({ note, setIsOpen, setDeleteOpen, setMoveOpen, words }) => {
   const [openPopver, setOpenPopover] = useState(false);
   return (
     <Box className='navbar'>
@@ -62,12 +63,17 @@ const TitleBar = ({ note, setIsOpen, setDeleteOpen, words }) => {
               </PopoverBody>
             </PopoverContent>
           </PopoverRoot>
+          <OptionsBtn
+            setDeleteOpen={setDeleteOpen}
+            setMoveOpen={setMoveOpen}
+            type='note'
+          />
           <Button className='button1' onClick={() => setIsOpen(true)}>
             Rename
           </Button>
-          <Button className='button2' onClick={() => setDeleteOpen(true)}>
+          {/* <Button className='button2' onClick={() => setDeleteOpen(true)}>
             Delete
-          </Button>
+          </Button> */}
         </Stack>
       </Flex>
     </Box>
