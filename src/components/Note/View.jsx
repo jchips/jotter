@@ -7,7 +7,8 @@ import Preview from './Preview';
 import Loading from '../Loading';
 import TitleBar from '../Navbars/TitleBar';
 import ChangeTitle from '../modals/ChangeTitle';
-import DeleteConfirmation from '../modals/DeleteNote';
+import MoveModal from '../modals/MoveModal';
+import DeleteModal from '../modals/DeleteModal';
 import getWordCount from '@/util/getWordCount';
 import api from '@/util/api';
 import './Preview.scss';
@@ -18,7 +19,8 @@ const View = () => {
   const [error, setError] = useState('');
   const [words, setWords] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
-  const [delConfirmOpen, setDelConfirmOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [moveOpen, setMoveOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const { markdown, setMarkdown } = useMarkdown('');
   const { logout } = useAuth();
@@ -72,7 +74,8 @@ const View = () => {
         <TitleBar
           note={note}
           setIsOpen={setIsOpen}
-          setDelConfirmOpen={setDelConfirmOpen}
+          setDeleteOpen={setDeleteOpen}
+          setMoveOpen={setMoveOpen}
           words={words}
         />
         <div className='preview__wrapper'>
@@ -93,11 +96,18 @@ const View = () => {
           setIsOpen={setIsOpen}
           type={'note'}
         />
-        <DeleteConfirmation
+        <DeleteModal
           note={note}
-          delConfirmOpen={delConfirmOpen}
-          setDelConfirmOpen={setDelConfirmOpen}
+          deleteOpen={deleteOpen}
+          setDeleteOpen={setDeleteOpen}
           type={'note'}
+        />
+        <MoveModal
+          moveOpen={moveOpen}
+          setMoveOpen={setMoveOpen}
+          type='note'
+          note={note}
+          folders={{}}
         />
       </div>
     )

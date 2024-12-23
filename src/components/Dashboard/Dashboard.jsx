@@ -8,17 +8,21 @@ import AddTitle from '../modals/AddTitle';
 import DisplayNotes from './DisplayNotes';
 import Navbar from '../Navbars/Navbar';
 import DisplayFolders from './DisplayFolders';
+import DeleteModal from '../modals/DeleteModal';
 import FolderBreadcrumbs from './FolderBreadcrumbs';
 import api from '@/util/api';
 import './Dashboard.scss';
+import MoveModal from '../modals/MoveModal';
 
 const Dashboard = () => {
   const [notes, setNotes] = useState();
   const [folders, setFolders] = useState();
   const [error, setError] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
+  const [addTitleOpen, setAddTitleOpen] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedCreate, setSelectedCreate] = useState('');
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [moveOpen, setMoveOpen] = useState(false);
   const { user, logout } = useAuth();
   const { setMarkdown } = useMarkdown();
   const { folderId } = useParams();
@@ -73,8 +77,11 @@ const Dashboard = () => {
       <div className='dashboard'>
         <Navbar
           logout={logUserOut}
-          setSelectedOption={setSelectedOption}
-          setIsOpen={setIsOpen}
+          setSelectedCreate={setSelectedCreate}
+          setAddTitleOpen={setAddTitleOpen}
+          setDeleteOpen={setDeleteOpen}
+          setMoveOpen={setMoveOpen}
+          setError={setError}
           notes={notes}
           folders={folders}
           setNotes={setNotes}
@@ -90,14 +97,27 @@ const Dashboard = () => {
         )}
         <AddTitle
           user={user}
-          selectedOption={selectedOption}
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
+          selectedCreate={selectedCreate}
+          addTitleOpen={addTitleOpen}
+          setAddTitleOpen={setAddTitleOpen}
           notes={notes}
           folders={folders}
           setNotes={setNotes}
           setFolders={setFolders}
           currentFolder={folder}
+        />
+        <DeleteModal
+          deleteOpen={deleteOpen}
+          setDeleteOpen={setDeleteOpen}
+          type='folder'
+          folder={folder?.data}
+        />
+        <MoveModal
+          moveOpen={moveOpen}
+          setMoveOpen={setMoveOpen}
+          type='folder'
+          folder={folder?.data}
+          folders={folders}
         />
       </div>
     )

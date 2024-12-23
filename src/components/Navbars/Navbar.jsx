@@ -1,30 +1,67 @@
-import React from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import {
-  Box,
-  Flex,
-  Text,
-  Button,
-  Stack,
-  useBreakpointValue,
-} from '@chakra-ui/react';
+import { Box, Flex, Text, Button, Stack, Editable } from '@chakra-ui/react';
 import { LuChevronLeft } from 'react-icons/lu';
 import CreateNew from './CreateNew';
 import SortSelect from '../Dashboard/SortSelect';
+import OptionsBtn from './Options/OptionsBtn';
+import api from '@/util/api';
 import './Navbar.scss';
 
 const Navbar = (props) => {
   const {
     logout,
-    setSelectedOption,
-    setIsOpen,
+    setSelectedCreate,
+    setAddTitleOpen,
+    setDeleteOpen,
+    setMoveOpen,
+    setError,
     currentFolder,
     notes,
     setNotes,
     folders,
     setFolders,
   } = props;
+  const [saving, setSaving] = useState(false);
+  const [showRenameBtn, setShowRenameBtn] = useState(false);
+  const [folderTitle, setFolderTitle] = useState(
+    currentFolder ? currentFolder.title : null
+  );
   const navigate = useNavigate();
+
+  // Update folder title
+  const handleUpdateFolderTitle = async () => {
+    let updateData = {
+      title: folderTitle,
+      updatedAt: Date.now(),
+    };
+    try {
+      setError('');
+      setSaving(true);
+      await api.updateFolder(updateData, currentFolder.id);
+      currentFolder.title = folderTitle;
+      setShowRenameBtn(false);
+    } catch (err) {
+      setError('Failed to change folder title');
+      console.error(err);
+    }
+    setSaving(false);
+  };
+
+  // Delete folder (not using)
+  const handleDeleteFolder = async () => {
+    try {
+      setError('');
+      setSaving(true);
+      await api.deleteFolder(currentFolder.id);
+      navigate(`/folder/${currentFolder.parentId}`);
+    } catch (err) {
+      setError('Failed to delete folder');
+      console.error(err);
+    }
+    setSaving(false);
+  };
+
   return (
     <Box>
       <Flex
@@ -46,14 +83,45 @@ const Navbar = (props) => {
               onClick={() => navigate(`/folder/${currentFolder.parentId}`)}
             />
           ) : null}
-          <Text
-            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            fontFamily={'heading'}
-            textStyle='2xl'
-            fontWeight={700}
-          >
-            {currentFolder ? currentFolder.title : 'Jotter'}
-          </Text>
+          {currentFolder && currentFolder !== 'null' ? (
+            <Editable.Root
+              value={folderTitle}
+              onValueChange={(e) => {
+                setFolderTitle(e.value);
+                e.value !== currentFolder.title
+                  ? setShowRenameBtn(true)
+                  : setShowRenameBtn(false);
+              }}
+              textAlign={{ base: 'center', md: 'left' }}
+              fontFamily={'heading'}
+              textStyle='2xl'
+              fontWeight={700}
+              width='300px'
+            >
+              <Editable.Preview />
+              <Editable.Input />
+            </Editable.Root>
+          ) : (
+            <Text
+              textAlign={{ base: 'center', md: 'left' }}
+              fontFamily={'heading'}
+              textStyle='2xl'
+              fontWeight={700}
+            >
+              Jotter
+            </Text>
+          )}
+          {currentFolder && currentFolder !== 'null' ? (
+            <Button
+              className='button1'
+              style={{ marginLeft: '12px' }}
+              visibility={showRenameBtn ? 'visible' : 'hidden'}
+              onClick={handleUpdateFolderTitle}
+              disabled={saving}
+            >
+              Rename folder
+            </Button>
+          ) : null}
         </Flex>
 
         <Stack
@@ -68,12 +136,20 @@ const Navbar = (props) => {
             setNotes={setNotes}
             setFolders={setFolders}
           />
+          {currentFolder && (
+            <OptionsBtn
+              setSelectedCreate={setSelectedCreate}
+              setDeleteOpen={setDeleteOpen}
+              setMoveOpen={setMoveOpen}
+              type='folder'
+            />
+          )}
           <Button fontSize={'sm'} fontWeight={400} onClick={logout}>
             Log out
           </Button>
           <CreateNew
-            setSelectedOption={setSelectedOption}
-            setIsOpen={setIsOpen}
+            setSelectedCreate={setSelectedCreate}
+            setAddTitleOpen={setAddTitleOpen}
           />
         </Stack>
       </Flex>

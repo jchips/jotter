@@ -1,12 +1,7 @@
 import { Box, Stack, Text, Flex, Button } from '@chakra-ui/react';
-import { LuChevronRight, LuFolder, LuStickyNote, LuFile } from 'react-icons/lu';
+import { LuChevronRight, LuFolderOutput, LuTrash } from 'react-icons/lu';
 
-const CreateNewOptions = ({
-  label,
-  subLabel,
-  setAddTitleOpen,
-  setSelectedCreate,
-}) => {
+const OptionsDropdown = ({ label, subLabel, setDeleteOpen, setMoveOpen }) => {
   const iconStyle = {
     height: '20px',
     width: '20px',
@@ -21,19 +16,16 @@ const CreateNewOptions = ({
       rounded='md'
       variant='surface'
       onClick={() => {
-        subLabel === 'note'
-          ? setSelectedCreate('note')
-          : setSelectedCreate('folder');
-        setAddTitleOpen(true);
+        label.includes('Move') ? setMoveOpen(true) : setDeleteOpen(true);
       }}
     >
       <Stack direction={'row'} align={'center'}>
         <Box>
           <Stack direction={'row'}>
-            {subLabel === 'note' ? (
-              <LuFile style={iconStyle} />
+            {label.includes('Move') ? (
+              <LuFolderOutput style={iconStyle} />
             ) : (
-              <LuFolder style={iconStyle} />
+              <LuTrash style={iconStyle} />
             )}
             <Text transition='all .3s ease'>{label}</Text>
           </Stack>
@@ -54,4 +46,4 @@ const CreateNewOptions = ({
   );
 };
 
-export default CreateNewOptions;
+export default OptionsDropdown;

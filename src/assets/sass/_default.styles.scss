@@ -1,7 +1,13 @@
+@use 'sass:color';
 @use './colors';
 
+$lightThemeBg: #ffffff;
+$darkThemeBg: #242424;
+$lightThemeHover: color.adjust($lightThemeBg, $lightness: -10%);
+$darkThemeHover: color.adjust($darkThemeBg, $lightness: -10%);
+
 @mixin small-text {
-  font-size: smaller;
+  font-size: small;
   color: colors.$themePurpleText;
   font-weight: 400;
   width: fit-content;
@@ -14,18 +20,24 @@
 
 $backgroundColor: var(--editor-background-color);
 $textColor: var(--editor-text-color);
+$backgroundHover: var(--background-hover);
+$borderColor: var(--border);
 
 /* Applies light/dark background dynamically */
 @media (prefers-color-scheme: light) {
   :root {
-    --editor-background-color: #ffffff;
+    --editor-background-color: #{$lightThemeBg};
     --editor-text-color: #213547;
+    --background-hover: #{$lightThemeHover};
+    --border: #e4e4e7;
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --editor-background-color: #242424;
+    --editor-background-color: #{$darkThemeBg};
     --editor-text-color: rgba(255, 255, 255, 0.87);
+    --background-hover: #{$darkThemeHover};
+    --border: #27272a;
   }
 }

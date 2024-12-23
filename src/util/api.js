@@ -25,7 +25,6 @@ api.interceptors.request.use(
   }
 );
 
-
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -47,8 +46,10 @@ const apiService = {
   deleteNote: (noteId) => api.delete(`/note/${noteId}`),
   getFolder: (folderId) => api.get(`/folder/${folderId}`),
   getFolders: (parentId) => api.get(`/folder/f/${parentId}`),
+  getAllFolders: (folderId) => api.get(`/folder/all/${folderId}`),
   addFolder: (body) => api.post('/folder', body),
-  updateFolder: (body, folderId) => api.patch(`folder/${folderId}`, body),
+  updateFolder: (body, folderId) => api.patch(`/folder/${folderId}`, body),
+  deleteFolder: (folderId) => api.delete(`/folder/${folderId}`),
 }
 
 export default apiService;
