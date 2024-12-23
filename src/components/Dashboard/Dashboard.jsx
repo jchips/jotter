@@ -8,10 +8,11 @@ import AddTitle from '../modals/AddTitle';
 import DisplayNotes from './DisplayNotes';
 import Navbar from '../Navbars/Navbar';
 import DisplayFolders from './DisplayFolders';
+import DeleteModal from '../modals/DeleteModal';
 import FolderBreadcrumbs from './FolderBreadcrumbs';
 import api from '@/util/api';
 import './Dashboard.scss';
-import DeleteModal from '../modals/DeleteNote';
+import MoveModal from '../modals/MoveModal';
 
 const Dashboard = () => {
   const [notes, setNotes] = useState();
@@ -21,6 +22,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [selectedCreate, setSelectedCreate] = useState('');
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [moveOpen, setMoveOpen] = useState(false);
   const { user, logout } = useAuth();
   const { setMarkdown } = useMarkdown();
   const { folderId } = useParams();
@@ -78,6 +80,7 @@ const Dashboard = () => {
           setSelectedCreate={setSelectedCreate}
           setAddTitleOpen={setAddTitleOpen}
           setDeleteOpen={setDeleteOpen}
+          setMoveOpen={setMoveOpen}
           setError={setError}
           notes={notes}
           folders={folders}
@@ -108,6 +111,13 @@ const Dashboard = () => {
           setDeleteOpen={setDeleteOpen}
           type='folder'
           folder={folder?.data}
+        />
+        <MoveModal
+          moveOpen={moveOpen}
+          setMoveOpen={setMoveOpen}
+          type='folder'
+          folder={folder?.data}
+          folders={folders}
         />
       </div>
     )

@@ -5,6 +5,7 @@ const OptionsDropdown = ({
   label,
   subLabel,
   setDeleteOpen,
+  setMoveOpen,
   setSelectedCreate,
 }) => {
   const iconStyle = {
@@ -21,10 +22,7 @@ const OptionsDropdown = ({
       rounded='md'
       variant='surface'
       onClick={() => {
-        // subLabel === 'note'
-        // ? setSelectedCreate('note')
-        // : setSelectedCreate('folder');
-        setDeleteOpen(true);
+        label.includes('Move') ? setMoveOpen(true) : setDeleteOpen(true);
       }}
     >
       <Stack direction={'row'} align={'center'}>

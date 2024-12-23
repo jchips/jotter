@@ -7,7 +7,7 @@ import Preview from './Preview';
 import Loading from '../Loading';
 import TitleBar from '../Navbars/TitleBar';
 import ChangeTitle from '../modals/ChangeTitle';
-import DeleteModal from '../modals/DeleteNote';
+import DeleteModal from '../modals/DeleteModal';
 import getWordCount from '@/util/getWordCount';
 import api from '@/util/api';
 import './Preview.scss';

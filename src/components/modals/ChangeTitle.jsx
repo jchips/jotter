@@ -32,6 +32,11 @@ const ChangeTitle = (props) => {
     },
   });
 
+  /**
+   * Changes the title of a note (does not change folder titles)
+   * TODO: remove folder case
+   * @param {Object} titleControl - The input the user types as a title
+   */
   const onSubmit = async (titleControl) => {
     try {
       setError('');
@@ -51,7 +56,6 @@ const ChangeTitle = (props) => {
         case 'folder':
           break;
       }
-      console.log('res', res.data); // delete later
     } catch (err) {
       setError('Failed to rename' + type);
       console.error(err);
@@ -62,6 +66,7 @@ const ChangeTitle = (props) => {
     setIsOpen(false);
     setSaving(false);
   };
+
   return (
     <DialogRoot modal={true} open={isOpen}>
       <DialogContent>
@@ -71,7 +76,7 @@ const ChangeTitle = (props) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogBody>
             {error ? (
-              <div>
+              <div style={{ marginBottom: '20px' }}>
                 <Alert status='error' title={error} />
               </div>
             ) : null}

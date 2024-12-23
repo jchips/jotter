@@ -14,6 +14,7 @@ const Navbar = (props) => {
     setSelectedCreate,
     setAddTitleOpen,
     setDeleteOpen,
+    setMoveOpen,
     setError,
     currentFolder,
     notes,
@@ -133,6 +134,7 @@ const Navbar = (props) => {
             <OptionsBtn
               setSelectedCreate={setSelectedCreate}
               setDeleteOpen={setDeleteOpen}
+              setMoveOpen={setMoveOpen}
               type='folder'
             />
           )}
