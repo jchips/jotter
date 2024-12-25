@@ -71,9 +71,6 @@ const TitleBar = ({ note, setIsOpen, setDeleteOpen, setMoveOpen, words }) => {
           <Button className='button1' onClick={() => setIsOpen(true)}>
             Rename
           </Button>
-          {/* <Button className='button2' onClick={() => setDeleteOpen(true)}>
-            Delete
-          </Button> */}
         </Stack>
       </Flex>
     </Box>

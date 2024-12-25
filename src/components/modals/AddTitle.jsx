@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { Input } from '@chakra-ui/react';
 import { Button } from '@/components/ui/button';
 import { Alert } from '@/components/ui/alert';
-import { Input } from '@chakra-ui/react';
+import { Field } from '@/components/ui/field';
 import {
   DialogRoot,
   DialogActionTrigger,
@@ -13,7 +14,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Field } from '@/components/ui/field';
 import { useAuth } from '@/hooks/useAuth';
 import { ROOT_FOLDER } from '@/hooks/useFolder';
 import api from '@/util/api';
@@ -110,7 +110,7 @@ const AddTitle = (props) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogBody>
             {error ? (
-              <div>
+              <div style={{ marginBottom: '20px' }}>
                 <Alert status='error' title={error} />
               </div>
             ) : null}

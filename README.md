@@ -1,18 +1,31 @@
 # Jotter
 
-Jotter is a web app for note-taking with markdown capabilities.
+Tired of searching for the perfect private, accessible tool to easily organize your thoughts and ideas? Say hello to **Jotter**, the intuitive note-taking web app that combines the simplicity of Markdown with the power of organization.
 
-Users can log in to accounts and write notes with markdown.
+**Why Choose Jotter?**
+
+- **Stay Organized Your Way**: Create folders to neatly categorize your notes. Move notes and folders effortlessly to stay on top of your workflow.
+- **Markdown Made Easy**: Use Markdown to format your notes quickly and beautifully, whether it’s for lists, headings, code snippets, or more.
+- **Personalized Accounts**: Sign up and securely log in to access your notes anywhere, anytime.
+- **Seamless Note Management**: Create, save, edit, or delete notes and folders with ease.
+- **Adaptive Themes**: Whether your device is set to light or dark mode, **Jotter** adapts to your preferences, keeping your note-taking experience easy on the eyes.
+- **A Minimalist Design**: No clutter, no distractions—just you and your thoughts, perfectly synced.
+
+Whether you're a student, professional, or creative thinker, **Jotter** empowers you to take control of your notes and ideas with precision and style.
+
+Try **Jotter** today and elevate your note-taking game!
+
+TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 ## Creator & developer: Jelani R
 
-## Version: 1.0.0
+## Version: 1.0.1
 
 ## Architecture
 
 - Built with React + Vite.
 - Languages used: JavaScript and Sass.
-- Backend uses MySQL, Sequelize, Nodejs, jwt, Bcrypt, and base-64.
+- Backend uses MySQL, Sequelize, Nodejs, Jsonwebtoken, Bcrypt, and base-64.
 
 ## Resources
 
@@ -32,7 +45,8 @@ Users can log in to accounts and write notes with markdown.
 
 ## Changelog
 
-- 1.0.0 (2024-12-23) - Users can edit folder titles, move folders/notes, and delete folders.
+- 1.0.1 (2024-12-23, 8:22pm) - Export notes. Fixed a bug when moving notes. Minor improvements.
+- 1.0.0 (2024-12-23, 2:52am) - Users can edit folder titles, move folders/notes, and delete folders.
 - 0.2.3 (2024-12-22, 1:23am) - Added temporary sort for notes and folders.
 - 0.2.2 (2024-12-21, 9:31pm) - Added word count. Improved editor. Support for HTML code rendering.
 - 0.2.1 (2024-12-21, 4:33am) - Folder breadcrumbs.

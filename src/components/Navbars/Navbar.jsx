@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Box, Flex, Text, Button, Stack, Editable } from '@chakra-ui/react';
 import { LuChevronLeft } from 'react-icons/lu';
-import CreateNew from './CreateNew';
+import CreateNew from './Create/CreateNew';
 import SortSelect from '../Dashboard/SortSelect';
 import OptionsBtn from './Options/OptionsBtn';
 import api from '@/util/api';
@@ -43,20 +43,6 @@ const Navbar = (props) => {
       setShowRenameBtn(false);
     } catch (err) {
       setError('Failed to change folder title');
-      console.error(err);
-    }
-    setSaving(false);
-  };
-
-  // Delete folder (not using)
-  const handleDeleteFolder = async () => {
-    try {
-      setError('');
-      setSaving(true);
-      await api.deleteFolder(currentFolder.id);
-      navigate(`/folder/${currentFolder.parentId}`);
-    } catch (err) {
-      setError('Failed to delete folder');
       console.error(err);
     }
     setSaving(false);
@@ -138,7 +124,6 @@ const Navbar = (props) => {
           />
           {currentFolder && (
             <OptionsBtn
-              setSelectedCreate={setSelectedCreate}
               setDeleteOpen={setDeleteOpen}
               setMoveOpen={setMoveOpen}
               type='folder'

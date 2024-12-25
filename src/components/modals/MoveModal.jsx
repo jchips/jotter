@@ -41,7 +41,7 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
     let parentId = note?.folderId || folder?.parentId;
     const getAllFolders = async () => {
       try {
-        let res = await api.getAllFolders(folderId ? folderId : 'null');
+        let res = await api.getAllFolders(folderId ? folderId : 'null', type);
         let formatFolders = res.data
           .map((folder) => {
             return {
@@ -59,7 +59,7 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
       }
     };
     note || folder ? getAllFolders() : null;
-  }, [note, folder, folders]);
+  }, [note, folder, folders, type]);
 
   /**
    * Create collection based on if a folder or note is being moved.

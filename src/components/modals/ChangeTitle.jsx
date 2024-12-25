@@ -17,8 +17,7 @@ import { Field } from '@/components/ui/field';
 import api from '@/util/api';
 
 const ChangeTitle = (props) => {
-  const { isOpen, setIsOpen, type, notes, setNote, setFolders, note, folder } =
-    props;
+  const { isOpen, setIsOpen, setNote, note } = props;
   const [error, setError] = useState('');
   const [saving, setSaving] = useState(false);
   const {
@@ -33,32 +32,25 @@ const ChangeTitle = (props) => {
   });
 
   /**
-   * Changes the title of a note (does not change folder titles)
-   * TODO: remove folder case
+   * Changes the title of a note
+   * Changing title of folder is in `Navbar.jsx`
    * @param {Object} titleControl - The input the user types as a title
    */
   const onSubmit = async (titleControl) => {
     try {
       setError('');
       setSaving(true);
-      let res;
-      switch (type) {
-        case 'note':
-          res = await api.updateNote(
-            {
-              title: titleControl.title,
-              updatedAt: Date.now(),
-            },
-            note.id
-          );
-          setNote(res.data);
-          break;
-        case 'folder':
-          break;
-      }
+      let res = await api.updateNote(
+        {
+          title: titleControl.title,
+          updatedAt: Date.now(),
+        },
+        note.id
+      );
+      setNote(res.data);
     } catch (err) {
-      setError('Failed to rename' + type);
-      console.error(err);
+      setError('Failed to rename note');
+      console.error('Failed to rename note: ', err);
     }
     reset({
       title: '',
@@ -71,7 +63,7 @@ const ChangeTitle = (props) => {
     <DialogRoot modal={true} open={isOpen}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Rename {type}</DialogTitle>
+          <DialogTitle>Rename note</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogBody>
@@ -92,7 +84,7 @@ const ChangeTitle = (props) => {
                     type='text'
                     value={value}
                     onChange={onChange}
-                    placeholder={type === 'note' ? note.title : folder.title}
+                    placeholder={note.title}
                   />
                 )}
               />
@@ -110,7 +102,7 @@ const ChangeTitle = (props) => {
               variant='solid'
               disabled={saving}
             >
-              Rename {type}
+              Rename note
             </Button>
           </DialogFooter>
         </form>

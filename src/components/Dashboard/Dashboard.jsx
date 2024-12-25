@@ -28,10 +28,7 @@ const Dashboard = () => {
   const { folderId } = useParams();
   const navigate = useNavigate();
   const { pathState = {} } = useLocation();
-  const { folder, childFolders, childFiles } = useFolder(
-    folderId,
-    pathState.folder
-  );
+  const { folder } = useFolder(folderId, pathState.folder);
 
   // Fetch folders and notes
   useEffect(() => {

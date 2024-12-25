@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
+import { LuDownload } from 'react-icons/lu';
 import { Button, HStack } from '@chakra-ui/react';
+import { Alert } from '@/components/ui/alert';
 import { useAuth } from '@/hooks/useAuth';
 import { useMarkdown } from '../../hooks/useMarkdown';
 import Preview from './Preview';
@@ -63,6 +65,16 @@ const View = () => {
     setMarkdown('');
   };
 
+  // Downloads the note as an .md file to user's device
+  const downloadNote = () => {
+    const link = document.createElement('a');
+    const file = new Blob([markdown], { type: 'text/plain' });
+    link.href = URL.createObjectURL(file);
+    link.download = note.title + '.md';
+    link.click();
+    URL.revokeObjectURL(link.href);
+  };
+
   // Loading circle
   if (!note) {
     return <Loading />;
@@ -78,13 +90,28 @@ const View = () => {
           setMoveOpen={setMoveOpen}
           words={words}
         />
+        {error ? (
+          <div style={{ marginBottom: '20px' }}>
+            <Alert status='error' title={error} />
+          </div>
+        ) : null}
         <div className='preview__wrapper'>
           <Preview markdown={markdown} />
         </div>
         <HStack className='footer'>
-          <Button className='button2' variant='solid' onClick={handleExit}>
-            Exit
-          </Button>
+          <HStack>
+            <Button className='button2' variant='solid' onClick={handleExit}>
+              Exit note
+            </Button>
+            <Button
+              className='button1'
+              onClick={downloadNote}
+              title='Export note'
+            >
+              {/* <LuDownload /> */}
+              Export
+            </Button>
+          </HStack>
           <Button className='button1' variant='solid' onClick={handleEdit}>
             Edit note
           </Button>
@@ -94,7 +121,6 @@ const View = () => {
           setNote={setNote}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          type={'note'}
         />
         <DeleteModal
           note={note}

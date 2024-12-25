@@ -6,23 +6,16 @@ import {
 } from '@/components/ui/hover-card';
 import OptionsDropdown from './OptionsDropdown';
 
-const OptionsBtn = ({
-  setSelectedCreate,
-  setDeleteOpen,
-  setMoveOpen,
-  type,
-}) => {
+const OptionsBtn = ({ setDeleteOpen, setMoveOpen, type }) => {
   const options = [
     {
       label: 'Options',
       children: [
         {
           label: 'Move ' + type,
-          subLabel: type,
         },
         {
           label: 'Delete ' + type,
-          subLabel: type,
         },
       ],
     },
@@ -44,7 +37,6 @@ const OptionsBtn = ({
                           {...child}
                           setDeleteOpen={setDeleteOpen}
                           setMoveOpen={setMoveOpen}
-                          setSelectedCreate={setSelectedCreate}
                         />
                       ))}
                     </Stack>
