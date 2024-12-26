@@ -3,9 +3,10 @@ import { useNavigate, useParams } from 'react-router';
 import { throttle } from 'lodash';
 import { Button, HStack, Text, Box } from '@chakra-ui/react';
 import { Alert } from '@/components/ui/alert';
-import CodeMirror from '@uiw/react-codemirror';
-import { markdown as md } from '@codemirror/lang-markdown';
-import { EditorView } from '@uiw/react-codemirror';
+import CodeMirror from './CodeMirror';
+// import CodeMirror from '@uiw/react-codemirror';
+// import { markdown as md } from '@codemirror/lang-markdown';
+// import { EditorView } from '@uiw/react-codemirror';
 import { useMarkdown } from '../../hooks/useMarkdown';
 import { useAuth } from '@/hooks/useAuth';
 import ExitNote from '../modals/ExitNote';
@@ -82,10 +83,13 @@ const Editor = () => {
    * Updates the markdown state with the current markdown content
    * @param {String} value - The markdown content that user types
    */
-  const update = (value) => {
-    setMarkdown(value);
-    setWords(getWordCount(value));
-  };
+  const update = useCallback(
+    (value) => {
+      setMarkdown(value);
+      setWords(getWordCount(value));
+    },
+    [setMarkdown]
+  );
 
   // Saves changes to the note
   const handleSave = useCallback(async () => {
@@ -153,9 +157,7 @@ const Editor = () => {
           <div className='editor__wrap' ref={editorRef}>
             <CodeMirror
               value={markdown}
-              className='editor'
-              extensions={[md(), EditorView.lineWrapping]}
-              placeholder='Type Markdown here...'
+              placeholderText='Type Markdown here...'
               onChange={update}
               options={{
                 lineWrapping: true,

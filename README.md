@@ -19,7 +19,7 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 ## Creator & developer: Jelani R
 
-## Version: 1.0.1
+## Version: 1.0.2
 
 ## Architecture
 
@@ -45,6 +45,7 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 ## Changelog
 
+- 1.0.2 (2024-12-25, 6:12pm) - Fixed bug where cursor jumps to top of editor when typing quickly. Minor editor improvements.
 - 1.0.1 (2024-12-23, 8:22pm) - Export notes. Fixed a bug when moving notes. Minor improvements.
 - 1.0.0 (2024-12-23, 2:52am) - Users can edit folder titles, move folders/notes, and delete folders.
 - 0.2.3 (2024-12-22, 1:23am) - Added temporary sort for notes and folders.

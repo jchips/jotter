@@ -9,12 +9,22 @@ import './markdown.scss';
 
 const Preview = ({ markdown }) => {
   /**
-   * Replaces blank lines with '<br>' to preserve blank spaces
+   * Replaces blank lines with '<br/>' to preserve blank spaces
+   * Checks if the line is empty and ensures multiple empty lines are handled
    * @param {String} markdown - Markdown content
-   * @returns {String} - Markdown content with the added '<br>'s
+   * @returns {String} - Markdown content with the added '<br/>'s or returns
+   * the line as is if it's not blank
    */
   const preserveBlankLines = (markdown) => {
-    return markdown.replace(/^\s*\n$/gm, '<br/>');
+    return markdown
+      .split('\n')
+      .map((line, index, lines) => {
+        if (line.trim() === '' && lines[index + 1]?.trim() === '') {
+          return '<br />';
+        }
+        return line;
+      })
+      .join('\n'); // Joins the lines back into a single string
   };
 
   return (
