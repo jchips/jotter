@@ -17,6 +17,7 @@
     "@codemirror/view": "^6.36.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@uiw/codemirror-extensions-basic-setup": "^4.23.7",
     "@uiw/react-codemirror": "^4.23.7",
     "axios": "^1.7.9",
     "buffer": "^6.0.3",

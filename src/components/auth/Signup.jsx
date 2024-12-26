@@ -92,7 +92,7 @@ const Signup = () => {
           </Card.Description>
         </Card.Header>
         <Card.Body>
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <Stack gap='4' w='full'>
               <Field
                 label='Email'
@@ -162,11 +162,10 @@ const Signup = () => {
                 />
               </Field>
               <Button
-                className='auth-btn'
                 type='submit'
+                className='auth-btn'
                 colorPalette={'gray'}
                 variant='solid'
-                onClick={handleSubmit(onSubmit)}
                 disabled={loading}
               >
                 Sign up
