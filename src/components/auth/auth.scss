@@ -1,13 +1,19 @@
 @use '../../assets/sass/colors';
+@use '../../assets/sass/default.styles' as default;
 @use 'sass:color';
 
-// $btnBg: #646cff;
-// $btnBg: #3b45ff;
+.header-container {
+  margin-top: 60px;
+
+  >* {
+    margin: 0 5px;
+  }
+}
 
 .auth-component h1 {
+  @include default.large-text;
   text-align: center;
-  margin-top: 60px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .login-form {
@@ -49,12 +55,5 @@
 }
 
 .navigate-btn {
-  // background-color: $btnBg;
-  // border: 1px #646cff solid;
   color: colors.$themePurple;
-
-  // &:hover {
-  //   // background-color: adjust-color($btnBg, $lightness: 10%);
-  //   background-color: color.adjust($btnBg, $lightness: -10%);
-  // }
 }

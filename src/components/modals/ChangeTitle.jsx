@@ -27,7 +27,7 @@ const ChangeTitle = (props) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      title: '',
+      title: note.title,
     },
   });
 

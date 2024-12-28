@@ -1,7 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import { markdown as md } from '@codemirror/lang-markdown';
-import { EditorView, placeholder } from '@codemirror/view';
+import { EditorView, placeholder, keymap } from '@codemirror/view';
 import { EditorState } from '@codemirror/state';
+import { indentWithTab } from '@codemirror/commands';
 import { basicSetup } from '@uiw/codemirror-extensions-basic-setup';
 
 // This component is to fix an bug where the cursor jumps to the top of
@@ -17,8 +18,12 @@ const CodeMirror = ({ value, onChange, placeholderText, ...rest }) => {
         state: EditorState.create({
           doc: value,
           extensions: [
-            basicSetup(),
+            basicSetup({
+              indentOnInput: true,
+              highlightActiveLine: true,
+            }),
             md(),
+            keymap.of([indentWithTab]),
             placeholder(placeholderText),
             EditorView.lineWrapping,
             EditorView.updateListener.of((update) => {

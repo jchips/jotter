@@ -6,6 +6,7 @@ import CreateNew from './Create/CreateNew';
 import SortSelect from '../Dashboard/SortSelect';
 import OptionsBtn from './Options/OptionsBtn';
 import api from '@/util/api';
+import jotterGif from '@/assets/ic/jotter4.gif';
 import './Navbar.scss';
 
 const Navbar = (props) => {
@@ -88,14 +89,18 @@ const Navbar = (props) => {
               <Editable.Input />
             </Editable.Root>
           ) : (
-            <Text
-              textAlign={{ base: 'center', md: 'left' }}
-              fontFamily={'heading'}
-              textStyle='2xl'
-              fontWeight={700}
-            >
-              Jotter
-            </Text>
+            <Flex direction='row' alignItems='center'>
+              <img className='gif' src={jotterGif} alt='Jotter gif' />
+              <Text
+                textAlign={{ base: 'center', md: 'left' }}
+                fontFamily={'heading'}
+                textStyle='2xl'
+                fontWeight={700}
+                marginLeft='10px'
+              >
+                Jotter
+              </Text>
+            </Flex>
           )}
           {currentFolder && currentFolder !== 'null' ? (
             <Button
