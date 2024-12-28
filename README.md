@@ -1,15 +1,6 @@
 # Jotter
 
-<style>
-  img[src$="#jotter"] {
-  display: block;
-  margin: 0 auto;
-  height: 50px;
-  width: 50px;
-  border-radius: 100%;
-</style>
-
-![Jotter logo](./src/assets/ic/jotter4.gif#jotter)
+<center><img src='./src/assets/ic/jotter4.gif#jotter' alt='Jotter logo' height='50px' width='50px'/></center>
 
 Tired of searching for the perfect private, accessible tool to easily organize your thoughts and ideas? Say hello to **Jotter**, the intuitive note-taking web app that combines the simplicity of Markdown with the power of organization.
 
@@ -68,3 +59,9 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 - 0.1.0 (2024-12-18, 3:11pm) - Users can create notes that support markdown, edit, and save them.
 - 0.0.2 (2024-12-28, 11:32am) - Users can create notes.
 - 0.0.1 (2024-12-15, 6:43pm) - Initial commit with functional login/signup.
+
+<style>
+  center>* {
+    border-radius: 100%
+  }
+</style>
