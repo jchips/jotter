@@ -4,9 +4,6 @@ import { throttle } from 'lodash';
 import { Button, HStack, Text, Box } from '@chakra-ui/react';
 import { Alert } from '@/components/ui/alert';
 import CodeMirror from './CodeMirror';
-// import CodeMirror from '@uiw/react-codemirror';
-// import { markdown as md } from '@codemirror/lang-markdown';
-// import { EditorView } from '@uiw/react-codemirror';
 import { useMarkdown } from '../../hooks/useMarkdown';
 import { useAuth } from '@/hooks/useAuth';
 import ExitNote from '../modals/ExitNote';
@@ -158,9 +155,11 @@ const Editor = () => {
             <CodeMirror
               value={markdown}
               placeholderText='Type Markdown here...'
+              indentWithTab={true}
               onChange={update}
               options={{
                 lineWrapping: true,
+                indentWithTabs: true,
               }}
             />
           </div>
@@ -170,17 +169,13 @@ const Editor = () => {
         </div>
       )}
       <HStack className='footer'>
-        <Button className='button1' variant='solid' onClick={handleExit}>
-          Exit editor
+        <Button className='button1' variant='solid' onClick={handleSaveAndExit}>
+          Save and exit
         </Button>
         <Text>{words} words</Text>
         <Box>
-          <Button
-            className='button1'
-            variant='solid'
-            onClick={handleSaveAndExit}
-          >
-            Save and exit
+          <Button className='button1' variant='solid' onClick={handleExit}>
+            Exit editor
           </Button>
           <Button
             className='button1'

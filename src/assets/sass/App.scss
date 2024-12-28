@@ -67,3 +67,14 @@
 .medium-text {
   @include default.medium-text;
 }
+
+.large-text {
+  @include default.large-text;
+}
+
+.gif {
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  filter: default.$dropShadow;
+}

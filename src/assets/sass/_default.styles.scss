@@ -18,10 +18,16 @@ $darkThemeHover: color.adjust($darkThemeBg, $lightness: -10%);
   width: fit-content;
 }
 
+@mixin large-text {
+  font-size: xx-large;
+  width: fit-content;
+}
+
 $backgroundColor: var(--editor-background-color);
 $textColor: var(--editor-text-color);
 $backgroundHover: var(--background-hover);
 $borderColor: var(--border);
+$dropShadow: var(--icon-drop-shadow);
 
 /* Applies light/dark background dynamically */
 @media (prefers-color-scheme: light) {
@@ -30,6 +36,7 @@ $borderColor: var(--border);
     --editor-text-color: #213547;
     --background-hover: #{$lightThemeHover};
     --border: #e4e4e7;
+    --icon-drop-shadow: drop-shadow(0 0 2em #646cffaa);
   }
 }
 
@@ -39,5 +46,6 @@ $borderColor: var(--border);
     --editor-text-color: rgba(255, 255, 255, 0.87);
     --background-hover: #{$darkThemeHover};
     --border: #27272a;
+    --icon-drop-shadow: drop-shadow(0 0);
   }
 }

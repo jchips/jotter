@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useForm, Controller } from 'react-hook-form';
-import { Button, Card, Input, Stack } from '@chakra-ui/react';
+import { Button, Card, Input, Stack, Flex } from '@chakra-ui/react';
 import { Alert } from '@/components/ui/alert';
 import { Field } from '@/components/ui/field';
 import { InputGroup } from '@/components/ui/input-group';
@@ -9,6 +9,7 @@ import { PasswordInput } from '@/components/ui/password-input';
 import { LuLock, LuMail } from 'react-icons/lu';
 import { useAuth } from '@/hooks/useAuth';
 import { getToken } from '@/util/authUtil';
+import jotterGif from '@/assets/ic/jotter4.gif';
 import './auth.scss';
 
 const Login = () => {
@@ -66,7 +67,15 @@ const Login = () => {
 
   return (
     <div className='auth-component'>
-      <h1>Jotter</h1>
+      <Flex
+        className='header-container'
+        direction={'row'}
+        justify={'center'}
+        align={'center'}
+      >
+        <img className='gif' src={jotterGif} alt='Jotter gif' />
+        <h1>Jotter</h1>
+      </Flex>
       <Card.Root className='login-form' variant={'elevated'}>
         {error ? (
           <div>
