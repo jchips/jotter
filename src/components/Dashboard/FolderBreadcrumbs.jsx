@@ -19,8 +19,8 @@ const FolderBreadcrumbs = ({ currentFolder }) => {
           <Link
             to={{
               pathname: folder.id ? `/folder/${folder.id}` : '/',
-              pathState: { folder: { ...folder, path: path.slice(1, index) } },
             }}
+            state={{ folder: { ...folder, path: path.slice(1, index) } }}
           >
             {folder.title}
           </Link>

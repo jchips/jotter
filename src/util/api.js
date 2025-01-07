@@ -8,11 +8,6 @@ const api = axios.create({
   },
 });
 
-/**
- * Sets the Bearer auth token to the current user's token.
- * @param {Function} tokenGetter - Returns the current user's token.
- */
-
 // Axios interceptor
 api.interceptors.request.use(
   (apiConfig) => {
@@ -30,7 +25,7 @@ api.interceptors.response.use(
   async (error) => {
     if (error.response.status === 401) {
       clearToken();
-      window.location = '/login'; // Redirect to login
+      window.location = '/jotter/login'; // Redirect to login
     }
     return Promise.reject(error);
   }

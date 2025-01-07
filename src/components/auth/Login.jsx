@@ -59,7 +59,6 @@ const Login = () => {
       reset({
         email: '',
         password: '',
-        confirmPassword: '',
       });
       setLoading(false);
     }
@@ -83,7 +82,7 @@ const Login = () => {
           </div>
         ) : null}
         <Card.Header>
-          <Card.Title>Login</Card.Title>
+          <Card.Title>Log in</Card.Title>
           <Card.Description>Fill in the form below to log in</Card.Description>
         </Card.Header>
         <Card.Body>
@@ -103,7 +102,7 @@ const Login = () => {
                   render={({ field: { onChange, value } }) => (
                     <InputGroup flex='1' startElement={<LuMail />}>
                       <Input
-                        type='email'
+                        // type='email'
                         value={value}
                         onChange={onChange}
                         placeholder='Email'
@@ -141,7 +140,7 @@ const Login = () => {
                 variant='solid'
                 disabled={loading}
               >
-                Log In
+                Log in
               </Button>
             </Stack>
           </form>
