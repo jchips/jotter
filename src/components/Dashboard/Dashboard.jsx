@@ -18,8 +18,8 @@ const Dashboard = () => {
   const [notes, setNotes] = useState();
   const [folders, setFolders] = useState();
   const [error, setError] = useState('');
-  const [addTitleOpen, setAddTitleOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [addTitleOpen, setAddTitleOpen] = useState(false);
   const [selectedCreate, setSelectedCreate] = useState('');
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [moveOpen, setMoveOpen] = useState(false);
@@ -27,8 +27,11 @@ const Dashboard = () => {
   const { setMarkdown } = useMarkdown();
   const { folderId } = useParams();
   const navigate = useNavigate();
-  const { pathState = {} } = useLocation();
-  const { folder } = useFolder(folderId, pathState.folder);
+  const location = useLocation();
+  const { state = {} } = useLocation();
+  const { folder } = useFolder(folderId, state?.folder);
+
+  console.log('state:', location); // delete later
 
   // Fetch folders and notes
   useEffect(() => {

@@ -37,6 +37,7 @@
   @include buttonColors(colors.$themeWhite, #dc3545, $static: true);
 }
 
+// button outline
 .button5 {
   @include buttonColors(default.$textColor, default.$backgroundColor, $static: false);
   border-width: 1px;

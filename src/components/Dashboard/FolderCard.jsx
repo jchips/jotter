@@ -4,18 +4,15 @@ import { Card, Heading, HStack, Button } from '@chakra-ui/react';
 
 const FolderCard = ({ folder }) => {
   return (
-    <Card.Root
-      size='sm'
-      className='folder-card'
-      as={Link}
-      to={{ pathname: `/folder/${folder.id}`, pathState: { folder: folder } }}
-    >
-      <Card.Body>
-        <HStack spacing={4}>
-          <LuFolder />
-          <Heading size='md'>{folder.title}</Heading>
-        </HStack>
-      </Card.Body>
+    <Card.Root size='sm' className='folder-card'>
+      <Link to={`/folder/${folder.id}`} state={{ folder: folder }}>
+        <Card.Body>
+          <HStack spacing={4}>
+            <LuFolder />
+            <Heading size='md'>{folder.title}</Heading>
+          </HStack>
+        </Card.Body>
+      </Link>
     </Card.Root>
   );
 };

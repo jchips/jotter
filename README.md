@@ -59,9 +59,3 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 - 0.1.0 (2024-12-18, 3:11pm) - Users can create notes that support markdown, edit, and save them.
 - 0.0.2 (2024-12-28, 11:32am) - Users can create notes.
 - 0.0.1 (2024-12-15, 6:43pm) - Initial commit with functional login/signup.
-
-<style>
-  center>* {
-    border-radius: 100%
-  }
-</style>
