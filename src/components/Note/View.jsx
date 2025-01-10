@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { LuDownload } from 'react-icons/lu';
+import { LuDownload, LuUpload } from 'react-icons/lu';
 import { Button, HStack } from '@chakra-ui/react';
 import { Alert } from '@/components/ui/alert';
 import { useAuth } from '@/hooks/useAuth';
@@ -8,6 +8,7 @@ import { useMarkdown } from '../../hooks/useMarkdown';
 import Preview from './Preview';
 import Loading from '../Loading';
 import TitleBar from '../Navbars/TitleBar';
+import ImportNote from '../modals/ImportNote';
 import ChangeTitle from '../modals/ChangeTitle';
 import MoveModal from '../modals/MoveModal';
 import DeleteModal from '../modals/DeleteModal';
@@ -23,6 +24,7 @@ const View = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [moveOpen, setMoveOpen] = useState(false);
+  const [importOpen, setImportOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const { markdown, setMarkdown } = useMarkdown('');
   const { logout } = useAuth();
@@ -66,13 +68,36 @@ const View = () => {
   };
 
   // Downloads the note as an .md file to user's device
-  const downloadNote = () => {
+  const exportNote = () => {
     const link = document.createElement('a');
     const file = new Blob([markdown], { type: 'text/plain' });
     link.href = URL.createObjectURL(file);
     link.download = note.title + '.md';
     link.click();
     URL.revokeObjectURL(link.href);
+  };
+
+  /**
+   * Imports a markdown file
+   * @param {Object} mdFile - The file to import
+   */
+  const importNote = async (mdFile) => {
+    try {
+      setError('');
+      let getTextRes = await mdFile.text();
+      setMarkdown(getTextRes);
+      let updateRes = await api.updateNote(
+        {
+          content: getTextRes,
+          updatedAt: Date.now(),
+        },
+        noteId
+      );
+      setNote(updateRes.data);
+      setImportOpen(false);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   // Loading circle
@@ -104,11 +129,19 @@ const View = () => {
               Exit note
             </Button>
             <Button
-              className='button1'
-              onClick={downloadNote}
+              className='button1 ex-im-btn'
+              onClick={() => setImportOpen(true)}
+              title='Import note'
+            >
+              <LuUpload />
+              Import
+            </Button>
+            <Button
+              className='button1 ex-im-btn'
+              onClick={exportNote}
               title='Export note'
             >
-              {/* <LuDownload /> */}
+              <LuDownload />
               Export
             </Button>
           </HStack>
@@ -134,6 +167,11 @@ const View = () => {
           type='note'
           note={note}
           folders={{}}
+        />
+        <ImportNote
+          importOpen={importOpen}
+          setImportOpen={setImportOpen}
+          importNote={importNote}
         />
       </div>
     )
