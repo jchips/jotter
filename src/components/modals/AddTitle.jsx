@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { Input } from '@chakra-ui/react';
 import { Button } from '@/components/ui/button';
@@ -15,19 +16,13 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { useAuth } from '@/hooks/useAuth';
+import { setNotes } from '@/reducers/noteReducer';
+import { setFolders } from '@/reducers/folderReducer';
 import { ROOT_FOLDER } from '@/hooks/useFolder';
 import api from '@/util/api';
 
 const AddTitle = (props) => {
-  const {
-    addTitleOpen,
-    setAddTitleOpen,
-    selectedCreate,
-    notes,
-    folders,
-    setNotes,
-    setFolders,
-  } = props;
+  const { addTitleOpen, setAddTitleOpen, selectedCreate } = props;
   let { currentFolder } = props;
   const {
     control,
@@ -42,6 +37,9 @@ const AddTitle = (props) => {
   const [error, setError] = useState('');
   const [saving, setSaving] = useState(false);
   const { user } = useAuth();
+  const notes = useSelector((state) => state.notes.value);
+  const folders = useSelector((state) => state.folders.value);
+  const dispatch = useDispatch();
 
   /**
    * Adds a title to either a note or a folder
@@ -77,7 +75,7 @@ const AddTitle = (props) => {
             userId: user.id,
             folderId: currentFolder.id,
           });
-          setNotes([...notes, res.data]);
+          dispatch(setNotes([...notes, res.data]));
           break;
         // add folder
         case 'folder':
@@ -87,7 +85,7 @@ const AddTitle = (props) => {
             parentId: currentFolder.id,
             path,
           });
-          setFolders([...folders, res.data]);
+          dispatch(setFolders([...folders, res.data]));
           break;
       }
       setAddTitleOpen(false);

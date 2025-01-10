@@ -19,9 +19,7 @@ const Navbar = (props) => {
     setError,
     currentFolder,
     notes,
-    setNotes,
     folders,
-    setFolders,
   } = props;
   const [saving, setSaving] = useState(false);
   const [showRenameBtn, setShowRenameBtn] = useState(false);
@@ -41,12 +39,62 @@ const Navbar = (props) => {
       setSaving(true);
       await api.updateFolder(updateData, currentFolder.id);
       currentFolder.title = folderTitle;
+      {
+        folders?.length !== 0 && getChildren(currentFolder.id);
+      }
       setShowRenameBtn(false);
     } catch (err) {
       setError('Failed to change folder title');
       console.error(err);
     }
     setSaving(false);
+  };
+
+  /**
+   * Updates the path of the child folder given
+   * @param {Object} child - The folder to update
+   */
+  const updateInnerPath = async (child) => {
+    let childPath = JSON.parse(child.path);
+    let index = childPath.findIndex(
+      (pathItem) => pathItem.id === currentFolder.id
+    );
+    childPath.splice(index, 1, {
+      id: currentFolder.id,
+      title: currentFolder.title,
+    });
+    try {
+      await api.updateFolder(
+        {
+          path: childPath,
+        },
+        child.id
+      );
+    } catch (err) {
+      console.error('Failed to update path - ', child.title, child.id, err);
+    }
+  };
+
+  /**
+   * Gets the child folders of the current folder and updates their paths.
+   * @param {Integer} parentId - The id of the current folder (it will the parent on recall)
+   * @returns - exit the recursive function once there are no more child folders
+   */
+  const getChildren = async (parentId) => {
+    try {
+      let children = await api.getFolders(parentId);
+      children = children.data;
+      if (children.length === 0) {
+        return;
+      } else {
+        for (const child of children) {
+          await updateInnerPath(child);
+          await getChildren(child.id);
+        }
+      }
+    } catch (err) {
+      console.error('Failed to fetch child folders', err);
+    }
   };
 
   return (
@@ -121,12 +169,7 @@ const Navbar = (props) => {
           direction={'row'}
           spacing={6}
         >
-          <SortSelect
-            notes={notes}
-            folders={folders}
-            setNotes={setNotes}
-            setFolders={setFolders}
-          />
+          <SortSelect notes={notes} folders={folders} />
           {currentFolder && (
             <OptionsBtn
               setDeleteOpen={setDeleteOpen}

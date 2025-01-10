@@ -129,7 +129,7 @@ const View = () => {
               Exit note
             </Button>
             <Button
-              className='button1 ex-im-btn'
+              className='button5 ex-im-btn'
               onClick={() => setImportOpen(true)}
               title='Import note'
             >
@@ -137,7 +137,7 @@ const View = () => {
               Import
             </Button>
             <Button
-              className='button1 ex-im-btn'
+              className='button5 ex-im-btn'
               onClick={exportNote}
               title='Export note'
             >

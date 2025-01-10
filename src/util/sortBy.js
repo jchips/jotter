@@ -4,10 +4,10 @@
  * @param {Object} sortMethod - the sort methods object
  * @param {Object[]} notes - The user's notes
  * @param {Object[]} folders - The user's folders
- * @param {Function} setNotes - Sets the user's notes (once sorted)
- * @param {Function} setFolders - Sets the user's folders (once sorted)
+ * @param {Function} sortNotes - Sets the user's notes (once sorted)
+ * @param {Function} sortFolders - Sets the user's folders (once sorted)
  */
-const sortBy = (value, sortMethod, notes, folders, setNotes, setFolders) => {
+const sortBy = (value, sortMethod, notes, folders, sortNotes, sortFolders) => {
   let sortedNotes;
   let sortedFolders;
   switch (value) {
@@ -40,8 +40,8 @@ const sortBy = (value, sortMethod, notes, folders, setNotes, setFolders) => {
       sortedFolders = sortMethod.sortByCreatedAsc(folders);
       break;
   }
-  setNotes(sortedNotes);
-  setFolders(sortedFolders);
+  sortNotes(sortedNotes);
+  sortFolders(sortedFolders);
 };
 
 export default sortBy;

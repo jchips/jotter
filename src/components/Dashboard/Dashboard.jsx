@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router';
+import { useSelector, useDispatch } from 'react-redux';
 import { useAuth } from '@/hooks/useAuth';
 import { useFolder } from '@/hooks/useFolder';
 import { useMarkdown } from '@/hooks/useMarkdown';
+import { setFolders } from '@/reducers/folderReducer';
+import { setNotes } from '@/reducers/noteReducer';
 import Loading from '../Loading';
 import AddTitle from '../modals/AddTitle';
 import DisplayNotes from './DisplayNotes';
@@ -15,8 +18,6 @@ import api from '@/util/api';
 import './Dashboard.scss';
 
 const Dashboard = () => {
-  const [notes, setNotes] = useState();
-  const [folders, setFolders] = useState();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [addTitleOpen, setAddTitleOpen] = useState(false);
@@ -29,6 +30,9 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { state = {} } = useLocation();
   const { folder } = useFolder(folderId, state?.folder);
+  const folders = useSelector((state) => state.folders.value);
+  const notes = useSelector((state) => state.notes.value);
+  const dispatch = useDispatch();
 
   // Fetch folders and notes
   useEffect(() => {
@@ -42,8 +46,8 @@ const Dashboard = () => {
           api.getFolders(folder_id),
           folder_id ? api.getNotes(folder_id) : api.getRootNotes(),
         ]);
-        setFolders(foldersRes.data);
-        setNotes(notesRes.data);
+        dispatch(setFolders(foldersRes.data));
+        dispatch(setNotes(notesRes.data));
       } catch (err) {
         console.error(err);
         if (err.response?.data?.message === 'jwt expired') {
@@ -56,7 +60,7 @@ const Dashboard = () => {
       }
     };
     fetchContent();
-  }, [logout, setMarkdown, folderId]);
+  }, [logout, setMarkdown, folderId, dispatch]);
 
   // Loading circle
   if (loading) {
@@ -81,8 +85,6 @@ const Dashboard = () => {
           setError={setError}
           notes={notes}
           folders={folders}
-          setNotes={setNotes}
-          setFolders={setFolders}
           currentFolder={folder?.data}
         />
         {folderId && folderId !== 'null' && (
@@ -99,8 +101,6 @@ const Dashboard = () => {
           setAddTitleOpen={setAddTitleOpen}
           notes={notes}
           folders={folders}
-          setNotes={setNotes}
-          setFolders={setFolders}
           currentFolder={folder}
         />
         <DeleteModal
