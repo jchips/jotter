@@ -1,4 +1,5 @@
 @use './note';
+@use '../../assets/sass/default.styles' as default;
 
 .view {
   display: flex;
@@ -6,7 +7,10 @@
   height: 100vh;
 
   .ex-im-btn {
+    background-color: default.$darkThemeBg;
+    color: default.$lightThemeBg;
     font-size: 0.8rem;
+    margin: 1px;
   }
 }
 

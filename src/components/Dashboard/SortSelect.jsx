@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { createListCollection } from '@chakra-ui/react';
 import {
   SelectContent,
@@ -9,12 +10,17 @@ import {
   SelectTrigger,
   SelectValueText,
 } from '@/components/ui/select';
+import { setNotes } from '@/reducers/noteReducer';
+import { setFolders } from '@/reducers/folderReducer';
 import sortMethods from '@/hooks/sortMethods';
 import sortBy from '@/util/sortBy';
 
-const SortSelect = ({ notes, setNotes, folders, setFolders }) => {
+const SortSelect = ({ notes, folders }) => {
   const [sort, setSort] = useState('1');
+  const dispatch = useDispatch();
   const sortMethod = sortMethods;
+  const sortNotes = (notes) => dispatch(setNotes(notes));
+  const sortFolders = (folders) => dispatch(setFolders(folders));
 
   return (
     <SelectRoot
@@ -26,7 +32,7 @@ const SortSelect = ({ notes, setNotes, folders, setFolders }) => {
       value={sort}
       onValueChange={(e) => {
         setSort(e.value);
-        sortBy(e.value[0], sortMethod, notes, folders, setNotes, setFolders);
+        sortBy(e.value[0], sortMethod, notes, folders, sortNotes, sortFolders);
       }}
     >
       {' '}
