@@ -53,7 +53,11 @@ const Login = () => {
       }
     } catch (err) {
       setIsLoggedIn(false);
-      setError('Incorrect email or password');
+      setError(
+        err.message === 'Request failed with status code 403'
+          ? 'Incorrect email or password'
+          : 'Sorry, there has been a server error :('
+      );
       console.error(err);
     } finally {
       reset({

@@ -8,11 +8,11 @@ import AddTitle from '../modals/AddTitle';
 import DisplayNotes from './DisplayNotes';
 import Navbar from '../Navbars/Navbar';
 import DisplayFolders from './DisplayFolders';
+import MoveModal from '../modals/MoveModal';
 import DeleteModal from '../modals/DeleteModal';
 import FolderBreadcrumbs from './FolderBreadcrumbs';
 import api from '@/util/api';
 import './Dashboard.scss';
-import MoveModal from '../modals/MoveModal';
 
 const Dashboard = () => {
   const [notes, setNotes] = useState();
@@ -27,11 +27,8 @@ const Dashboard = () => {
   const { setMarkdown } = useMarkdown();
   const { folderId } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
   const { state = {} } = useLocation();
   const { folder } = useFolder(folderId, state?.folder);
-
-  console.log('state:', location); // delete later
 
   // Fetch folders and notes
   useEffect(() => {

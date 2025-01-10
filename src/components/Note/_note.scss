@@ -44,3 +44,19 @@
 .ͼ4 .cm-line {
   caret-color: default.$textColor !important;
 }
+
+.css-1rldt0e {
+  padding-bottom: 0;
+}
+
+.dialog-msg-wrapper {
+  margin: 10px;
+
+  .dialog-msg1 {
+    font-weight: 500;
+  }
+
+  &>p {
+    margin: 10px 0;
+  }
+}

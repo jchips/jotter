@@ -25,7 +25,7 @@ api.interceptors.response.use(
   async (error) => {
     if (error.response.status === 401) {
       clearToken();
-      window.location = '/jotter/login'; // Redirect to login
+      window.location = '/login'; // Redirect to login
     }
     return Promise.reject(error);
   }

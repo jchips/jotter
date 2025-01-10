@@ -97,27 +97,26 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
 
   /**
    * Moves the note or folder to chosen location
-   * @param {Object[] | Integer} moveFolderId - The id of the folder to move to.
+   * @param {Object[] | Integer} folderTargetId - The id of the folder to move to.
    * Chakra seems to store Select value as an array, but sometimes it works
    * as an integer without extracting it first *shrugs*
    */
-  const move = async (moveFolderId) => {
+  const move = async (folderTargetId) => {
     try {
-      let moveToFolder;
+      let moveToFolder = await getFolder(folderTargetId);
       switch (type) {
         case 'note':
           await api.updateNote(
             {
-              folderId: moveFolderId[0] === 'null' ? null : moveFolderId,
+              folderId: folderTargetId[0] === 'null' ? null : folderTargetId,
             },
             note.id
           );
           break;
-        case 'folder':
-          moveToFolder = await getFolder(moveFolderId);
-          await api.updateFolder(
+        case 'folder': {
+          let res = await api.updateFolder(
             {
-              parentId: moveFolderId[0] === 'null' ? null : moveFolderId,
+              parentId: folderTargetId[0] === 'null' ? null : folderTargetId,
               path: moveToFolder
                 ? [
                     ...JSON.parse(moveToFolder.path),
@@ -127,11 +126,22 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
             },
             folder.id
           );
-          folders.length !== 0 && updateInnerFolderPaths(moveToFolder);
+          let updatedFolderPath =
+            typeof res.data.path === 'string'
+              ? JSON.parse(res.data.path)
+              : res.data.path;
+          folders?.length !== 0 &&
+            getChildren(
+              folder.id,
+              moveToFolder,
+              updatedFolderPath,
+              folder.path
+            );
           break;
+        }
       }
       setMoveOpen(false);
-      navigate(`/folder/${moveFolderId}`);
+      navigate(`/folder/${folderTargetId}`);
     } catch (err) {
       setError('Failed to move folder');
       console.error('Failed to move folder - ', err);
@@ -154,31 +164,80 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
   };
 
   /**
-   * Updates the paths of all inner folders of the current folder
-   * @param {Object} moveToFolder - The folder object that current folder will be moved to
+   * Updates the path of the child folder given
+   * @param {Object} child - The folder to update
+   * @param {Object} moveToFolder - The folder that current folder will be moved to
+   * @param {Object[]} folderPath - The updated path of the current folder
+   * @param {Object[]} orgFolderPath - The original path of the current folder
    */
-  const updateInnerFolderPaths = (moveToFolder) => {
-    folders.forEach(async (innerFolder) => {
-      try {
-        await api.updateFolder(
-          {
-            path: [
-              ...JSON.parse(moveToFolder.path),
-              { id: moveToFolder.id, title: moveToFolder.title },
-              { id: folder.id, title: folder.title },
-            ],
-          },
-          innerFolder.id
-        );
-      } catch (err) {
-        console.error(
-          'Failed to update path - ',
-          innerFolder.title,
-          innerFolder.id,
-          err
-        );
+  const updateInnerPath = async (
+    child,
+    moveToFolder,
+    folderPath,
+    orgFolderPath
+  ) => {
+    let path;
+    let childPath = JSON.parse(child.path);
+
+    let index = childPath.findIndex(
+      (pathItem) => pathItem.id === folder.id && pathItem.title === folder.title
+    );
+    let updatedChildPath = childPath.slice(index + 1);
+    if (orgFolderPath.length === 0 && moveToFolder) {
+      // Moving from root to a new folder
+      path = [
+        ...JSON.parse(moveToFolder.path),
+        { id: moveToFolder.id, title: moveToFolder.title },
+        ...updatedChildPath,
+      ];
+    } else {
+      // Moving from one folder to another
+      path = [
+        ...folderPath,
+        { id: folder.id, title: folder.title },
+        ...updatedChildPath,
+      ];
+    }
+    try {
+      await api.updateFolder(
+        {
+          path: path,
+        },
+        child.id
+      );
+    } catch (err) {
+      console.error('Failed to update path - ', child.title, child.id, err);
+    }
+  };
+
+  /**
+   * Gets the child folders of the current folder and updates their paths.
+   * @param {Integer} parentId - The id of the current folder (it will the parent on recall)
+   * @param {Object} moveToFolder - The folder that current folder will be moved to
+   * @param {Object[]} folderPath - The updated path of the current folder
+   * @param {Object} orgFolderPath - The original path of the current folder
+   * @returns - exit the recursive function once there are no more child folders
+   */
+  const getChildren = async (
+    parentId,
+    moveToFolder,
+    folderPath,
+    orgFolderPath
+  ) => {
+    try {
+      let children = await api.getFolders(parentId);
+      children = children.data;
+      if (children.length === 0) {
+        return;
+      } else {
+        for (const child of children) {
+          await updateInnerPath(child, moveToFolder, folderPath, orgFolderPath);
+          await getChildren(child.id, moveToFolder, folderPath, orgFolderPath);
+        }
       }
-    });
+    } catch (err) {
+      console.error('Failed to fetch child folders', err);
+    }
   };
 
   return (
