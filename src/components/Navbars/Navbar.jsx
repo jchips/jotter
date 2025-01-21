@@ -55,7 +55,8 @@ const Navbar = (props) => {
    * @param {Object} child - The folder to update
    */
   const updateInnerPath = async (child) => {
-    let childPath = JSON.parse(child.path);
+    let childPath =
+      typeof child.path === 'string' ? JSON.parse(child.path) : child.path;
     let index = childPath.findIndex(
       (pathItem) => pathItem.id === currentFolder.id
     );
