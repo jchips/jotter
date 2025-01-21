@@ -51,8 +51,11 @@ const AddTitle = (props) => {
     if (currentFolder === null) return;
     currentFolder = currentFolder?.data ? currentFolder.data : currentFolder;
     let path = currentFolder === ROOT_FOLDER ? [] : [ROOT_FOLDER];
-    let currentFolderPath =
-      currentFolder !== ROOT_FOLDER ? JSON.parse(currentFolder.path) : path; // parse from db
+    let parsedPath =
+      typeof currentFolder.path === 'string'
+        ? JSON.parse(currentFolder.path)
+        : currentFolder.path;
+    let currentFolderPath = currentFolder !== ROOT_FOLDER ? parsedPath : path; // parse from db
     path = [...currentFolderPath];
 
     // Adds current folder to the path
@@ -75,7 +78,7 @@ const AddTitle = (props) => {
             userId: user.id,
             folderId: currentFolder.id,
           });
-          dispatch(setNotes([...notes, res.data]));
+          dispatch(setNotes([res.data, ...notes]));
           break;
         // add folder
         case 'folder':
@@ -85,7 +88,7 @@ const AddTitle = (props) => {
             parentId: currentFolder.id,
             path,
           });
-          dispatch(setFolders([...folders, res.data]));
+          dispatch(setFolders([res.data, ...folders]));
           break;
       }
       setAddTitleOpen(false);

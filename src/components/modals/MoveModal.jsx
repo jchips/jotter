@@ -44,10 +44,14 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
         let res = await api.getAllFolders(folderId ? folderId : 'null', type);
         let formatFolders = res.data
           .map((folder) => {
+            let parsedPath =
+              typeof folder.path === 'string'
+                ? JSON.parse(folder.path)
+                : folder.path;
             return {
               label: folder.title,
               value: folder.id,
-              path: JSON.parse(folder.path),
+              path: parsedPath,
             };
           })
           .filter((formattedFolder) => formattedFolder.value !== parentId); // filter out parent folder
@@ -104,6 +108,10 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
   const move = async (folderTargetId) => {
     try {
       let moveToFolder = await getFolder(folderTargetId);
+      let parsedTargetPath =
+        typeof moveToFolder.path === 'string'
+          ? JSON.parse(moveToFolder.path)
+          : moveToFolder.path;
       switch (type) {
         case 'note':
           await api.updateNote(
@@ -119,7 +127,7 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
               parentId: folderTargetId[0] === 'null' ? null : folderTargetId,
               path: moveToFolder
                 ? [
-                    ...JSON.parse(moveToFolder.path),
+                    ...parsedTargetPath,
                     { id: moveToFolder.id, title: moveToFolder.title },
                   ]
                 : [],
@@ -177,8 +185,12 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
     orgFolderPath
   ) => {
     let path;
-    let childPath = JSON.parse(child.path);
-
+    let childPath =
+      typeof child.path === 'string' ? JSON.parse(child.path) : child.path;
+    let parsedTargetPath =
+      typeof moveToFolder.path === 'string'
+        ? JSON.parse(moveToFolder.path)
+        : moveToFolder.path;
     let index = childPath.findIndex(
       (pathItem) => pathItem.id === folder.id && pathItem.title === folder.title
     );
@@ -186,7 +198,7 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
     if (orgFolderPath.length === 0 && moveToFolder) {
       // Moving from root to a new folder
       path = [
-        ...JSON.parse(moveToFolder.path),
+        ...parsedTargetPath,
         { id: moveToFolder.id, title: moveToFolder.title },
         ...updatedChildPath,
       ];
@@ -270,14 +282,20 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
                 <SelectValueText placeholder='Select folder' />
               </SelectTrigger>
               <SelectContent portalRef={contentRef}>
-                {folderOpts.items.map((item) => (
-                  <SelectItem item={item} key={item.value}>
-                    {item.label}{' '}
-                    <Text color={'GrayText'}>
-                      {item.path.map((pathItem) => pathItem.title).join(' > ')}
-                    </Text>
-                  </SelectItem>
-                ))}
+                {folderOpts.items.length < 1 ? (
+                  <Text>No folder options</Text>
+                ) : (
+                  folderOpts.items.map((item) => (
+                    <SelectItem item={item} key={item.value}>
+                      {item.label}{' '}
+                      <Text color={'GrayText'}>
+                        {item.path
+                          .map((pathItem) => pathItem.title)
+                          .join(' > ')}
+                      </Text>
+                    </SelectItem>
+                  ))
+                )}
               </SelectContent>
             </SelectRoot>
           </DialogBody>

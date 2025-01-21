@@ -47,46 +47,43 @@ const sortMethods = {
   /**
    * Sort by title AZ
    * Sorts numbers and letters
+   * If there are 2 numbers, compare numerically
+   * If there is 1 number, numbers come before letters
+   * If there is 1 letter, letters come after numbers
+   * If there are no numbers, compare alphabetically
    * (ex: 12, 2a, a1, a2, a12, abc, b, b4)
    */
   sortByTitleDesc: (data) => {
     let dataCopy = [...data];
     dataCopy.sort((a, b) => {
-      const parseString = (str) => {
-        const match = String(str).match(/([a-zA-Z]*)(\d*)/) || [];
-        const letter = match[1] || ''; // Letters part
-        const number = match[2] ? Number(match[2]) : null; // Numbers part (convert to number if present)
-        return { letter, number };
-      };
+      const regex = /(\d+|\D+)/g;
 
-      const parsedA = parseString(a.title);
-      const parsedB = parseString(b.title);
+      // Split into alphanumeric parts
+      const partsA = a.title.match(regex) || [];
+      const partsB = b.title.match(regex) || [];
 
-      // Compare letters
-      if (parsedA.letter !== parsedB.letter) {
-        return parsedA.letter.localeCompare(parsedB.letter);
+      // Compare each part (letters or numbers)
+      for (let i = 0; i < Math.max(partsA.length, partsB.length); i++) {
+        const partA = partsA[i] || '';
+        const partB = partsB[i] || '';
+
+        const isNumA = /^\d+$/.test(partA);
+        const isNumB = /^\d+$/.test(partB);
+
+        if (isNumA && isNumB) { // Compare numerically
+          const numA = parseInt(partA, 10);
+          const numB = parseInt(partB, 10);
+          if (numA !== numB) return numA - numB;
+        } else if (isNumA) { // Numbers come before letters
+          return -1;
+        } else if (isNumB) { // Letters come after numbers
+          return 1;
+        } else { // Compare alphabetically
+          if (partA !== partB) return partA.localeCompare(partB);
+        }
       }
 
-      // If letters are the same and both lack numbers, sort alphabetically
-      // may not need this
-      if (parsedA.number === null && parsedB.number === null) {
-        return a.localeCompare(b);
-      }
-
-      // If letters are the same and both have numbers, compare numbers
-      if (parsedA.number !== null && parsedB.number !== null) {
-        return parsedA.number - parsedB.number;
-      }
-
-      // Handle cases where one has no number
-      if (parsedA.number === null && parsedB.number !== null) {
-        return 1; // `a` has no number, so it should come after
-      }
-      if (parsedB.number === null && parsedA.number !== null) {
-        return -1; // `b` has no number, so it should come after
-      }
-
-      // Default to equal (should not reach this point)
+      // Equal strings
       return 0;
     });
     return dataCopy;
@@ -99,44 +96,34 @@ const sortMethods = {
   sortByTitleAsc: (data) => {
     let dataCopy = [...data];
     dataCopy.sort((a, b) => {
-      const parseString = (str) => {
-        const match = String(str).match(/([a-zA-Z]*)(\d*)/) || [];
-        const letter = match[1] || ''; // Letters part
-        const number = match[2] ? Number(match[2]) : null; // Numbers part
-        return { letter, number };
-      };
+      const regex = /(\d+|\D+)/g;
 
-      const parsedA = parseString(a.title);
-      const parsedB = parseString(b.title);
+      // Split into alphanumeric parts
+      const partsA = a.title.match(regex) || [];
+      const partsB = b.title.match(regex) || [];
 
-      // Compare letters
-      if (parsedA.letter !== parsedB.letter) {
-        if (parsedA.letter > parsedB.letter) {
-          return -1;
-        } else {
+      // Compare each part (letters or numbers)
+      for (let i = 0; i < Math.max(partsA.length, partsB.length); i++) {
+        const partA = partsA[i] || '';
+        const partB = partsB[i] || '';
+
+        const isNumA = /^\d+$/.test(partA);
+        const isNumB = /^\d+$/.test(partB);
+
+        if (isNumA && isNumB) { // Compare numerically (largest to smallest)
+          const numA = parseInt(partA, 10);
+          const numB = parseInt(partB, 10);
+          if (numA !== numB) return numB - numA;
+        } else if (isNumA) { // Letters come before numbers
           return 1;
+        } else if (isNumB) { // Numbers come after letters
+          return -1;
+        } else { // Compare alphabetically Z-A
+          if (partA !== partB) return partB.localeCompare(partA);
         }
       }
-      // May not need this
-      if (parsedA.number === null && parsedB.number === null) {
-        if (parsedA.letter > parsedB.letter) {
-          return -1;
-        } else {
-          return 1;
-        }
-      }
 
-      if (parsedA.number !== null && parsedB.number !== null) {
-        return parsedA.number - parsedB.number;
-      }
-
-      if (parsedA.number === null && parsedB.number !== null) {
-        return 1; // `a` has no number, so it should come after
-      }
-      if (parsedB.number === null && parsedA.number !== null) {
-        return -1; // `b` has no number, so it should come after
-      }
-
+      // Equal strings
       return 0;
     })
     return dataCopy;

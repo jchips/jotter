@@ -19,11 +19,11 @@ Try **Jotter** today and elevate your note-taking game!
 
 TLDR: Jotter is a web app designed for note-taking with Markdown.
 
-[View the mobile version here! (currently only optimized for Android)](https://github.com/jchips/jotter-rn)
+[View the Android version here!](https://github.com/jchips/jotter-rn)
 
 ## Creator & developer: Jelani R
 
-## Version: 1.2.1
+## Version: 1.2.2
 
 ## Architecture
 
@@ -48,6 +48,7 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 ## Changelog
 
+- **1.2.2** (2025-01-20, 6:25pm) - Fixed alphabetical sort bug, added support for blockquotes.
 - **1.2.1** (2025-01-10, 2:02am) - Fixed folder breadcrumb bug when renaming folder.
 - **1.2.0** (2025-01-09, 10:06pm) - Added import file button, fixed some bugs.
 - **1.1.2** (2024-12-27, 5:07pm) - Minor editor improvements, added logo.
