@@ -44,14 +44,14 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
         let res = await api.getAllFolders(folderId ? folderId : 'null', type);
         let formatFolders = res.data
           .map((folder) => {
-            let path =
+            let parsedPath =
               typeof folder.path === 'string'
                 ? JSON.parse(folder.path)
                 : folder.path;
             return {
               label: folder.title,
               value: folder.id,
-              path: path,
+              path: parsedPath,
             };
           })
           .filter((formattedFolder) => formattedFolder.value !== parentId); // filter out parent folder
