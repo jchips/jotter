@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { createListCollection } from '@chakra-ui/react';
 import {
   SelectContent,
@@ -10,17 +10,34 @@ import {
   SelectTrigger,
   SelectValueText,
 } from '@/components/ui/select';
-import { setNotes } from '@/reducers/noteReducer';
-import { setFolders } from '@/reducers/folderReducer';
+import { setNotes, setFolders, setConfigs } from '@/reducers';
 import sortMethods from '@/hooks/sortMethods';
 import sortBy from '@/util/sortBy';
+import { getLocalConfigs, setLocalConfigs } from '@/util/configUtil';
+import api from '@/util/api';
 
 const SortSelect = ({ notes, folders }) => {
-  const [sort, setSort] = useState('1');
+  const configs = useSelector((state) => state.configs.value);
+  const localConfigs = getLocalConfigs();
+  const [sort, setSort] = useState(configs?.sort || localConfigs?.sort);
   const dispatch = useDispatch();
   const sortMethod = sortMethods;
+
   const sortNotes = (notes) => dispatch(setNotes(notes));
   const sortFolders = (folders) => dispatch(setFolders(folders));
+  const setUConfigs = (sortOption) => {
+    const updateSort = async (sortOption) => {
+      let configObj = { sort: sortOption };
+      try {
+        let res = await api.updateConfigs(configObj);
+        dispatch(setConfigs({ ...res.data, ...configObj }));
+        setLocalConfigs({ ...res.data, ...configObj });
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    updateSort(sortOption);
+  };
 
   return (
     <SelectRoot
@@ -32,7 +49,16 @@ const SortSelect = ({ notes, folders }) => {
       value={sort}
       onValueChange={(e) => {
         setSort(e.value);
-        sortBy(e.value[0], sortMethod, notes, folders, sortNotes, sortFolders);
+        sortBy(
+          e.value[0],
+          sortMethod,
+          notes,
+          folders,
+          sortNotes,
+          sortFolders,
+          setUConfigs
+        );
+        setUConfigs(e.value[0]);
       }}
     >
       {' '}

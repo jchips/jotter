@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Buffer } from 'buffer';
 import { AuthContext } from './AuthContext';
+import { setConfigs } from '@/reducers';
 import { setToken, clearToken } from '@/util/authUtil';
+import { setLocalConfigs } from '@/util/configUtil';
 import api from '@/util/api';
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const dispatch = useDispatch();
 
   // authenticates user on page reload
   useEffect(() => {
@@ -52,6 +56,9 @@ export function AuthProvider({ children }) {
       setUser(res.data.user);
       setToken(res.data.token);
       setIsLoggedIn(true);
+      let uConfigs = await api.getConfigs();
+      dispatch(setConfigs(uConfigs.data));
+      setLocalConfigs(uConfigs.data);
     } catch (err) {
       console.error(err);
       res = err;
