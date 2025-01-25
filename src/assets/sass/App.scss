@@ -39,7 +39,7 @@
 
 // button outline
 .button5 {
-  @include buttonColors(default.$textColor, default.$backgroundColor, $static: false);
+  @include buttonColors(default.$textColor, 'transparent', $static: false);
   border-width: 1px;
   border-color: default.$borderColor;
   border-radius: 0.25rem;
