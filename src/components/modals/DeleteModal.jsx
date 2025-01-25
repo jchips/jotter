@@ -42,6 +42,7 @@ const DeleteModal = (props) => {
     }
     setSaving(false);
   };
+
   return (
     (note || folder) && (
       <DialogRoot modal={true} open={deleteOpen}>

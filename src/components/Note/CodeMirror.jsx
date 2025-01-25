@@ -5,8 +5,10 @@ import { EditorState } from '@codemirror/state';
 import { indentWithTab } from '@codemirror/commands';
 import { basicSetup } from '@uiw/codemirror-extensions-basic-setup';
 
-// This component is to fix an bug where the cursor jumps to the top of
-// the editor at times when typing quickly
+/**
+ * This component is to fix an bug where the cursor jumps to the top
+ * of the editor at times when typing
+ */
 const CodeMirror = ({ value, onChange, placeholderText, ...rest }) => {
   const editorRef = useRef(null); // Reference to the editor DOM node
   const editorInstanceRef = useRef(null); // Reference to the editor instance
