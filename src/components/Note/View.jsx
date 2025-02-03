@@ -7,6 +7,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useMarkdown } from '../../hooks/useMarkdown';
 import Preview from './Preview';
 import Loading from '../Loading';
+import Error404 from '../404';
 import TitleBar from '../Navbars/TitleBar';
 import ImportNote from '../modals/ImportNote';
 import ChangeTitle from '../modals/ChangeTitle';
@@ -43,9 +44,13 @@ const View = () => {
         setWords(getWordCount(note.data.content));
       } catch (err) {
         console.error(err);
-        err.response.data.message === 'jwt expired'
-          ? logUserOut()
-          : setError('Failed to open note');
+        if (err.status === 403 || err.status === 404) {
+          setError('404');
+        } else {
+          err.response.data.message === 'jwt expired'
+            ? logUserOut()
+            : setError('Failed to open note');
+        }
       }
     };
     const logUserOut = () => {
@@ -100,8 +105,10 @@ const View = () => {
     }
   };
 
-  // Loading circle
-  if (!note) {
+  // Error handling and loading circle
+  if (!note && error === '404') {
+    return <Error404 />;
+  } else if (!note && error !== '404') {
     return <Loading />;
   }
 

@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/select';
 import { setNotes, setFolders, setConfigs } from '@/reducers';
 import { getLocalConfigs, setLocalConfigs } from '@/util/configUtil';
-import sortMethods from '@/hooks/sortMethods';
+import sortMethods from '@/util/sortMethods';
 import sortBy from '@/util/sortBy';
 import api from '@/util/api';
 
