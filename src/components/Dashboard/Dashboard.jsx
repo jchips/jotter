@@ -5,6 +5,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useFolder } from '@/hooks/useFolder';
 import { useMarkdown } from '@/hooks/useMarkdown';
 import { setFolders, setNotes } from '@/reducers';
+import Error404 from '../404';
 import Loading from '../Loading';
 import AddTitle from '../modals/AddTitle';
 import DisplayNotes from './DisplayNotes';
@@ -49,7 +50,9 @@ const Dashboard = () => {
         dispatch(setNotes(notesRes.data));
       } catch (err) {
         console.error(err);
-        if (err.response?.data?.message === 'jwt expired') {
+        if (err.status === 403 || err.status === 404) {
+          setError('404');
+        } else if (err.response.data.message === 'jwt expired') {
           logout();
         } else {
           setError('Could not fetch content');
@@ -64,6 +67,11 @@ const Dashboard = () => {
   // Loading circle
   if (loading) {
     return <Loading />;
+  }
+
+  // 403 or 404 redirect
+  if (error === '404') {
+    return <Error404 />;
   }
 
   // logs user out
