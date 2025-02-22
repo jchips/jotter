@@ -27,24 +27,9 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 ## Architecture
 
-- Built with React + Vite, Redux.
+- Built with React + Vite, Redux, Chakra.
 - Languages used: JavaScript and Sass.
-- Backend uses MySQL, Sequelize, Nodejs, Jsonwebtoken, Bcrypt, and base-64.
-
-## Resources
-
-- [React-markdown](https://www.npmjs.com/package/react-markdown)
-- [React Syntax Highlighter](https://github.com/react-syntax-highlighter/react-syntax-highlighter)
-- [remark-gfm](https://github.com/remarkjs/remark-gfm)
-- [rehype-raw](https://www.npmjs.com/package/rehype-raw)
-- [React Hook Form](https://react-hook-form.com/)
-- [React Icons](https://react-icons.github.io/react-icons/)
-- [React-codemirror](https://uiwjs.github.io/react-codemirror/)
-- [Chakra](https://www.chakra-ui.com/docs/get-started/installation)
-- [Chakra templates](https://chakra-templates.vercel.app/navigation/navbar)
-- [Table styling](https://dev.to/letsbsocial1/how-to-add-tables-to-react-markdown-21lc)
-- [Lodash](https://lodash.com/)
-- [Web Dev Simplified](https://youtu.be/6XTRElVAZ9Y)
+- Backend uses MySQL, Sequelize, Nodejs, Bcrypt, Base-64, and Jsonwebtoken.
 
 ## Changelog
 
@@ -65,3 +50,18 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 - **0.1.0** (2024-12-18, 3:11pm) - Users can create notes that support markdown, edit, and save them.
 - **0.0.2** (2024-12-18, 11:32am) - Users can create notes.
 - **0.0.1** (2024-12-15, 6:43pm) - Initial commit with functional login/signup.
+
+## Resources
+
+- [React-markdown](https://www.npmjs.com/package/react-markdown)
+- [React Syntax Highlighter](https://github.com/react-syntax-highlighter/react-syntax-highlighter)
+- [remark-gfm](https://github.com/remarkjs/remark-gfm)
+- [rehype-raw](https://www.npmjs.com/package/rehype-raw)
+- [React Hook Form](https://react-hook-form.com/)
+- [React Icons](https://react-icons.github.io/react-icons/)
+- [React-codemirror](https://uiwjs.github.io/react-codemirror/)
+- [Chakra](https://www.chakra-ui.com/docs/get-started/installation)
+- [Chakra templates](https://chakra-templates.vercel.app/navigation/navbar)
+- [Table styling](https://dev.to/letsbsocial1/how-to-add-tables-to-react-markdown-21lc)
+- [Lodash](https://lodash.com/)
+- [Web Dev Simplified](https://youtu.be/6XTRElVAZ9Y)
