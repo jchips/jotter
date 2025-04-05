@@ -20,8 +20,11 @@ const ExportAllButton = ({ setError }) => {
       ]);
       return { foldersRes: foldersRes.data, notesRes: notesRes.data };
     } catch (err) {
-      console.error('Failed to fetch root folders - ', err);
-      setError('Failed to export notes');
+      console.error(
+        `Failed to fetch folders and notes for folder id ${folder_id}: - `,
+        err
+      );
+      setError('Failed to export');
     }
     return {};
   };

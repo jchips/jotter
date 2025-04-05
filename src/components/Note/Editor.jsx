@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router';
+import { useSelector } from 'react-redux';
 import { throttle } from 'lodash';
 import { Button, HStack, Text, Box } from '@chakra-ui/react';
 import { Alert } from '@/components/ui/alert';
@@ -26,6 +27,7 @@ const Editor = () => {
   const { noteId } = useParams();
   const navigate = useNavigate();
   const previewRef = useRef(null);
+  const configs = useSelector((state) => state.configs.value);
 
   // fetch the note
   useEffect(() => {
@@ -172,7 +174,7 @@ const Editor = () => {
         <Button className='button1' variant='solid' onClick={handleSaveAndExit}>
           Save and exit
         </Button>
-        <Text>{words} words</Text>
+        {!configs?.hideWordCount && <Text>{words} words</Text>}
         <Box>
           <Button className='button1' variant='solid' onClick={handleExit}>
             Exit editor

@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Alert, Text, Stack, Switch, Card, Button } from '@chakra-ui/react';
+import { Alert, Text, Stack, Switch, Card } from '@chakra-ui/react';
 import { setConfigs } from '@/reducers';
 import { useAuth } from '@/hooks/useAuth';
 import { getLocalConfigs, setLocalConfigs } from '@/util/configUtil';
+import api from '@/util/api';
 import SettingsNav from '../Navbars/SettingsNav';
 import ExportAllButton from './ExportAllButton';
 import './Settings.scss';
@@ -23,6 +24,51 @@ const Settings = () => {
   const { user } = useAuth();
   const dispatch = useDispatch();
   const themeText = '#646cff';
+
+  useEffect(() => {
+    const fetchConfigs = async () => {
+      let uConfigs = await api.getConfigs();
+      setHideWordCount(uConfigs.data?.hideWordCount);
+      setHighlightActiveLine(uConfigs.data?.highlightActiveLine);
+      dispatch(setConfigs(uConfigs.data));
+      setLocalConfigs(uConfigs.data);
+    };
+    fetchConfigs();
+  }, [dispatch]);
+
+  /**
+   * Adds the new config changes to the database
+   * @param {Object} updates - Updates to add to database
+   */
+  const dbUpdate = async (updates) => {
+    try {
+      setError('');
+      let res = await api.updateConfigs(updates);
+      dispatch(setConfigs({ ...res.data, ...updates }));
+    } catch (err) {
+      setError('Failed to update settings');
+      console.error('Failed to update user configs -', err);
+    }
+  };
+
+  /**
+   * Updates the configs based on user changes
+   * @param {String} setting - The setting /config to be updated
+   * @returns {Function} - Calls `dbUpdate()` to update settings
+   */
+  const updateSettings = (setting, settingState) => {
+    console.log('settingState', settingState); // dl
+    switch (setting) {
+      case 'toggleWordCount': {
+        setHideWordCount(settingState);
+        return dbUpdate({ hideWordCount: settingState });
+      }
+      case 'toggleHighLightActiveLine': {
+        setHighlightActiveLine(settingState);
+        return dbUpdate({ highlightActiveLine: settingState });
+      }
+    }
+  };
 
   return (
     <div>
@@ -59,7 +105,10 @@ const Settings = () => {
             <Text>Hide Word Count</Text>
             <Switch.Root
               checked={hideWordCount}
-              onCheckedChange={(e) => setHideWordCount(e.checked)}
+              onCheckedChange={(e) =>
+                updateSettings('toggleWordCount', e.checked)
+              }
+              // onCheckedChange={(e) => setHideWordCount(e.checked)}
             >
               <Switch.HiddenInput />
               <Switch.Control
@@ -78,7 +127,10 @@ const Settings = () => {
             <Text>Highlight active line</Text>
             <Switch.Root
               checked={highlightActiveLine}
-              onCheckedChange={(e) => setHighlightActiveLine(e.checked)}
+              onCheckedChange={(e) =>
+                updateSettings('toggleHighLightActiveLine', e.checked)
+              }
+              // onCheckedChange={(e) => setHighlightActiveLine(e.checked)}
             >
               <Switch.HiddenInput />
               <Switch.Control
