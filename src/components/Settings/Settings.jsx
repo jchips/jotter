@@ -9,6 +9,7 @@ import { getLocalConfigs, setLocalConfigs } from '@/util/configUtil';
 import api from '@/util/api';
 import SettingsNav from '../Navbars/SettingsNav';
 import ExportAllButton from './ExportAllButton';
+import ToggleCard from './ToggleCard';
 import ErrAlert from '../ErrAlert';
 import './Settings.scss';
 
@@ -25,6 +26,18 @@ const Settings = () => {
   const { user } = useAuth();
   const dispatch = useDispatch();
   const themeText = '#646cff';
+  const toggleOptions = [
+    {
+      settingState: hideWordCount,
+      settingOption: 'toggleWordCount',
+      settingText: 'Hide Word Count',
+    },
+    {
+      settingState: highlightActiveLine,
+      settingOption: 'toggleHighLightActiveLine',
+      settingText: 'Highlight active line',
+    },
+  ];
 
   useEffect(() => {
     const fetchConfigs = async () => {
@@ -97,48 +110,13 @@ const Settings = () => {
         Editor
       </Text>
       <Stack align='center'>
-        <Card.Root size='md' className='settings-card'>
-          <Card.Body className='settings-card__body'>
-            <Text>Hide Word Count</Text>
-            <Switch.Root
-              checked={hideWordCount}
-              onCheckedChange={(e) =>
-                updateSettings('toggleWordCount', e.checked)
-              }
-            >
-              <Switch.HiddenInput />
-              <Switch.Control
-                _checked={{
-                  bg: themeText,
-                }}
-              >
-                <Switch.Thumb />
-              </Switch.Control>
-              <Switch.Label />
-            </Switch.Root>
-          </Card.Body>
-        </Card.Root>
-        <Card.Root size='md' className='settings-card'>
-          <Card.Body className='settings-card__body'>
-            <Text>Highlight active line</Text>
-            <Switch.Root
-              checked={highlightActiveLine}
-              onCheckedChange={(e) =>
-                updateSettings('toggleHighLightActiveLine', e.checked)
-              }
-            >
-              <Switch.HiddenInput />
-              <Switch.Control
-                _checked={{
-                  bg: themeText,
-                }}
-              >
-                <Switch.Thumb />
-              </Switch.Control>
-              <Switch.Label />
-            </Switch.Root>
-          </Card.Body>
-        </Card.Root>
+        {toggleOptions.map((settingOption) => (
+          <ToggleCard
+            key={settingOption.settingOption}
+            toggleData={settingOption}
+            updateSettings={updateSettings}
+          />
+        ))}
       </Stack>
       <Text
         textAlign='center'
