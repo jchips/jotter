@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Text, Stack, Switch, Card } from '@chakra-ui/react';
+import { Text, Stack, Card } from '@chakra-ui/react';
 import { setConfigs } from '@/reducers';
 import { useAuth } from '@/hooks/useAuth';
 import { getLocalConfigs, setLocalConfigs } from '@/util/configUtil';
