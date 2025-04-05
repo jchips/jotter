@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { LuDownload, LuUpload } from 'react-icons/lu';
 import { Button, HStack } from '@chakra-ui/react';
@@ -61,16 +61,40 @@ const View = () => {
     setLoading(false);
   }, [noteId, setMarkdown, logout, navigate]);
 
-  // Navigates to the editor
-  const handleEdit = () => {
-    navigate(`/editor/${noteId}`);
-  };
-
   // Navigates one page back
-  const handleExit = () => {
+  const handleExit = useCallback(() => {
     note.folderId ? navigate(`/folder/${note.folderId}`) : navigate('/');
     setMarkdown('');
-  };
+  }, [navigate, setMarkdown, note]);
+
+  // Navigates to the editor
+  const handleEdit = useCallback(() => {
+    navigate(`/editor/${noteId}`);
+  }, [navigate, noteId]);
+
+  /**
+   * Handles key press options
+   * ctrl/cmd-x or ctrl/cmd-e: exit note
+   * ctrl/cmd-o: edit note
+   */
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (
+        ((e.ctrlKey || e.metaKey) && e.key === 'x') ||
+        ((e.ctrlKey || e.metaKey) && e.key === 'e')
+      ) {
+        e.preventDefault();
+        handleExit();
+      } else if ((e.ctrlKey || e.metaKey) && e.key === 'o') {
+        e.preventDefault();
+        handleEdit();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [markdown, handleExit, handleEdit]);
 
   // Downloads the note as an .md file to user's device
   const exportNote = () => {

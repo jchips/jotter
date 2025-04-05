@@ -110,34 +110,45 @@ const Editor = () => {
     setSaving(false);
   }, [markdown, noteId]);
 
-  // If user presses ctrl-s, the note saves it's changes
+  // Saves the note and exits
+  const handleSaveAndExit = useCallback(() => {
+    handleSave();
+    navigate(`/preview/${noteId}`);
+  }, [navigate, handleSave, noteId]);
+
+  // Exits the editor without saving
+  const handleExit = useCallback(() => {
+    if (note.content !== markdown) {
+      setOpenExit(true);
+    } else {
+      navigate(`/preview/${noteId}`);
+    }
+  }, [markdown, navigate, note, noteId]);
+
+  /**
+   * Handles key press options
+   * ctrl/cmd-s: save the new changes
+   * ctrl/cmd-x: save and exit note
+   * ctrl/cmd-e: exit the editor without saving
+   */
   useEffect(() => {
     const handleKeyDown = (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 's') {
         e.preventDefault();
         handleSave();
+      } else if ((e.ctrlKey || e.metaKey) && e.key === 'x') {
+        e.preventDefault();
+        handleSaveAndExit();
+      } else if ((e.ctrlKey || e.metaKey) && e.key === 'e') {
+        e.preventDefault();
+        handleExit();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [markdown, handleSave]);
-
-  // Saves the note and exits
-  const handleSaveAndExit = () => {
-    handleSave();
-    navigate(`/preview/${noteId}`);
-  };
-
-  // Exits the editor without saving
-  const handleExit = () => {
-    if (note.content !== markdown) {
-      setOpenExit(true);
-    } else {
-      navigate(`/preview/${noteId}`);
-    }
-  };
+  }, [markdown, handleSave, handleSaveAndExit, handleExit]);
 
   // Loading circle
   if (!note) {
