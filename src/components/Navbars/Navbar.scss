@@ -13,7 +13,6 @@
   left: 0;
   z-index: 2;
   color: colors.$themePurple;
-  // background-color: #f4f4f5;
 }
 
 .details-text {
@@ -45,4 +44,9 @@
 
 .sort {
   background-color: default.$backgroundColor;
+}
+
+/* Sort button */
+.css-20plmx {
+  border-color: rgba($color: colors.$themePurple, $alpha: 0.4);
 }

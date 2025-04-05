@@ -7,6 +7,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Signup from './components/auth/Signup';
 import Editor from './components/Note/Editor';
 import View from './components/Note/View';
+import Settings from './components/Settings/Settings';
 import './assets/sass/App.scss';
 
 function App() {
@@ -48,6 +49,15 @@ function App() {
               element={
                 <PrivateRoute>
                   <View />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/settings'
+              element={
+                <PrivateRoute>
+                  <Settings />
                 </PrivateRoute>
               }
             />

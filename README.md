@@ -29,7 +29,7 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 - Built with React + Vite, Redux, Chakra.
 - Languages used: JavaScript and Sass.
-- Backend uses MySQL, Sequelize, Nodejs, Bcrypt, Base-64, and Jsonwebtoken.
+- Backend uses MySQL, Sequelize, Nodejs, Express, Bcrypt, Base-64, and Jsonwebtoken.
 
 ## Changelog
 

@@ -223,7 +223,7 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
   };
 
   /**
-   * Gets the child folders of the current folder and updates their paths.
+   * Gets the child folders of the current folder and updates their paths
    * @param {Integer} parentId - The id of the current folder (it will the parent on recall)
    * @param {Object} moveToFolder - The folder that current folder will be moved to
    * @param {Object[]} folderPath - The updated path of the current folder
