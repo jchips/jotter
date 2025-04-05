@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { LuDownload, LuUpload } from 'react-icons/lu';
 import { Button, HStack } from '@chakra-ui/react';
-import { Alert } from '@/components/ui/alert';
 import { useAuth } from '@/hooks/useAuth';
 import { useMarkdown } from '../../hooks/useMarkdown';
+import getWordCount from '@/util/getWordCount';
+import api from '@/util/api';
 import Preview from './Preview';
 import Loading from '../Loading';
 import Error404 from '../404';
@@ -13,8 +14,7 @@ import ImportNote from '../modals/ImportNote';
 import ChangeTitle from '../modals/ChangeTitle';
 import MoveModal from '../modals/MoveModal';
 import DeleteModal from '../modals/DeleteModal';
-import getWordCount from '@/util/getWordCount';
-import api from '@/util/api';
+import ErrAlert from '../ErrAlert';
 import './Preview.scss';
 import './markdown.scss';
 
@@ -122,11 +122,7 @@ const View = () => {
           setMoveOpen={setMoveOpen}
           words={words}
         />
-        {error ? (
-          <div style={{ marginBottom: '20px' }}>
-            <Alert status='error' title={error} />
-          </div>
-        ) : null}
+        {error ? <ErrAlert error={error} m={10} /> : null}
         <div className='preview__wrapper'>
           <Preview markdown={markdown} />
         </div>

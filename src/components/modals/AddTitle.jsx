@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { Input } from '@chakra-ui/react';
 import { Button } from '@/components/ui/button';
-import { Alert } from '@/components/ui/alert';
 import { Field } from '@/components/ui/field';
 import {
   DialogRoot,
@@ -20,6 +19,7 @@ import { setNotes } from '@/reducers/noteReducer';
 import { setFolders } from '@/reducers/folderReducer';
 import { ROOT_FOLDER } from '@/hooks/useFolder';
 import api from '@/util/api';
+import ErrAlert from '../ErrAlert';
 
 const AddTitle = (props) => {
   const { addTitleOpen, setAddTitleOpen, selectedCreate } = props;
@@ -110,11 +110,7 @@ const AddTitle = (props) => {
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogBody>
-            {error ? (
-              <div style={{ marginBottom: '20px' }}>
-                <Alert status='error' title={error} />
-              </div>
-            ) : null}
+            {error ? <ErrAlert error={error} mb={20} /> : null}
             <Field label='Title'>
               <Controller
                 name='title'

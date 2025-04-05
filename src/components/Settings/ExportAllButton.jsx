@@ -31,7 +31,7 @@ const ExportAllButton = ({ setError }) => {
 
   /**
    * Fetches all folders and their notes recursively
-   * @param {JSZip} zip - A (zip) folder
+   * @param {JSZip} zip - A new (zip) folder
    * @param {Object[]} folders - All the folders
    * @param {Object[]} notes - All the notes
    */

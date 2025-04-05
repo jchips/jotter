@@ -46,7 +46,7 @@ const SortSelect = ({ notes, folders }) => {
     updateSort(sortOption);
   };
 
-  // Fetch/store sort config from database
+  // Fetch and store sort config from database
   useEffect(() => {
     const fetchConfigs = async () => {
       let uConfigs = await api.getConfigs();

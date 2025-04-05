@@ -2,13 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Alert, Text, Stack, Switch, Card } from '@chakra-ui/react';
+import { Text, Stack, Switch, Card } from '@chakra-ui/react';
 import { setConfigs } from '@/reducers';
 import { useAuth } from '@/hooks/useAuth';
 import { getLocalConfigs, setLocalConfigs } from '@/util/configUtil';
 import api from '@/util/api';
 import SettingsNav from '../Navbars/SettingsNav';
 import ExportAllButton from './ExportAllButton';
+import ErrAlert from '../ErrAlert';
 import './Settings.scss';
 
 const Settings = () => {
@@ -53,11 +54,11 @@ const Settings = () => {
 
   /**
    * Updates the configs based on user changes
-   * @param {String} setting - The setting /config to be updated
+   * @param {String} setting - The setting / config to be updated
+   * @param {Boolean} settingState - The updated toggle state
    * @returns {Function} - Calls `dbUpdate()` to update settings
    */
   const updateSettings = (setting, settingState) => {
-    console.log('settingState', settingState); // dl
     switch (setting) {
       case 'toggleWordCount': {
         setHideWordCount(settingState);
@@ -73,11 +74,7 @@ const Settings = () => {
   return (
     <div>
       <SettingsNav />
-      {error ? (
-        <div style={{ marginBottom: '20px' }}>
-          <Alert status='error' title={error} />
-        </div>
-      ) : null}
+      {error ? <ErrAlert error={error} m={20} /> : null}
       <Text
         textAlign={{ base: 'center' }}
         fontFamily={'heading'}
@@ -108,7 +105,6 @@ const Settings = () => {
               onCheckedChange={(e) =>
                 updateSettings('toggleWordCount', e.checked)
               }
-              // onCheckedChange={(e) => setHideWordCount(e.checked)}
             >
               <Switch.HiddenInput />
               <Switch.Control
@@ -130,7 +126,6 @@ const Settings = () => {
               onCheckedChange={(e) =>
                 updateSettings('toggleHighLightActiveLine', e.checked)
               }
-              // onCheckedChange={(e) => setHighlightActiveLine(e.checked)}
             >
               <Switch.HiddenInput />
               <Switch.Control

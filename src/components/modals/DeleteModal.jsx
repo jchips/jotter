@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Button } from '@/components/ui/button';
-import { Alert } from '@/components/ui/alert';
 import {
   DialogRoot,
   DialogActionTrigger,
@@ -13,6 +12,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import api from '@/util/api';
+import ErrAlert from '../ErrAlert';
 
 const DeleteModal = (props) => {
   const { deleteOpen, setDeleteOpen, type, note, folder } = props;
@@ -51,11 +51,7 @@ const DeleteModal = (props) => {
             <DialogTitle>Delete {type}</DialogTitle>
           </DialogHeader>
           <DialogBody>
-            {error ? (
-              <div style={{ marginBottom: '20px' }}>
-                <Alert status='error' title={error} />
-              </div>
-            ) : null}
+            {error ? <ErrAlert error={error} mb={20} /> : null}
             Are you sure that you want to delete{' '}
             <span style={{ fontWeight: 'bold' }}>
               {type === 'note' ? note.title : folder.title}

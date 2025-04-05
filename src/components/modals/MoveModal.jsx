@@ -2,7 +2,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import { createListCollection, Text } from '@chakra-ui/react';
-import { Alert } from '@/components/ui/alert';
 import {
   DialogRoot,
   DialogBackdrop,
@@ -22,6 +21,7 @@ import {
   SelectValueText,
 } from '@/components/ui/select';
 import api from '@/util/api';
+import ErrAlert from '../ErrAlert';
 
 const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
   const [error, setError] = useState('');
@@ -262,11 +262,7 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
             <DialogTitle>Move {type}</DialogTitle>
           </DialogHeader>
           <DialogBody>
-            {error ? (
-              <div style={{ marginBottom: '20px' }}>
-                <Alert status='error' title={error} />
-              </div>
-            ) : null}
+            {error ? <ErrAlert error={error} mb={20} /> : null}
             <SelectRoot
               collection={folderOpts}
               onValueChange={(e) => {
