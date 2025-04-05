@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Box, Flex, Text, Button, Stack, Editable } from '@chakra-ui/react';
-import { LuChevronLeft } from 'react-icons/lu';
+import { LuChevronLeft, LuSettings } from 'react-icons/lu';
 import CreateNew from './Create/CreateNew';
 import SortSelect from '../Dashboard/SortSelect';
 import OptionsBtn from './Options/OptionsBtn';
@@ -170,6 +170,10 @@ const Navbar = (props) => {
           direction={'row'}
           spacing={6}
         >
+          <CreateNew
+            setSelectedCreate={setSelectedCreate}
+            setAddTitleOpen={setAddTitleOpen}
+          />
           <SortSelect notes={notes} folders={folders} />
           {currentFolder && (
             <OptionsBtn
@@ -178,13 +182,12 @@ const Navbar = (props) => {
               type='folder'
             />
           )}
+          <Button className='button1' onClick={() => navigate(`/settings`)}>
+            <LuSettings />
+          </Button>
           <Button fontSize={'sm'} fontWeight={400} onClick={logout}>
             Log out
           </Button>
-          <CreateNew
-            setSelectedCreate={setSelectedCreate}
-            setAddTitleOpen={setAddTitleOpen}
-          />
         </Stack>
       </Flex>
     </Box>

@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { markdown as md } from '@codemirror/lang-markdown';
 import { EditorView, placeholder, keymap } from '@codemirror/view';
 import { EditorState } from '@codemirror/state';
@@ -12,6 +13,7 @@ import { basicSetup } from '@uiw/codemirror-extensions-basic-setup';
 const CodeMirror = ({ value, onChange, placeholderText, ...rest }) => {
   const editorRef = useRef(null); // Reference to the editor DOM node
   const editorInstanceRef = useRef(null); // Reference to the editor instance
+  const configs = useSelector((state) => state.configs.value);
 
   useEffect(() => {
     if (!editorRef.current) return;
@@ -22,7 +24,7 @@ const CodeMirror = ({ value, onChange, placeholderText, ...rest }) => {
           extensions: [
             basicSetup({
               indentOnInput: true,
-              highlightActiveLine: true,
+              highlightActiveLine: configs?.highlightActiveLine,
             }),
             md(),
             keymap.of([indentWithTab]),

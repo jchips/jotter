@@ -1,0 +1,11 @@
+.settings-card {
+  width: 75%;
+  margin: 5px 10px;
+}
+
+.settings-card__body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}

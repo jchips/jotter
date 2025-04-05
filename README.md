@@ -23,24 +23,25 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 ## Creator & developer: Jelani R
 
-## Version: 1.3.1
+## Version: 1.2.0
 
 ## Architecture
 
 - Built with React + Vite, Redux, Chakra.
 - Languages used: JavaScript and Sass.
-- Backend uses MySQL, Sequelize, Nodejs, Bcrypt, Base-64, and Jsonwebtoken.
+- Backend uses MySQL, Sequelize, Nodejs, Express, Bcrypt, Base-64, and Jsonwebtoken.
 
 ## Changelog
 
-- **1.3.1** (2025-02-02, 5:30pm) - Improved error handling.
-- **1.3.0** (2025-01-21, 3:47am) - Sort is no longer temporary.
-- **1.2.2** (2025-01-20, 6:25pm) - Fixed alphabetical sort bug, added support for blockquotes.
-- **1.2.1** (2025-01-10, 2:02am) - Fixed folder breadcrumb bug when renaming folder.
-- **1.2.0** (2025-01-09, 10:06pm) - Added import file button, fixed some bugs.
-- **1.1.2** (2024-12-27, 5:07pm) - Minor editor improvements, added logo.
-- **1.1.1** (2024-12-25, 6:12pm) - Fixed bug where cursor jumps to top of editor when typing quickly, minor editor improvements.
-- **1.1.0** (2024-12-23, 8:22pm) - Export notes, fixed a bug when moving notes. Minor improvements.
+- **1.2.0** (2025-04-04, 9:05pm) - Added settings page.
+- **1.1.4** (2025-02-02, 5:30pm) - Improved error handling.
+- **1.1.3** (2025-01-21, 3:47am) - Sort is no longer temporary.
+- **1.1.2** (2025-01-20, 6:25pm) - Fixed alphabetical sort bug, added support for blockquotes.
+- **1.1.1** (2025-01-10, 2:02am) - Fixed folder breadcrumb bug when renaming folder.
+- **1.1.0** (2025-01-09, 10:06pm) - Added import file button, fixed some bugs.
+- **1.0.3** (2024-12-27, 5:07pm) - Minor editor improvements, added logo.
+- **1.0.2** (2024-12-25, 6:12pm) - Fixed bug where cursor jumps to top of editor when typing quickly, minor editor improvements.
+- **1.0.1** (2024-12-23, 8:22pm) - Export notes, fixed a bug when moving notes. Minor improvements.
 - **1.0.0** (2024-12-23, 2:52am) - Users can edit folder titles, move folders/notes, and delete folders.
 - **0.2.3** (2024-12-22, 1:23am) - Added temporary sort for notes and folders.
 - **0.2.2** (2024-12-21, 9:31pm) - Added word count, improved editor, added support for HTML code rendering.

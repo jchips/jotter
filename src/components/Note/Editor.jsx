@@ -1,16 +1,17 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router';
+import { useSelector } from 'react-redux';
 import { throttle } from 'lodash';
 import { Button, HStack, Text, Box } from '@chakra-ui/react';
-import { Alert } from '@/components/ui/alert';
 import CodeMirror from './CodeMirror';
 import { useMarkdown } from '../../hooks/useMarkdown';
 import { useAuth } from '@/hooks/useAuth';
 import ExitNote from '../modals/ExitNote';
+import getWordCount from '@/util/getWordCount';
+import api from '@/util/api';
 import Preview from './Preview';
 import Loading from '../Loading';
-import api from '@/util/api';
-import getWordCount from '@/util/getWordCount';
+import ErrAlert from '../ErrAlert';
 import './Editor.scss';
 import './markdown.scss';
 
@@ -26,6 +27,7 @@ const Editor = () => {
   const { noteId } = useParams();
   const navigate = useNavigate();
   const previewRef = useRef(null);
+  const configs = useSelector((state) => state.configs.value);
 
   // fetch the note
   useEffect(() => {
@@ -144,11 +146,7 @@ const Editor = () => {
 
   return (
     <div className='note-window'>
-      {error && (
-        <div>
-          <Alert status='error' title={error} />
-        </div>
-      )}
+      {error && <ErrAlert error={error} m={10} />}
       {!loading && (
         <div className='note-body'>
           <div className='editor__wrap' ref={editorRef}>
@@ -172,7 +170,7 @@ const Editor = () => {
         <Button className='button1' variant='solid' onClick={handleSaveAndExit}>
           Save and exit
         </Button>
-        <Text>{words} words</Text>
+        {!configs?.hideWordCount && <Text>{words} words</Text>}
         <Box>
           <Button className='button1' variant='solid' onClick={handleExit}>
             Exit editor

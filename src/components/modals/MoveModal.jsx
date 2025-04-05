@@ -2,7 +2,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import { createListCollection, Text } from '@chakra-ui/react';
-import { Alert } from '@/components/ui/alert';
 import {
   DialogRoot,
   DialogBackdrop,
@@ -22,6 +21,7 @@ import {
   SelectValueText,
 } from '@/components/ui/select';
 import api from '@/util/api';
+import ErrAlert from '../ErrAlert';
 
 const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
   const [error, setError] = useState('');
@@ -223,7 +223,7 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
   };
 
   /**
-   * Gets the child folders of the current folder and updates their paths.
+   * Gets the child folders of the current folder and updates their paths
    * @param {Integer} parentId - The id of the current folder (it will the parent on recall)
    * @param {Object} moveToFolder - The folder that current folder will be moved to
    * @param {Object[]} folderPath - The updated path of the current folder
@@ -262,11 +262,7 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
             <DialogTitle>Move {type}</DialogTitle>
           </DialogHeader>
           <DialogBody>
-            {error ? (
-              <div style={{ marginBottom: '20px' }}>
-                <Alert status='error' title={error} />
-              </div>
-            ) : null}
+            {error ? <ErrAlert error={error} mb={20} /> : null}
             <SelectRoot
               collection={folderOpts}
               onValueChange={(e) => {
