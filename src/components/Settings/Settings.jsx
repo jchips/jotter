@@ -7,14 +7,13 @@ import { setConfigs } from '@/reducers';
 import { useAuth } from '@/hooks/useAuth';
 import { getLocalConfigs, setLocalConfigs } from '@/util/configUtil';
 import SettingsNav from '../Navbars/SettingsNav';
+import ExportAllButton from './ExportAllButton';
 import './Settings.scss';
-import api from '@/util/api';
 
 const Settings = () => {
   const configs = useSelector((state) => state.configs.value);
   const localConfigs = getLocalConfigs();
   const [error, setError] = useState('');
-  const [folders, setFolders] = useState(null);
   const [hideWordCount, setHideWordCount] = useState(
     configs?.hideWordCount || localConfigs?.hideWordCount
   );
@@ -24,13 +23,6 @@ const Settings = () => {
   const { user } = useAuth();
   const dispatch = useDispatch();
   const themeText = '#646cff';
-
-  const fetchFolders = async () => {
-    let rootFolders = await api.getFolders(null);
-    setFolders(rootFolders.data);
-  };
-
-  console.log('folders', folders); // dl
 
   return (
     <div>
@@ -115,14 +107,7 @@ const Settings = () => {
         <Card.Root size='md' className='settings-card'>
           <Card.Body className='settings-card__body'>
             <Text>Export all folders and notes</Text>
-            <Button
-              className='button1'
-              onClick={() => {
-                fetchFolders();
-              }}
-            >
-              Export all
-            </Button>
+            <ExportAllButton setError={setError} />
           </Card.Body>
         </Card.Root>
       </Stack>
