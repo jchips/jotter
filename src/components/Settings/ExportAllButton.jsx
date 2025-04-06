@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { Button } from '@chakra-ui/react';
@@ -6,6 +6,7 @@ import { formatDate2 } from '@/util/formatDate';
 import api from '@/util/api';
 
 const ExportAllButton = ({ setError }) => {
+  const [exporting, setExporting] = useState(false);
   /**
    * Fetches all the folders and notes that are inside the given folder
    * @param {Number} folder_id - The current folder id
@@ -55,16 +56,18 @@ const ExportAllButton = ({ setError }) => {
    * Starts by fetching all the root folders and notes.
    */
   const handleExport = async () => {
+    setExporting(true);
     let { foldersRes, notesRes } = await fetchAll(null);
     let date = new Date();
     const zip = new JSZip();
     await recursiveFetch(zip, foldersRes, notesRes);
     const content = await zip.generateAsync({ type: 'blob' });
     saveAs(content, formatDate2(date));
+    setExporting(false);
   };
 
   return (
-    <Button onClick={handleExport} className='button1'>
+    <Button onClick={handleExport} className='button1' loading={exporting}>
       Export All
     </Button>
   );

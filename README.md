@@ -2,7 +2,7 @@
 
 <center><img src='./public/jotter-circle.png' alt='Jotter logo' height='50px' width='50px'/></center>
 
-Tired of searching for the perfect private, accessible tool to easily organize your thoughts and ideas? Say hello to **Jotter**, the intuitive note-taking web app that combines the simplicity of Markdown with the power of organization.
+Tired of searching for the perfect tool to easily organize your thoughts and ideas? Say hello to **Jotter**, the intuitive note-taking web app that combines the simplicity of Markdown with the power of organization.
 
 **Why Choose Jotter?**
 
@@ -56,11 +56,11 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 - [React-markdown](https://www.npmjs.com/package/react-markdown)
 - [React Syntax Highlighter](https://github.com/react-syntax-highlighter/react-syntax-highlighter)
+- [React-codemirror](https://uiwjs.github.io/react-codemirror/)
 - [remark-gfm](https://github.com/remarkjs/remark-gfm)
 - [rehype-raw](https://www.npmjs.com/package/rehype-raw)
 - [React Hook Form](https://react-hook-form.com/)
 - [React Icons](https://react-icons.github.io/react-icons/)
-- [React-codemirror](https://uiwjs.github.io/react-codemirror/)
 - [Chakra](https://www.chakra-ui.com/docs/get-started/installation)
 - [Chakra templates](https://chakra-templates.vercel.app/navigation/navbar)
 - [Table styling](https://dev.to/letsbsocial1/how-to-add-tables-to-react-markdown-21lc)
