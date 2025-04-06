@@ -42,11 +42,10 @@
   cursor: pointer;
 }
 
-.sort {
-  background-color: default.$backgroundColor;
-}
-
 /* Sort button */
-.css-20plmx {
-  border-color: rgba($color: colors.$themePurple, $alpha: 0.4);
+.sort {
+  .css-1hl2915 {
+    background-color: default.$backgroundColor;
+    border-color: rgba($color: colors.$themePurple, $alpha: 0.4);
+  }
 }

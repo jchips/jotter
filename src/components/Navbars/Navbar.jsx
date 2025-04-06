@@ -106,6 +106,7 @@ const Navbar = (props) => {
         px={{ base: 4 }}
         borderBottom={1}
         borderStyle={'solid'}
+        borderColor={'lightgray'}
         align={'center'}
       >
         <Flex
