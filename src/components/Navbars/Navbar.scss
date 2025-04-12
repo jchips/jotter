@@ -2,17 +2,17 @@
 @use '../../assets/sass/colors';
 @use '../../assets/sass/default.styles' as default;
 
-.navbar {
-  border-bottom: 1px;
-  border-style: solid;
-  border-color: inherit;
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 60px;
-  left: 0;
-  z-index: 2;
+.title-bar {
   color: colors.$themePurple;
+}
+
+.navbar-logo {
+  flex-direction: row;
+  align-items: center;
+}
+
+.navbar-btns {
+  justify-content: flex-end;
 }
 
 .details-text {
@@ -35,8 +35,8 @@
 }
 
 .back-btn {
-  height: 30px;
-  width: 30px;
+  min-height: 30px;
+  min-width: 30px;
   margin-right: 10px;
   color: default.$textColor;
   cursor: pointer;
@@ -47,5 +47,26 @@
   .css-1hl2915 {
     background-color: default.$backgroundColor;
     border-color: rgba($color: colors.$themePurple, $alpha: 0.4);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+  }
+
+  .folder-nav {
+    padding-top: 5px;
+    padding-bottom: 15px;
+  }
+
+  .navbar-logo {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar-btns {
+    justify-content: space-evenly;
+    flex-wrap: wrap;
   }
 }

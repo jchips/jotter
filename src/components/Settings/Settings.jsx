@@ -131,7 +131,7 @@ const Settings = () => {
       <Stack align={'center'}>
         <Card.Root size='md' className='settings-card'>
           <Card.Body className='settings-card__body'>
-            <Text>Export all folders and notes</Text>
+            <Text>Export all notes and folders</Text>
             <ExportAllButton setError={setError} />
           </Card.Body>
         </Card.Root>

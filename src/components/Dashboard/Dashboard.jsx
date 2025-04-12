@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useAuth } from '@/hooks/useAuth';
 import { useFolder } from '@/hooks/useFolder';
 import { useMarkdown } from '@/hooks/useMarkdown';
+import useWindowDimensions from '@/hooks/useWindowDimensions';
 import { setFolders, setNotes } from '@/reducers';
 import Error404 from '../404';
 import Loading from '../Loading';
@@ -16,6 +17,7 @@ import DisplayFolders from './DisplayFolders';
 import FolderBreadcrumbs from './FolderBreadcrumbs';
 import api from '@/util/api';
 import './Dashboard.scss';
+import Footer from '../Navbars/Footer';
 
 const Dashboard = () => {
   const [error, setError] = useState('');
@@ -32,6 +34,7 @@ const Dashboard = () => {
   const { folder } = useFolder(folderId, state?.folder);
   const folders = useSelector((state) => state.folders.value);
   const notes = useSelector((state) => state.notes.value);
+  const { width } = useWindowDimensions();
   const dispatch = useDispatch();
 
   // Fetch folders and notes
@@ -83,46 +86,49 @@ const Dashboard = () => {
   return (
     !loading && (
       <div className='dashboard'>
-        <Navbar
-          logout={logUserOut}
-          setSelectedCreate={setSelectedCreate}
-          setAddTitleOpen={setAddTitleOpen}
-          setDeleteOpen={setDeleteOpen}
-          setMoveOpen={setMoveOpen}
-          setError={setError}
-          notes={notes}
-          folders={folders}
-          currentFolder={folder?.data}
-        />
-        {folderId && folderId !== 'null' && (
-          <FolderBreadcrumbs currentFolder={folder} />
-        )}
-        {folders && <DisplayFolders folders={folders} error={error} />}
-        {notes && (
-          <DisplayNotes notes={notes} folders={folders} error={error} />
-        )}
-        <AddTitle
-          user={user}
-          selectedCreate={selectedCreate}
-          addTitleOpen={addTitleOpen}
-          setAddTitleOpen={setAddTitleOpen}
-          notes={notes}
-          folders={folders}
-          currentFolder={folder}
-        />
-        <DeleteModal
-          deleteOpen={deleteOpen}
-          setDeleteOpen={setDeleteOpen}
-          type='folder'
-          folder={folder?.data}
-        />
-        <MoveModal
-          moveOpen={moveOpen}
-          setMoveOpen={setMoveOpen}
-          type='folder'
-          folder={folder?.data}
-          folders={folders}
-        />
+        <div className='dashboard__wrapper'>
+          <Navbar
+            logout={logUserOut}
+            setSelectedCreate={setSelectedCreate}
+            setAddTitleOpen={setAddTitleOpen}
+            setDeleteOpen={setDeleteOpen}
+            setMoveOpen={setMoveOpen}
+            setError={setError}
+            notes={notes}
+            folders={folders}
+            currentFolder={folder?.data}
+          />
+          {folderId && folderId !== 'null' && (
+            <FolderBreadcrumbs currentFolder={folder} />
+          )}
+          {folders && <DisplayFolders folders={folders} error={error} />}
+          {notes && (
+            <DisplayNotes notes={notes} folders={folders} error={error} />
+          )}
+          <AddTitle
+            user={user}
+            selectedCreate={selectedCreate}
+            addTitleOpen={addTitleOpen}
+            setAddTitleOpen={setAddTitleOpen}
+            notes={notes}
+            folders={folders}
+            currentFolder={folder}
+          />
+          <DeleteModal
+            deleteOpen={deleteOpen}
+            setDeleteOpen={setDeleteOpen}
+            type='folder'
+            folder={folder?.data}
+          />
+          <MoveModal
+            moveOpen={moveOpen}
+            setMoveOpen={setMoveOpen}
+            type='folder'
+            folder={folder?.data}
+            folders={folders}
+          />
+        </div>
+        {width < 768 && <Footer logout={logUserOut} />}
       </div>
     )
   );

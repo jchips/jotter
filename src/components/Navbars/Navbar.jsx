@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Box, Flex, Text, Button, Stack, Editable } from '@chakra-ui/react';
 import { LuChevronLeft, LuSettings } from 'react-icons/lu';
+import useWindowDimensions from '@/hooks/useWindowDimensions';
 import CreateNew from './Create/CreateNew';
 import SortSelect from '../Dashboard/SortSelect';
 import OptionsBtn from './Options/OptionsBtn';
@@ -26,6 +27,7 @@ const Navbar = (props) => {
   const [folderTitle, setFolderTitle] = useState(
     currentFolder ? currentFolder.title : null
   );
+  const { width } = useWindowDimensions();
   const navigate = useNavigate();
 
   // Update folder title
@@ -99,99 +101,103 @@ const Navbar = (props) => {
   };
 
   return (
-    <Box>
+    <Flex
+      className='navbar'
+      minH={'60px'}
+      py={{ base: 2 }}
+      px={{ base: 4 }}
+      borderBottom={1}
+      borderStyle={'solid'}
+      borderColor={'lightgray'}
+      align={'center'}
+    >
       <Flex
-        minH={'60px'}
-        py={{ base: 2 }}
-        px={{ base: 4 }}
-        borderBottom={1}
-        borderStyle={'solid'}
-        borderColor={'lightgray'}
-        align={'center'}
+        className='folder-nav'
+        flex={{ base: 1 }}
+        justify={{ base: 'center', md: 'start' }}
+        align='center'
       >
-        <Flex
-          flex={{ base: 1 }}
-          justify={{ base: 'center', md: 'start' }}
-          align='center'
-        >
-          {currentFolder ? (
-            <LuChevronLeft
-              className='back-btn'
-              onClick={() => navigate(`/folder/${currentFolder.parentId}`)}
-            />
-          ) : null}
-          {currentFolder && currentFolder !== 'null' ? (
-            <Editable.Root
-              value={folderTitle}
-              onValueChange={(e) => {
-                setFolderTitle(e.value);
-                e.value !== currentFolder.title
-                  ? setShowRenameBtn(true)
-                  : setShowRenameBtn(false);
-              }}
+        {currentFolder ? (
+          <LuChevronLeft
+            className='back-btn'
+            onClick={() => navigate(`/folder/${currentFolder.parentId}`)}
+          />
+        ) : null}
+        {currentFolder && currentFolder !== 'null' ? (
+          <Editable.Root
+            value={folderTitle}
+            onValueChange={(e) => {
+              setFolderTitle(e.value);
+              e.value !== currentFolder.title
+                ? setShowRenameBtn(true)
+                : setShowRenameBtn(false);
+            }}
+            textAlign={{ base: 'center', md: 'left' }}
+            fontFamily={'heading'}
+            textStyle='2xl'
+            fontWeight={700}
+            maxWidth='300px'
+          >
+            <Editable.Preview />
+            <Editable.Input />
+          </Editable.Root>
+        ) : (
+          <Flex direction='row' alignItems='center'>
+            <img className='gif' src={jotterGif} alt='Jotter gif' />
+            <Text
               textAlign={{ base: 'center', md: 'left' }}
               fontFamily={'heading'}
               textStyle='2xl'
               fontWeight={700}
-              width='300px'
+              marginLeft='10px'
             >
-              <Editable.Preview />
-              <Editable.Input />
-            </Editable.Root>
-          ) : (
-            <Flex direction='row' alignItems='center'>
-              <img className='gif' src={jotterGif} alt='Jotter gif' />
-              <Text
-                textAlign={{ base: 'center', md: 'left' }}
-                fontFamily={'heading'}
-                textStyle='2xl'
-                fontWeight={700}
-                marginLeft='10px'
-              >
-                Jotter
-              </Text>
-            </Flex>
-          )}
-          {currentFolder && currentFolder !== 'null' ? (
-            <Button
-              className='button1'
-              style={{ marginLeft: '12px' }}
-              visibility={showRenameBtn ? 'visible' : 'hidden'}
-              onClick={handleUpdateFolderTitle}
-              disabled={saving}
-            >
-              Rename folder
-            </Button>
-          ) : null}
-        </Flex>
-
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={'flex-end'}
-          direction={'row'}
-          spacing={6}
-        >
-          <CreateNew
-            setSelectedCreate={setSelectedCreate}
-            setAddTitleOpen={setAddTitleOpen}
-          />
-          <SortSelect notes={notes} folders={folders} />
-          {currentFolder && (
-            <OptionsBtn
-              setDeleteOpen={setDeleteOpen}
-              setMoveOpen={setMoveOpen}
-              type='folder'
-            />
-          )}
-          <Button className='button1' onClick={() => navigate(`/settings`)}>
-            <LuSettings />
+              Jotter
+            </Text>
+          </Flex>
+        )}
+        {currentFolder && currentFolder !== 'null' ? (
+          <Button
+            className='button1'
+            style={{ marginLeft: '12px' }}
+            visibility={showRenameBtn ? 'visible' : 'hidden'}
+            onClick={handleUpdateFolderTitle}
+            disabled={saving}
+          >
+            Rename folder
           </Button>
-          <Button fontSize={'sm'} fontWeight={400} onClick={logout}>
-            Log out
-          </Button>
-        </Stack>
+        ) : null}
       </Flex>
-    </Box>
+
+      <Stack
+        className='navbar-btns'
+        flex={{ base: 1, md: 0 }}
+        direction={'row'}
+        spacing={6}
+      >
+        <CreateNew
+          setSelectedCreate={setSelectedCreate}
+          setAddTitleOpen={setAddTitleOpen}
+        />
+        <SortSelect notes={notes} folders={folders} />
+        {currentFolder && (
+          <OptionsBtn
+            setDeleteOpen={setDeleteOpen}
+            setMoveOpen={setMoveOpen}
+            type='folder'
+          />
+        )}
+        {width > 768 && (
+          <>
+            <Button className='button1' onClick={() => navigate(`/settings`)}>
+              <LuSettings />
+            </Button>
+            <Button fontSize={'sm'} fontWeight={400} onClick={logout}>
+              Log out
+            </Button>
+          </>
+        )}
+      </Stack>
+    </Flex>
   );
 };
 

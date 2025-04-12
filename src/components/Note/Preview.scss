@@ -20,7 +20,8 @@
 
 .preview__wrapper {
   max-height: 100%;
-  margin: 80px 40px;
+  margin: 10px 40px;
+  margin-bottom: 80px;
   flex-grow: 1;
   overflow-y: auto;
 }
@@ -34,4 +35,11 @@
 
 .footer {
   @include note.footer;
+}
+
+@media screen and (max-width: 768px) {
+  .preview__wrapper {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }

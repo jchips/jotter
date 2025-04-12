@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { LuFolder } from 'react-icons/lu';
-import { Card, Heading, HStack, Button } from '@chakra-ui/react';
+import { Card, Heading, HStack } from '@chakra-ui/react';
 
 const FolderCard = ({ folder }) => {
   return (

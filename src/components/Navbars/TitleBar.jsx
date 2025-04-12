@@ -14,16 +14,33 @@ import {
   PopoverRoot,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import { LuTextCursorInput } from 'react-icons/lu';
+import useWindowDimensions from '@/hooks/useWindowDimensions';
 import OptionsBtn from './Options/OptionsBtn';
 import formatDate from '@/util/formatDate';
 import './Navbar.scss';
 
 const TitleBar = ({ note, setIsOpen, setDeleteOpen, setMoveOpen, words }) => {
   const [openPopver, setOpenPopover] = useState(false);
+  const { width } = useWindowDimensions();
+
   return (
-    <Box className='navbar'>
-      <Flex minH={'60px'} py={{ base: 2 }} px={{ base: 4 }} align={'center'}>
-        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
+    <Box className='title-bar'>
+      <Flex
+        className='navbar'
+        minH={'60px'}
+        py={{ base: 2 }}
+        px={{ base: 4 }}
+        align={'center'}
+        borderBottom={1}
+        borderStyle={'solid'}
+        borderColor='inherit'
+      >
+        <Flex
+          className='folder-nav'
+          flex={{ base: 1 }}
+          justify={{ base: 'center', md: 'start' }}
+        >
           <Text
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
             fontFamily={'heading'}
@@ -33,7 +50,11 @@ const TitleBar = ({ note, setIsOpen, setDeleteOpen, setMoveOpen, words }) => {
             {note.title}
           </Text>
         </Flex>
-        <Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'}>
+        <Stack
+          className='navbar-btns'
+          flex={{ base: 1, md: 0 }}
+          direction={'row'}
+        >
           <PopoverRoot
             open={openPopver}
             onOpenChange={(e) => setOpenPopover(e.open)}
@@ -68,8 +89,12 @@ const TitleBar = ({ note, setIsOpen, setDeleteOpen, setMoveOpen, words }) => {
             setMoveOpen={setMoveOpen}
             type='note'
           />
-          <Button className='button1' onClick={() => setIsOpen(true)}>
-            Rename
+          <Button
+            className='button1'
+            onClick={() => setIsOpen(true)}
+            aria-label='Rename note'
+          >
+            {width > 350 ? 'Rename' : <LuTextCursorInput />}
           </Button>
         </Stack>
       </Flex>
