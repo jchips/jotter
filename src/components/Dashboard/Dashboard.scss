@@ -22,3 +22,28 @@
     margin-top: 20px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .dashboard {
+    margin: 0;
+  }
+
+  .dashboard__wrapper {
+    min-height: 100vh;
+    padding-bottom: 3.5rem;
+  }
+
+  .breadcrumb {
+    margin: 20px 20px 0 20px;
+  }
+
+  .dashboard-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin: 20px 0;
+    height: 2.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

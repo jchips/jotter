@@ -3,7 +3,9 @@ import { useNavigate, useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import { throttle } from 'lodash';
 import { Button, HStack, Text, Box } from '@chakra-ui/react';
+import { LuSave, LuSquareX } from 'react-icons/lu';
 import CodeMirror from './CodeMirror';
+import useWindowDimensions from '@/hooks/useWindowDimensions';
 import { useMarkdown } from '../../hooks/useMarkdown';
 import { useAuth } from '@/hooks/useAuth';
 import ExitNote from '../modals/ExitNote';
@@ -27,6 +29,7 @@ const Editor = () => {
   const { noteId } = useParams();
   const navigate = useNavigate();
   const previewRef = useRef(null);
+  const { width } = useWindowDimensions();
   const configs = useSelector((state) => state.configs.value);
 
   // fetch the note
@@ -183,16 +186,22 @@ const Editor = () => {
         </Button>
         {!configs?.hideWordCount && <Text>{words} words</Text>}
         <Box>
-          <Button className='button1' variant='solid' onClick={handleExit}>
-            Exit editor
+          <Button
+            className='button1'
+            variant='solid'
+            onClick={handleExit}
+            aria-label='Exit editor'
+          >
+            {width > 768 ? 'Exit editor' : <LuSquareX />}
           </Button>
           <Button
             className='button1'
             variant='solid'
             onClick={handleSave}
             disabled={saving}
+            aria-label='Save changes'
           >
-            Save changes
+            {width > 768 ? 'Save changes' : <LuSave />}
           </Button>
         </Box>
       </HStack>

@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { LuDownload, LuUpload } from 'react-icons/lu';
+import { LuDownload, LuUpload, LuPenLine } from 'react-icons/lu';
 import { Button, HStack } from '@chakra-ui/react';
 import { useAuth } from '@/hooks/useAuth';
-import { useMarkdown } from '../../hooks/useMarkdown';
+import { useMarkdown } from '@/hooks/useMarkdown';
+import useWindowDimensions from '@/hooks/useWindowDimensions';
 import getWordCount from '@/util/getWordCount';
 import api from '@/util/api';
 import Preview from './Preview';
@@ -31,6 +32,7 @@ const View = () => {
   const { logout } = useAuth();
   const { noteId } = useParams();
   const navigate = useNavigate();
+  const { width } = useWindowDimensions();
 
   // fetches the note
   useEffect(() => {
@@ -159,21 +161,28 @@ const View = () => {
               className='button5 ex-im-btn'
               onClick={() => setImportOpen(true)}
               title='Import note'
+              aria-label='Import'
             >
               <LuUpload />
-              Import
+              {width > 768 ? 'Import' : null}
             </Button>
             <Button
               className='button5 ex-im-btn'
               onClick={exportNote}
               title='Export note'
+              aria-label='Export'
             >
               <LuDownload />
-              Export
+              {width > 768 ? 'Export' : null}
             </Button>
           </HStack>
-          <Button className='button1' variant='solid' onClick={handleEdit}>
-            Edit note
+          <Button
+            className='button1'
+            variant='solid'
+            onClick={handleEdit}
+            aria-label='Edit note'
+          >
+            {width > 350 ? 'Edit note' : <LuPenLine />}
           </Button>
         </HStack>
         <ChangeTitle

@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Button, Grid } from '@chakra-ui/react';
 import { Alert } from '@/components/ui/alert';
+import useWindowDimensions from '@/hooks/useWindowDimensions';
 import NoteCard from './NoteCard';
 
 const DisplayNotes = ({ notes, folders, error }) => {
+  const { width } = useWindowDimensions();
   return (
     <div>
       {notes.length === 0 && folders.length === 0 ? (
@@ -17,7 +19,10 @@ const DisplayNotes = ({ notes, folders, error }) => {
               <Alert status='error' title={error} />
             </div>
           ) : null}
-          <Grid templateColumns='repeat(3, 1fr)' gap={6}>
+          <Grid
+            templateColumns={width > 768 ? 'repeat(3, 1fr)' : 'repeat(1, 1fr)'}
+            gap={width > 768 ? 6 : 2}
+          >
             {notes.map((note) => (
               <NoteCard note={note} key={note.id} />
             ))}

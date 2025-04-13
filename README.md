@@ -23,7 +23,7 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 ## Creator & developer: Jelani R
 
-## Version: 1.2.0
+## Version: 1.2.1
 
 ## Architecture
 
@@ -33,6 +33,7 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 ## Changelog
 
+- **1.2.1** (2025-04-12, 4:05pm) - Improved mobile viewing.
 - **1.2.0** (2025-04-04, 9:05pm) - Added settings page, added more key press controls.
 - **1.1.4** (2025-02-02, 5:30pm) - Improved error handling.
 - **1.1.3** (2025-01-21, 3:47am) - Sort is no longer temporary.
