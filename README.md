@@ -7,9 +7,9 @@ Tired of searching for the perfect tool to easily organize your thoughts and ide
 **Why Choose Jotter?**
 
 - **Stay Organized Your Way**: Create folders to neatly categorize your notes. Move notes and folders effortlessly to stay on top of your workflow.
-- **Markdown Made Easy**: Use Markdown to format your notes quickly and beautifully, whether it’s for lists, headings, code snippets, or more.
-- **Personalized Accounts**: Sign up and securely log in to access your notes anywhere, anytime.
-- **Seamless Note Management**: Create, save, edit, or delete notes and folders with ease.
+- **Markdown Made Easy**: Use Markdown to format your notes quickly and beautifully, whether it’s for lists, headings, code snippets, and more.
+- **Personalized Accounts**: Sign up and securely log in on browser or mobile device to access your notes anywhere, anytime.
+- **Seamless Note Management**: Create, save, edit, and delete notes and folders with ease.
 - **Adaptive Themes**: Whether your device is set to light or dark mode, **Jotter** adapts to your preferences, keeping your note-taking experience easy on the eyes.
 - **A Minimalist Design**: No clutter, no distractions—just you and your thoughts, perfectly synced.
 
@@ -23,7 +23,7 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 ## Creator & developer: Jelani R
 
-## Version: 1.2.1
+## Version: 1.2.2
 
 ## Architecture
 
@@ -33,6 +33,7 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 ## Changelog
 
+- **1.2.2** (2025-04-13, 11:00pm) - Improved viewing of markdown elements in dark mode.
 - **1.2.1** (2025-04-12, 4:05pm) - Improved mobile viewing.
 - **1.2.0** (2025-04-04, 9:05pm) - Added settings page, added more key press controls.
 - **1.1.4** (2025-02-02, 5:30pm) - Improved error handling.
@@ -66,4 +67,3 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 - [Chakra templates](https://chakra-templates.vercel.app/navigation/navbar)
 - [Table styling](https://dev.to/letsbsocial1/how-to-add-tables-to-react-markdown-21lc)
 - [Lodash](https://lodash.com/)
-- [Web Dev Simplified](https://youtu.be/6XTRElVAZ9Y)

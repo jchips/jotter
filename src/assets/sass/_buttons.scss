@@ -1,0 +1,57 @@
+@use 'sass:color';
+@use 'colors';
+@use 'theme';
+
+@mixin buttonColors($color, $bgColor, $static) {
+  color: $color;
+  background-color: $bgColor;
+  margin-left: 5px;
+
+  @if $static {
+    &:hover {
+      background-color: color.adjust($bgColor, $lightness: -10%);
+    }
+  }
+}
+
+// theme purple
+.button1 {
+  @include buttonColors(colors.$themeWhite, colors.$themePurple, $static: true);
+}
+
+// theme white
+.button2 {
+  @include buttonColors(#000, colors.$themeWhite, $static: true);
+}
+
+// black
+.button3 {
+  @include buttonColors(colors.$themeWhite, #000, $static: true);
+}
+
+// delete
+.button4 {
+  @include buttonColors(colors.$themeWhite, #dc3545, $static: true);
+}
+
+// button outline
+.button5 {
+  @include buttonColors(theme.$textColor, 'transparent', $static: false);
+  border-width: 1px;
+  border-color: theme.$borderColor;
+  border-radius: 0.25rem;
+  font-weight: 400;
+  font-size: 0.875rem;
+  height: 2.5rem;
+  min-width: 2.5rem;
+  padding-inline: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 5px;
+
+  &:hover {
+    background-color: theme.$backgroundHover;
+  }
+}

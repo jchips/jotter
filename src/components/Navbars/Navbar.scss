@@ -1,6 +1,7 @@
 @use 'sass:color';
 @use '../../assets/sass/colors';
-@use '../../assets/sass/default.styles' as default;
+@use '../../assets/sass/mixins';
+@use '../../assets/sass/theme';
 
 .title-bar {
   color: colors.$themePurple;
@@ -30,7 +31,7 @@
   }
 
   p {
-    @include default.small-text;
+    @include mixins.small-text;
   }
 }
 
@@ -38,14 +39,14 @@
   min-height: 30px;
   min-width: 30px;
   margin-right: 10px;
-  color: default.$textColor;
+  color: theme.$textColor;
   cursor: pointer;
 }
 
 /* Sort button */
 .sort {
   .css-1hl2915 {
-    background-color: default.$backgroundColor;
+    background-color: theme.$backgroundColor;
     border-color: rgba($color: colors.$themePurple, $alpha: 0.4);
   }
 }

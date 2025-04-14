@@ -1,5 +1,5 @@
 @use '../../assets/sass/colors';
-@use '../../assets/sass/default.styles' as default;
+@use '../../assets/sass/theme';
 
 @mixin grid {
   display: flex;
@@ -30,19 +30,19 @@
 }
 
 .CodeMirror {
-  background-color: default.$backgroundColor !important;
-  color: default.$textColor !important;
+  background-color: theme.$backgroundColor !important;
+  color: theme.$textColor !important;
   border: none !important;
   font-family: inherit;
 }
 
 .ͼ15 {
-  background-color: default.$backgroundColor !important;
-  color: default.$textColor !important;
+  background-color: theme.$backgroundColor !important;
+  color: theme.$textColor !important;
 }
 
 .ͼ4 .cm-line {
-  caret-color: default.$textColor !important;
+  caret-color: theme.$textColor !important;
 }
 
 .css-1rldt0e {

@@ -1,6 +1,7 @@
-@use '../../assets/sass/colors';
-@use '../../assets/sass/default.styles' as default;
 @use 'sass:color';
+@use '../../assets/sass/colors';
+@use '../../assets//sass/mixins';
+@use '../../assets/sass/theme';
 
 .header-container {
   margin-top: 60px;
@@ -11,7 +12,7 @@
 }
 
 .auth-component h1 {
-  @include default.large-text;
+  @include mixins.large-text;
   text-align: center;
   font-weight: 700;
 }

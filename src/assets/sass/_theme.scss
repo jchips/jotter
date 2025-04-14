@@ -6,36 +6,22 @@ $darkThemeBg: #242424;
 $lightThemeHover: color.adjust($lightThemeBg, $lightness: -10%);
 $darkThemeHover: color.adjust($darkThemeBg, $lightness: -10%);
 
-@mixin small-text {
-  font-size: small;
-  color: colors.$themePurpleText;
-  font-weight: 400;
-  width: fit-content;
-}
-
-@mixin medium-text {
-  font-size: medium;
-  width: fit-content;
-}
-
-@mixin large-text {
-  font-size: xx-large;
-  width: fit-content;
-}
-
 $backgroundColor: var(--editor-background-color);
 $textColor: var(--editor-text-color);
 $backgroundHover: var(--background-hover);
 $borderColor: var(--border);
+$hr: var(--hr);
+$markdownBorderColor: var(--markdown-border);
 $dropShadow: var(--icon-drop-shadow);
 
-/* Applies light/dark background dynamically */
 @media (prefers-color-scheme: light) {
   :root {
     --editor-background-color: #{$lightThemeBg};
     --editor-text-color: #213547;
     --background-hover: #{$lightThemeHover};
     --border: #e4e4e7;
+    --hr: #e4e4e7;
+    --markdown-border: #e4e4e7;
     --icon-drop-shadow: drop-shadow(0 0 2em #646cffaa);
   }
 }
@@ -46,6 +32,8 @@ $dropShadow: var(--icon-drop-shadow);
     --editor-text-color: rgba(255, 255, 255, 0.87);
     --background-hover: #{$darkThemeHover};
     --border: #27272a;
+    --hr: #3f3f46;
+    --markdown-border: #84848424;
     --icon-drop-shadow: drop-shadow(0 0);
   }
 }

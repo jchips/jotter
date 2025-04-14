@@ -1,3 +1,5 @@
+@use '../../assets/sass/theme';
+
 .markdown-wrapper {
   padding: 20px;
 
@@ -16,7 +18,7 @@
     border-bottom: 1px;
     border-style: solid;
     padding: 10px;
-    border-color: #84848424;
+    border-color: theme.$markdownBorderColor;
   }
 
   h2 {
@@ -87,7 +89,7 @@
   table {
     border-spacing: 0 !important;
     border-collapse: collapse !important;
-    border-color: inherit !important;
+    border-color: theme.$markdownBorderColor !important;
     display: block !important;
     margin: 20px auto !important;
     width: 100% !important;
@@ -101,7 +103,7 @@
   th,
   thead,
   tr {
-    border-color: inherit !important;
+    border-color: theme.$markdownBorderColor !important;
     border-style: solid !important;
     border-width: 2px !important;
     padding: 0.7rem;
@@ -113,6 +115,7 @@
 
   hr {
     margin-bottom: 20px;
+    border-color: theme.$hr !important;
   }
 
   blockquote {
