@@ -78,18 +78,19 @@ const View = () => {
 
   /**
    * Handles key press options
-   * ctrl/cmd-j or ctrl/cmd-e: exit note
-   * ctrl/cmd-o: edit note
+   * ctrl/cmd-j or ctrl/cmd-e or alt-q: exit note
+   * ctrl/cmd-o or alt-o: edit note
    */
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (
         ((e.ctrlKey || e.metaKey) && e.key === 'j') ||
-        ((e.ctrlKey || e.metaKey) && e.key === 'e')
+        ((e.ctrlKey || e.metaKey) && e.key === 'e') ||
+        (e.altKey && e.code === 'KeyQ')
       ) {
         e.preventDefault();
         handleExit();
-      } else if ((e.ctrlKey || e.metaKey) && e.key === 'o') {
+      } else if ((e.ctrlKey || e.metaKey || e.altKey) && e.code === 'KeyO') {
         e.preventDefault();
         handleEdit();
       }
