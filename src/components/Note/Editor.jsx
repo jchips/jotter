@@ -116,7 +116,7 @@ const Editor = () => {
   // Saves the note and exits
   const handleSaveAndExit = useCallback(() => {
     handleSave();
-    navigate(`/preview/${noteId}`);
+    navigate(`/view/${noteId}`);
   }, [navigate, handleSave, noteId]);
 
   // Exits the editor without saving
@@ -124,7 +124,7 @@ const Editor = () => {
     if (note.content !== markdown) {
       setOpenExit(true);
     } else {
-      navigate(`/preview/${noteId}`);
+      navigate(`/view/${noteId}`);
     }
   }, [markdown, navigate, note, noteId]);
 
