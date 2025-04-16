@@ -1,0 +1,19 @@
+@use 'sass:color';
+@use 'colors';
+
+@mixin small-text {
+  font-size: small;
+  color: colors.$themePurpleText;
+  font-weight: 400;
+  width: fit-content;
+}
+
+@mixin medium-text {
+  font-size: medium;
+  width: fit-content;
+}
+
+@mixin large-text {
+  font-size: xx-large;
+  width: fit-content;
+}

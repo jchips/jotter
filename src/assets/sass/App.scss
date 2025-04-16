@@ -1,80 +1,25 @@
 @use 'sass:color';
 @use 'colors';
-@use './default.styles' as default;
-
-
-@mixin buttonColors($color, $bgColor, $static) {
-  color: $color;
-  background-color: $bgColor;
-  margin-left: 5px;
-
-  @if $static {
-    &:hover {
-      background-color: color.adjust($bgColor, $lightness: -10%);
-    }
-  }
-}
-
-/* Buttons---------------- */
-
-// theme purple
-.button1 {
-  @include buttonColors(colors.$themeWhite, colors.$themePurple, $static: true);
-}
-
-// theme white
-.button2 {
-  @include buttonColors(#000, colors.$themeWhite, $static: true);
-}
-
-// black
-.button3 {
-  @include buttonColors(colors.$themeWhite, #000, $static: true);
-}
-
-// delete
-.button4 {
-  @include buttonColors(colors.$themeWhite, #dc3545, $static: true);
-}
-
-// button outline
-.button5 {
-  @include buttonColors(default.$textColor, 'transparent', $static: false);
-  border-width: 1px;
-  border-color: default.$borderColor;
-  border-radius: 0.25rem;
-  font-weight: 400;
-  font-size: 0.875rem;
-  height: 2.5rem;
-  min-width: 2.5rem;
-  padding-inline: 1rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin-right: 5px;
-
-  &:hover {
-    background-color: default.$backgroundHover;
-  }
-}
+@use 'theme';
+@use 'mixins';
+@use 'buttons';
 
 /* Text---------------- */
 
 .small-text {
-  @include default.small-text;
+  @include mixins.small-text;
 }
 
 .medium-text {
-  @include default.medium-text;
+  @include mixins.medium-text;
 }
 
 .large-text {
-  @include default.large-text;
+  @include mixins.large-text;
 }
 
 .themePurple-text {
-  @include default.medium-text;
+  @include mixins.medium-text;
   color: colors.$themePurpleText;
 }
 
@@ -82,5 +27,5 @@
   height: 40px;
   width: 40px;
   border-radius: 100%;
-  filter: default.$dropShadow;
+  filter: theme.$dropShadow;
 }
