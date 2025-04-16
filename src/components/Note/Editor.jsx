@@ -131,7 +131,7 @@ const Editor = () => {
   /**
    * Handles key press options
    * ctrl/cmd-s: save the new changes
-   * ctrl/cmd-n: save and exit note
+   * ctrl/cmd-j: save and exit note
    * ctrl/cmd-e: exit the editor without saving
    */
   useEffect(() => {
@@ -139,7 +139,7 @@ const Editor = () => {
       if ((e.ctrlKey || e.metaKey) && e.key === 's') {
         e.preventDefault();
         handleSave();
-      } else if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
+      } else if ((e.ctrlKey || e.metaKey) && e.key === 'j') {
         e.preventDefault();
         handleSaveAndExit();
       } else if ((e.ctrlKey || e.metaKey) && e.key === 'e') {

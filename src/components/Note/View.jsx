@@ -78,13 +78,13 @@ const View = () => {
 
   /**
    * Handles key press options
-   * ctrl/cmd-n or ctrl/cmd-e: exit note
+   * ctrl/cmd-j or ctrl/cmd-e: exit note
    * ctrl/cmd-o: edit note
    */
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (
-        ((e.ctrlKey || e.metaKey) && e.key === 'n') ||
+        ((e.ctrlKey || e.metaKey) && e.key === 'j') ||
         ((e.ctrlKey || e.metaKey) && e.key === 'e')
       ) {
         e.preventDefault();
