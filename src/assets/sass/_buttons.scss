@@ -19,9 +19,9 @@
   @include buttonColors(colors.$themeWhite, colors.$themePurple, $static: true);
 }
 
-// theme white
+// theme light or dark
 .button2 {
-  @include buttonColors(#000, colors.$themeWhite, $static: true);
+  @include buttonColors(theme.$backgroundColor, theme.$textColor, $static: false);
 }
 
 // black
@@ -38,7 +38,7 @@
 .button5 {
   @include buttonColors(theme.$textColor, 'transparent', $static: false);
   border-width: 1px;
-  border-color: theme.$borderColor;
+  border-color: theme.$markdownBorderColor;
   border-radius: 0.25rem;
   font-weight: 400;
   font-size: 0.875rem;

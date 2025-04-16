@@ -65,7 +65,9 @@ const View = () => {
 
   // Navigates one page back
   const handleExit = useCallback(() => {
-    note.folderId ? navigate(`/folder/${note.folderId}`) : navigate('/');
+    note.folderId
+      ? navigate(`/folder/${note.folderId}`)
+      : navigate(`/folder/${null}`);
     setMarkdown('');
   }, [navigate, setMarkdown, note]);
 
@@ -76,13 +78,13 @@ const View = () => {
 
   /**
    * Handles key press options
-   * ctrl/cmd-x or ctrl/cmd-e: exit note
+   * ctrl/cmd-n or ctrl/cmd-e: exit note
    * ctrl/cmd-o: edit note
    */
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (
-        ((e.ctrlKey || e.metaKey) && e.key === 'x') ||
+        ((e.ctrlKey || e.metaKey) && e.key === 'n') ||
         ((e.ctrlKey || e.metaKey) && e.key === 'e')
       ) {
         e.preventDefault();

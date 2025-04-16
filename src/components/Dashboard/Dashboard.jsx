@@ -15,9 +15,9 @@ import DeleteModal from '../modals/DeleteModal';
 import DisplayNotes from './DisplayNotes';
 import DisplayFolders from './DisplayFolders';
 import FolderBreadcrumbs from './FolderBreadcrumbs';
+import Footer from '../Navbars/Footer';
 import api from '@/util/api';
 import './Dashboard.scss';
-import Footer from '../Navbars/Footer';
 
 const Dashboard = () => {
   const [error, setError] = useState('');
