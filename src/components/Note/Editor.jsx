@@ -131,21 +131,18 @@ const Editor = () => {
   /**
    * Handles key press options
    * ctrl/cmd-s: save the new changes
-   * ctrl/cmd-j or alt-q: save and exit note
-   * ctrl/cmd-e: exit the editor without saving
+   * ctrl/cmd-e: save and exit note
+   * alt-q: exit the editor without saving
    */
   useEffect(() => {
     const handleKeyDown = (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 's') {
         e.preventDefault();
         handleSave();
-      } else if (
-        ((e.ctrlKey || e.metaKey) && e.key === 'j') ||
-        (e.altKey && e.code === 'KeyQ')
-      ) {
+      } else if ((e.ctrlKey || e.metaKey) && e.key === 'e') {
         e.preventDefault();
         handleSaveAndExit();
-      } else if ((e.ctrlKey || e.metaKey) && e.key === 'e') {
+      } else if (e.altKey && e.code === 'KeyQ') {
         e.preventDefault();
         handleExit();
       }

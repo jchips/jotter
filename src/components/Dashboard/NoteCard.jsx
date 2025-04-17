@@ -9,7 +9,7 @@ const NoteCard = ({ note }) => {
     <Card.Root
       size='sm'
       className='note-card'
-      onDoubleClick={() => navigate(`/view/${note.id}`)}
+      onDoubleClick={() => (note ? navigate(`/view/${note.id}`) : null)}
     >
       <Card.Header>
         <Heading size='md'>{note.title}</Heading>

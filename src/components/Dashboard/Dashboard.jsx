@@ -11,7 +11,7 @@ import Loading from '../Loading';
 import Navbar from '../Navbars/Navbar';
 import MoveModal from '../modals/MoveModal';
 import AddTitle from '../modals/AddTitle';
-import DeleteModal from '../modals/DeleteModal';
+import DeleteItem from '../modals/DeleteItem';
 import DisplayNotes from './DisplayNotes';
 import DisplayFolders from './DisplayFolders';
 import FolderBreadcrumbs from './FolderBreadcrumbs';
@@ -134,7 +134,7 @@ const Dashboard = () => {
             folders={folders}
             currentFolder={folder}
           />
-          <DeleteModal
+          <DeleteItem
             deleteOpen={deleteOpen}
             setDeleteOpen={setDeleteOpen}
             type='folder'

@@ -2,11 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Text, Stack, Card } from '@chakra-ui/react';
+import { Text, Stack, Card, Button } from '@chakra-ui/react';
 import { setConfigs } from '@/reducers';
 import { useAuth } from '@/hooks/useAuth';
 import { getLocalConfigs, setLocalConfigs } from '@/util/configUtil';
 import api from '@/util/api';
+import DeleteAccount from '../modals/DeleteAccount';
 import SettingsNav from '../Navbars/SettingsNav';
 import ExportAllButton from './ExportAllButton';
 import ToggleCard from './ToggleCard';
@@ -23,7 +24,8 @@ const Settings = () => {
   const [highlightActiveLine, setHighlightActiveLine] = useState(
     configs?.highlightActiveLine || localConfigs?.highlightActiveLine
   );
-  const { user } = useAuth();
+  const [openDeleteAcct, setOpenDeleteAcct] = useState(false);
+  const { user, logout } = useAuth();
   const dispatch = useDispatch();
   const themeText = '#646cff';
   const toggleOptions = [
@@ -136,6 +138,32 @@ const Settings = () => {
           </Card.Body>
         </Card.Root>
       </Stack>
+      <Text
+        textAlign='center'
+        fontFamily={'heading'}
+        textStyle='lg'
+        fontWeight={600}
+        marginTop={5}
+        marginBottom={5}
+      >
+        Account
+      </Text>
+      <Stack align={'center'}>
+        <Card.Root size='md' className='settings-card'>
+          <Card.Body className='settings-card__body'>
+            <Text>Permanently delete account</Text>
+            <Button className='button2' onClick={() => setOpenDeleteAcct(true)}>
+              Delete account
+            </Button>
+          </Card.Body>
+        </Card.Root>
+      </Stack>
+      <DeleteAccount
+        openDeleteAcct={openDeleteAcct}
+        setOpenDeleteAcct={setOpenDeleteAcct}
+        user={user}
+        logout={logout}
+      />
     </div>
   );
 };

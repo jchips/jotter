@@ -14,59 +14,48 @@ import {
 import api from '@/util/api';
 import ErrAlert from '../ErrAlert';
 
-const DeleteModal = (props) => {
-  const { deleteOpen, setDeleteOpen, type, note, folder } = props;
+const DeleteAccount = (props) => {
+  const { openDeleteAcct, setOpenDeleteAcct, user, logout } = props;
   const [error, setError] = useState('');
   const [saving, setSaving] = useState(false);
   const navigate = useNavigate();
 
-  // deletes note or folder
+  // deletes user's account
   const onSubmit = async () => {
     try {
       setError('');
       setSaving(true);
-      switch (type) {
-        case 'note':
-          await api.deleteNote(note.id);
-          navigate(`/folder/${note.folderId ? note.folderId : 'null'}`);
-          break;
-        case 'folder':
-          await api.deleteFolder(folder.id);
-          navigate(`/folder/${folder.parentId ? folder.parentId : 'null'}`);
-          break;
-      }
-      setDeleteOpen(false);
+      setOpenDeleteAcct(false);
+      navigate('/login');
+      logout();
+      await api.deleteUser(user.id);
     } catch (err) {
-      setError('Failed to delete ' + type);
-      console.error(err);
+      setError('Failed to delete user account');
+      console.error('Failed to delete user account -', err);
     }
     setSaving(false);
   };
 
   return (
-    (note || folder) && (
-      <DialogRoot modal={true} open={deleteOpen}>
+    user && (
+      <DialogRoot modal={true} open={openDeleteAcct}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Delete {type}</DialogTitle>
+            <DialogTitle>Permanently Delete Account</DialogTitle>
           </DialogHeader>
           <DialogBody>
             {error ? <ErrAlert error={error} mb={20} /> : null}
-            Are you sure that you want to delete{' '}
-            <span style={{ fontWeight: 'bold' }}>
-              {type === 'note' ? note.title : folder.title}
-            </span>
+            Are you sure that you want to delete the Jotter account{' '}
+            <span style={{ fontWeight: 'bold' }}>{user.email}</span>
             ?
             <br />
-            {type === 'folder' ? (
-              <>
-                <br />
-                <span className='small-text'>
-                  This will delete all folders and notes stored in{' '}
-                  <strong>{folder.title}</strong>.
-                </span>
-              </>
-            ) : null}
+            <>
+              <br />
+              <span className='small-text'>
+                This will delete all folders and notes created by{' '}
+                <strong>{user.email}</strong>.
+              </span>
+            </>
             <br />
             <span className='small-text'>This action cannot be undone.</span>
           </DialogBody>
@@ -75,7 +64,7 @@ const DeleteModal = (props) => {
               <Button
                 variant='outline'
                 onClick={() => {
-                  setDeleteOpen(false);
+                  setOpenDeleteAcct(false);
                   setError('');
                 }}
               >
@@ -93,7 +82,7 @@ const DeleteModal = (props) => {
           </DialogFooter>
           <DialogCloseTrigger
             onClick={() => {
-              setDeleteOpen(false);
+              setOpenDeleteAcct(false);
               setError('');
             }}
           />
@@ -103,4 +92,4 @@ const DeleteModal = (props) => {
   );
 };
 
-export default DeleteModal;
+export default DeleteAccount;

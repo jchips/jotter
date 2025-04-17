@@ -14,7 +14,7 @@ import TitleBar from '../Navbars/TitleBar';
 import ImportNote from '../modals/ImportNote';
 import ChangeTitle from '../modals/ChangeTitle';
 import MoveModal from '../modals/MoveModal';
-import DeleteModal from '../modals/DeleteModal';
+import DeleteItem from '../modals/DeleteItem';
 import ErrAlert from '../ErrAlert';
 import './Preview.scss';
 import './markdown.scss';
@@ -78,13 +78,13 @@ const View = () => {
 
   /**
    * Handles key press options
-   * ctrl/cmd-j or ctrl/cmd-e or alt-q: exit note
+   * ctrl/cmd-x or ctrl/cmd-e or alt-q: exit note
    * ctrl/cmd-o or alt-o: edit note
    */
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (
-        ((e.ctrlKey || e.metaKey) && e.key === 'j') ||
+        ((e.ctrlKey || e.metaKey) && e.key === 'x') ||
         ((e.ctrlKey || e.metaKey) && e.key === 'e') ||
         (e.altKey && e.code === 'KeyQ')
       ) {
@@ -194,7 +194,7 @@ const View = () => {
           isOpen={isOpen}
           setIsOpen={setIsOpen}
         />
-        <DeleteModal
+        <DeleteItem
           note={note}
           deleteOpen={deleteOpen}
           setDeleteOpen={setDeleteOpen}
