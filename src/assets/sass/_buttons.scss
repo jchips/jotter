@@ -24,11 +24,6 @@
   @include buttonColors(theme.$backgroundColor, theme.$textColor, $static: false);
 }
 
-// black
-.button3 {
-  @include buttonColors(colors.$themeWhite, #000, $static: true);
-}
-
 // delete
 .button4 {
   @include buttonColors(colors.$themeWhite, #dc3545, $static: true);
@@ -54,4 +49,8 @@
   &:hover {
     background-color: theme.$backgroundHover;
   }
+}
+
+.logout-btn {
+  margin-left: 0;
 }

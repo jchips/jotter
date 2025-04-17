@@ -67,6 +67,26 @@ const Dashboard = () => {
     fetchContent();
   }, [logout, setMarkdown, folderId, dispatch]);
 
+  /**
+   * Handles key press option
+   * ctrl/cmd-h or alt-h: navigate to root folder
+   */
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (
+        ((e.ctrlKey || e.metaKey) && e.code === 'KeyH') ||
+        (e.altKey && e.code === 'KeyH')
+      ) {
+        e.preventDefault();
+        navigate(`/folder/${null}`);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [navigate]);
+
   // Loading circle
   if (loading) {
     return <Loading />;

@@ -191,7 +191,12 @@ const Navbar = (props) => {
             <Button className='button1' onClick={() => navigate(`/settings`)}>
               <LuSettings />
             </Button>
-            <Button fontSize={'sm'} fontWeight={400} onClick={logout}>
+            <Button
+              className='button2 logout-btn'
+              fontSize={'sm'}
+              fontWeight={400}
+              onClick={logout}
+            >
               Log out
             </Button>
           </>

@@ -31,8 +31,8 @@ const MoveModal = ({ moveOpen, setMoveOpen, type, note, folder, folders }) => {
   const contentRef = useRef(null);
 
   /**
-   * Fetch all folders that the user can move current folder to
-   * This includes all folder except the current folder, any of the
+   * Fetch all folders that the user can move current folder to.
+   * This includes all folders except the current folder, any of the
    * current folder's inner folders, and the parent folder of the current
    * folder (because it's already in that one)
    */

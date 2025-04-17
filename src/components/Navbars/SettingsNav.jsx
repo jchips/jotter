@@ -48,7 +48,12 @@ const SettingsNav = () => {
           direction={'row'}
           spacing={6}
         >
-          <Button fontSize={'sm'} fontWeight={400} onClick={logUserOut}>
+          <Button
+            className='button2 logout-btn'
+            fontSize={'sm'}
+            fontWeight={400}
+            onClick={logUserOut}
+          >
             Log out
           </Button>
         </Stack>

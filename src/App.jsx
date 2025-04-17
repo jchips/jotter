@@ -45,7 +45,7 @@ function App() {
             />
             <Route
               exact
-              path='/preview/:noteId'
+              path='/view/:noteId'
               element={
                 <PrivateRoute>
                   <View />

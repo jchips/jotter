@@ -16,7 +16,7 @@ const ExitNote = ({ openExit, setOpenExit, noteId }) => {
 
   // navigate to preview page
   const onSubmit = () => {
-    navigate(`/preview/${noteId}`);
+    navigate(`/view/${noteId}`);
   };
 
   return (
