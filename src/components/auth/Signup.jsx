@@ -166,7 +166,7 @@ const Signup = () => {
                         type='password'
                         value={value}
                         onChange={onChange}
-                        placeholder='Re-enter Password'
+                        placeholder='Re-enter password'
                       />
                     </InputGroup>
                   )}

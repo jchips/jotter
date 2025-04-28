@@ -48,7 +48,7 @@ const apiService = {
   getConfigs: () => api.get('/config'),
   updateConfigs: (body) => api.patch('/config', body),
   updateUser: (body, userId) => api.patch(`/update/${userId}`, body),
-  deleteUser: (userId) => api.delete(`/delete/${userId}`),
+  deleteUser: (body, userId) => api.post(`/deleteuser/${userId}`, body),
 }
 
 export default apiService;

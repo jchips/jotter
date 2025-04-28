@@ -3,6 +3,11 @@
 @use '../../assets/sass/mixins';
 @use '../../assets/sass/theme';
 
+.navbar,
+.settings-navbar {
+  border-bottom: 1px solid theme.$markdownBorderColor;
+}
+
 .title-bar {
   color: colors.$themePurple;
 }
