@@ -78,7 +78,7 @@ const Dashboard = () => {
         (e.altKey && e.code === 'KeyH')
       ) {
         e.preventDefault();
-        navigate(`/folder/${null}`);
+        navigate(`/`);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
