@@ -65,9 +65,7 @@ const View = () => {
 
   // Navigates one page back
   const handleExit = useCallback(() => {
-    note.folderId
-      ? navigate(`/folder/${note.folderId}`)
-      : navigate(`/folder/${null}`);
+    note.folderId ? navigate(`/folder/${note.folderId}`) : navigate('/');
     setMarkdown('');
   }, [navigate, setMarkdown, note]);
 
