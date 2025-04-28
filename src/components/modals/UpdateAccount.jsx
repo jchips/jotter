@@ -51,7 +51,7 @@ const UpdateAccount = (props) => {
       setError('');
       if (formData.newPassword !== formData.confirmPassword) {
         setSaving(false);
-        return setError('New passwords do not match');
+        return setError('New password does not match');
       }
       let updates = {};
       if (formData.email.trim() !== user?.email) {
