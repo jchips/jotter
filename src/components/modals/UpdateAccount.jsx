@@ -2,10 +2,6 @@ import { useState } from 'react';
 import { LuLock, LuMail } from 'react-icons/lu';
 import { useForm, Controller } from 'react-hook-form';
 import { Input, Stack } from '@chakra-ui/react';
-import { Field } from '@/components/ui/field';
-import { InputGroup } from '@/components/ui/input-group';
-import { PasswordInput } from '@/components/ui/password-input';
-import { Button } from '@/components/ui/button';
 import {
   DialogRoot,
   DialogActionTrigger,
@@ -16,6 +12,10 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { Field } from '@/components/ui/field';
+import { InputGroup } from '@/components/ui/input-group';
+import { PasswordInput } from '@/components/ui/password-input';
+import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
 import { setToken } from '@/util/authUtil';
 import api from '@/util/api';
@@ -145,7 +145,7 @@ const UpdateAccount = (props) => {
                           type='password'
                           value={value}
                           onChange={onChange}
-                          placeholder='Current Password'
+                          placeholder='Current password'
                         />
                       </InputGroup>
                     )}
@@ -168,7 +168,7 @@ const UpdateAccount = (props) => {
                           type='new-password'
                           value={value}
                           onChange={onChange}
-                          placeholder='New Password'
+                          placeholder='New password'
                         />
                       </InputGroup>
                     )}
@@ -191,7 +191,7 @@ const UpdateAccount = (props) => {
                           type='password'
                           value={value}
                           onChange={onChange}
-                          placeholder='Re-enter New Password'
+                          placeholder='Repeat new password'
                         />
                       </InputGroup>
                     )}
