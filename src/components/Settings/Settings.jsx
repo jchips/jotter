@@ -7,6 +7,7 @@ import { setConfigs } from '@/reducers';
 import { useAuth } from '@/hooks/useAuth';
 import { getLocalConfigs, setLocalConfigs } from '@/util/configUtil';
 import api from '@/util/api';
+import UpdateAccount from '../modals/UpdateAccount';
 import DeleteAccount from '../modals/DeleteAccount';
 import SettingsNav from '../Navbars/SettingsNav';
 import ExportAllButton from './ExportAllButton';
@@ -24,6 +25,7 @@ const Settings = () => {
   const [highlightActiveLine, setHighlightActiveLine] = useState(
     configs?.highlightActiveLine || localConfigs?.highlightActiveLine
   );
+  const [openUpdateAcct, setOpenUpdateAcct] = useState(false);
   const [openDeleteAcct, setOpenDeleteAcct] = useState(false);
   const { user, logout } = useAuth();
   const dispatch = useDispatch();
@@ -87,7 +89,7 @@ const Settings = () => {
   };
 
   return (
-    <div>
+    <div className='settings__container'>
       <SettingsNav />
       {error ? <ErrAlert error={error} m={20} /> : null}
       <Text
@@ -151,6 +153,14 @@ const Settings = () => {
       <Stack align={'center'}>
         <Card.Root size='md' className='settings-card'>
           <Card.Body className='settings-card__body'>
+            <Text>Update account info</Text>
+            <Button className='button1' onClick={() => setOpenUpdateAcct(true)}>
+              Update login
+            </Button>
+          </Card.Body>
+        </Card.Root>
+        <Card.Root size='md' className='settings-card'>
+          <Card.Body className='settings-card__body'>
             <Text>Permanently delete account</Text>
             <Button className='button2' onClick={() => setOpenDeleteAcct(true)}>
               Delete account
@@ -158,6 +168,11 @@ const Settings = () => {
           </Card.Body>
         </Card.Root>
       </Stack>
+      <UpdateAccount
+        openUpdateAcct={openUpdateAcct}
+        setOpenUpdateAcct={setOpenUpdateAcct}
+        user={user}
+      />
       <DeleteAccount
         openDeleteAcct={openDeleteAcct}
         setOpenDeleteAcct={setOpenDeleteAcct}

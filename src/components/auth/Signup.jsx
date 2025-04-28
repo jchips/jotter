@@ -140,6 +140,7 @@ const Signup = () => {
                   render={({ field: { onChange, value } }) => (
                     <InputGroup flex='1' startElement={<LuLock />}>
                       <PasswordInput
+                        type='password'
                         value={value}
                         onChange={onChange}
                         placeholder='Password'
@@ -162,6 +163,7 @@ const Signup = () => {
                   render={({ field: { onChange, value } }) => (
                     <InputGroup flex='1' startElement={<LuLock />}>
                       <PasswordInput
+                        type='password'
                         value={value}
                         onChange={onChange}
                         placeholder='Re-enter Password'

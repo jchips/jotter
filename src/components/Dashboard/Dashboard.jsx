@@ -42,7 +42,7 @@ const Dashboard = () => {
     const fetchContent = async () => {
       setLoading(true);
       setMarkdown('');
-      let folder_id = folderId === undefined ? null : folderId;
+      let folder_id = folderId === undefined ? 'null' : folderId;
       try {
         setError('');
         const [foldersRes, notesRes] = await Promise.all([
