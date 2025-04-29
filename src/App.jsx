@@ -8,7 +8,6 @@ import Signup from './components/auth/Signup';
 import Editor from './components/Note/Editor';
 import View from './components/Note/View';
 import Settings from './components/Settings/Settings';
-import './assets/sass/App.scss';
 
 function App() {
   return (
