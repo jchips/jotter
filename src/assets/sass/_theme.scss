@@ -1,13 +1,15 @@
 @use 'sass:color';
-@use './colors';
+@use 'colors';
 
-$lightThemeBg: #ffffff;
-$darkThemeBg: #242424;
+$lightThemeBg: colors.$lightBg;
+$darkThemeBg: colors.$darkBg;
+$darkSectionBg: colors.$darkSectionBg;
 $lightThemeHover: color.adjust($lightThemeBg, $lightness: -10%);
-$darkThemeHover: color.adjust($darkThemeBg, $lightness: -10%);
+$darkThemeHover: color.adjust($darkSectionBg, $lightness: -10%);
 
-$backgroundColor: var(--editor-background-color);
-$textColor: var(--editor-text-color);
+$backgroundColor: var(--background-color);
+$sectionBg: var(--section-background-color);
+$textColor: var(--text-color);
 $backgroundHover: var(--background-hover);
 $borderColor: var(--border);
 $hr: var(--hr);
@@ -16,22 +18,24 @@ $dropShadow: var(--icon-drop-shadow);
 
 @media (prefers-color-scheme: light) {
   :root {
-    --editor-background-color: #{$lightThemeBg};
-    --editor-text-color: #213547;
+    --background-color: #{$lightThemeBg};
+    --section-background-color: #{$lightThemeBg};
+    --text-color: #{colors.$darkText};
     --background-hover: #{$lightThemeHover};
-    --border: #e4e4e7;
-    --hr: #e4e4e7;
-    --markdown-border: #e4e4e7;
+    --border: #{colors.$lightBorder};
+    --hr: #{colors.$lightBorder};
+    --markdown-border: #{colors.$lightBorder};
     --icon-drop-shadow: drop-shadow(0 0 2em #646cffaa);
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --editor-background-color: #{$darkThemeBg};
-    --editor-text-color: rgba(255, 255, 255, 0.87);
+    --background-color: #{$darkThemeBg};
+    --section-background-color: #{$darkSectionBg};
+    --text-color: #{colors.$lightText};
     --background-hover: #{$darkThemeHover};
-    --border: #27272a;
+    --border: #{colors.$darkBorder};
     --hr: #3f3f46;
     --markdown-border: #84848424;
     --icon-drop-shadow: drop-shadow(0 0);

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Box, Flex, Text, Button, Stack, Editable } from '@chakra-ui/react';
+import { Flex, Text, Button, Stack, Editable } from '@chakra-ui/react';
 import { LuChevronLeft, LuSettings } from 'react-icons/lu';
 import useWindowDimensions from '@/hooks/useWindowDimensions';
 import CreateNew from './Create/CreateNew';
@@ -101,13 +101,7 @@ const Navbar = (props) => {
   };
 
   return (
-    <Flex
-      className='navbar'
-      minH={'60px'}
-      py={{ base: 2 }}
-      px={{ base: 4 }}
-      align={'center'}
-    >
+    <Flex className='navbar' minH={'60px'} py={{ base: 2 }} align={'center'}>
       <Flex
         className='folder-nav'
         flex={{ base: 1 }}

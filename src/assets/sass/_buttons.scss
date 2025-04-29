@@ -16,17 +16,17 @@
 
 // theme purple
 .button1 {
-  @include buttonColors(colors.$themeWhite, colors.$themePurple, $static: true);
+  @include buttonColors(colors.$lightBg, colors.$themePurple, $static: true);
 }
 
-// theme light or dark
+// dark button
 .button2 {
-  @include buttonColors(theme.$backgroundColor, theme.$textColor, $static: false);
+  @include buttonColors(theme.$lightThemeBg, colors.$darkBgSecondary, $static: false);
 }
 
 // delete
 .button4 {
-  @include buttonColors(colors.$themeWhite, #dc3545, $static: true);
+  @include buttonColors(colors.$lightBg, #dc3545, $static: true);
 }
 
 // button outline

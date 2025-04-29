@@ -23,7 +23,7 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 ## Creator & developer: Jelani R
 
-## Version: 1.2.4
+## Version: 1.2.5
 
 ## Architecture
 
@@ -33,6 +33,7 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 ## Changelog
 
+- **1.2.5** (2025-04-28, 8:00pm) - Improved colors in dark mode.
 - **1.2.4** (2025-04-27, 8:50pm) - Users can change their account email and/or password.
 - **1.2.3** (2025-04-16, 4:50pm) - Switched up key press options so none conflicts with editing commands, users can permanently delete their accounts in settings, improved ui, bug fix.
 - **1.2.2** (2025-04-13, 11:00pm) - Improved viewing of markdown elements in dark mode.
@@ -65,7 +66,7 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 - [rehype-raw](https://www.npmjs.com/package/rehype-raw)
 - [React Hook Form](https://react-hook-form.com/)
 - [React Icons](https://react-icons.github.io/react-icons/)
-- [Chakra](https://www.chakra-ui.com/docs/get-started/installation)
+- [Chakra UI](https://www.chakra-ui.com/docs/get-started/installation)
 - [Chakra templates](https://chakra-templates.vercel.app/navigation/navbar)
 - [Table styling](https://dev.to/letsbsocial1/how-to-add-tables-to-react-markdown-21lc)
 - [Lodash](https://lodash.com/)
