@@ -31,6 +31,50 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 - Languages used: JavaScript, SASS.
 - Backend uses MySQL, Sequelize, Nodejs, Express, Bcrypt, Base-64, Jsonwebtoken.
 
+## Included Markdown features
+
+- Headers
+- Paragraphs
+- Bold, Italics, Strikethrough
+- Ordered and unordered lists
+- Checkboxes
+- Links
+- Dividers
+- Blockquotes
+- Inline code
+- Code blocks
+- Tables
+- Images
+- HTML tags (not supported on mobile)
+
+## Keypress options
+
+### Dashboard / Home page
+
+- **ctrl/cmd-h or alt-h:** navigate to root folder
+
+### View Note
+
+- **ctrl/cmd-x or ctrl/cmd-e or alt-q:** exit note
+- **ctrl/cmd-o or alt-o:** edit note
+
+### Note Editor
+
+- **ctrl/cmd-s:** save new changes
+- **ctrl/cmd-e:** save and exit note
+- **alt-q:** exit editor without saving
+- All common text editing commands suchs as ctrl/cmd-c for copy, ctrl/cmd-v for paste, and so on.
+
+## Screenshots
+
+![Jotter note](https://iili.io/3waJBJn.jpg)
+![Jotter basic markdown](https://iili.io/3waJ9Dv.jpg)
+![Jotter editor dark](https://iili.io/3waJ2iN.jpg)
+![Jotter dashboard](https://iili.io/3waHyOJ.jpg)
+![Jotter breadcrumbs](https://iili.io/3waJJxR.jpg)
+![Jotter login](https://iili.io/3waJKlt.jpg)
+![Jotter settings](https://iili.io/3waJCRs.jpg)
+
 ## Changelog
 
 - **1.2.5** (2025-04-28, 8:00pm) - Improved colors in dark mode.
