@@ -185,7 +185,7 @@ const Editor = () => {
           Save and exit
         </Button>
         {!configs?.hideWordCount && <Text>{words} words</Text>}
-        <Box>
+        <Box style={{ display: 'flex' }}>
           <Button
             className='button1'
             variant='solid'

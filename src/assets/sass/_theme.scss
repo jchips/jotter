@@ -14,6 +14,7 @@ $backgroundHover: var(--background-hover);
 $borderColor: var(--border);
 $hr: var(--hr);
 $markdownBorderColor: var(--markdown-border);
+$authBtnBg: var(--auth-btn);
 $dropShadow: var(--icon-drop-shadow);
 
 @media (prefers-color-scheme: light) {
@@ -25,6 +26,7 @@ $dropShadow: var(--icon-drop-shadow);
     --border: #{colors.$lightBorder};
     --hr: #{colors.$lightBorder};
     --markdown-border: #{colors.$lightBorder};
+    --auth-btn: #{colors.$darkBgSecondary};
     --icon-drop-shadow: drop-shadow(0 0 2em #646cffaa);
   }
 }
@@ -38,6 +40,7 @@ $dropShadow: var(--icon-drop-shadow);
     --border: #{colors.$darkBorder};
     --hr: #3f3f46;
     --markdown-border: #84848424;
+    --auth-btn: #{colors.$themePurple};
     --icon-drop-shadow: drop-shadow(0 0);
   }
 }
