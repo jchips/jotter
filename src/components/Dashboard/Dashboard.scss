@@ -1,3 +1,5 @@
+@use '../../assets/sass/theme';
+
 .dashboard {
   margin: 0 20px 20px 20px;
 
@@ -13,6 +15,8 @@
 
   .note-card,
   .folder-card {
+    background-color: theme.$sectionBg;
+
     &:hover {
       filter: brightness(75%);
     }

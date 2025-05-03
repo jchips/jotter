@@ -19,9 +19,16 @@
   @include buttonColors(colors.$lightBg, colors.$themePurple, $static: true);
 }
 
-// dark button
+// dark button (logout btn)
 .button2 {
   @include buttonColors(theme.$lightThemeBg, colors.$darkBgSecondary, $static: false);
+  border-width: 1px;
+  border-color: rgba($color: colors.$themePurple, $alpha: 0.4);
+}
+
+// purple / dark (auth btn)
+.button3 {
+  @include buttonColors(colors.$lightBg, theme.$authBtnBg, $static: false);
 }
 
 // delete

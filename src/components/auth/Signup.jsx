@@ -174,7 +174,7 @@ const Signup = () => {
               </Field>
               <Button
                 type='submit'
-                className='auth-btn'
+                className='auth-btn button3'
                 colorPalette={'gray'}
                 variant='solid'
                 disabled={loading}
