@@ -21,9 +21,11 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 [View the Android version here!](https://github.com/jchips/jotter-rn)
 
+[View the Jotter backend code here!](https://github.com/jchips/jotter-api)
+
 ## Creator & developer: Jelani R
 
-## Version: 1.2.5
+## Version: 1.2.4
 
 ## Architecture
 
@@ -77,11 +79,10 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 ## Changelog
 
-- **1.2.5** (2025-04-28, 8:00pm) - Improved colors in dark mode.
-- **1.2.4** (2025-04-27, 8:50pm) - Users can change their account email and/or password.
-- **1.2.3** (2025-04-16, 4:50pm) - Switched up key press options so none conflicts with editing commands, users can permanently delete their accounts in settings, improved ui, bug fix.
-- **1.2.2** (2025-04-13, 11:00pm) - Improved viewing of markdown elements in dark mode.
-- **1.2.1** (2025-04-12, 4:05pm) - Improved mobile viewing.
+- **1.2.4** (2025-04-28, 8:00pm) - Improved colors in dark mode.
+- **1.2.3** (2025-04-27, 8:50pm) - Users can change their account email and/or password.
+- **1.2.2** (2025-04-16, 4:50pm) - Switched up key press options so none conflicts with editing commands, users can permanently delete their accounts in settings, improved ui, bug fix.
+- **1.2.1** (2025-04-12, 4:05pm) - Improved mobile web viewing.
 - **1.2.0** (2025-04-04, 9:05pm) - Added settings page, added more key press controls.
 - **1.1.4** (2025-02-02, 5:30pm) - Improved error handling.
 - **1.1.3** (2025-01-21, 3:47am) - Sort is no longer temporary.

@@ -20,7 +20,7 @@ import OptionsBtn from './Options/OptionsBtn';
 import formatDate from '@/util/formatDate';
 import './Navbar.scss';
 
-const TitleBar = ({ note, setIsOpen, setDeleteOpen, setMoveOpen, words }) => {
+const ViewNav = ({ note, setIsOpen, setDeleteOpen, setMoveOpen, words }) => {
   const [openPopver, setOpenPopover] = useState(false);
   const { width } = useWindowDimensions();
 
@@ -102,4 +102,4 @@ const TitleBar = ({ note, setIsOpen, setDeleteOpen, setMoveOpen, words }) => {
   );
 };
 
-export default TitleBar;
+export default ViewNav;
