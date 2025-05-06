@@ -1,16 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { LuDownload, LuUpload, LuPenLine } from 'react-icons/lu';
-import { Button, HStack } from '@chakra-ui/react';
 import { useAuth } from '@/hooks/useAuth';
 import { useMarkdown } from '@/hooks/useMarkdown';
-import useWindowDimensions from '@/hooks/useWindowDimensions';
 import getWordCount from '@/util/getWordCount';
 import api from '@/util/api';
 import Preview from './Preview';
 import Loading from '../Loading';
 import Error404 from '../404';
-import TitleBar from '../Navbars/TitleBar';
+import ViewNav from '../Navbars/ViewNav';
+import ViewFooter from '../Navbars/ViewFooter';
 import ImportNote from '../modals/ImportNote';
 import ChangeTitle from '../modals/ChangeTitle';
 import MoveModal from '../modals/MoveModal';
@@ -32,7 +30,6 @@ const View = () => {
   const { logout } = useAuth();
   const { noteId } = useParams();
   const navigate = useNavigate();
-  const { width } = useWindowDimensions();
 
   // fetches the note
   useEffect(() => {
@@ -142,7 +139,7 @@ const View = () => {
   return (
     !loading && (
       <div className='view'>
-        <TitleBar
+        <ViewNav
           note={note}
           setIsOpen={setIsOpen}
           setDeleteOpen={setDeleteOpen}
@@ -153,39 +150,12 @@ const View = () => {
         <div className='preview__wrapper'>
           <Preview markdown={markdown} />
         </div>
-        <HStack className='footer'>
-          <HStack>
-            <Button className='button2' variant='solid' onClick={handleExit}>
-              Exit note
-            </Button>
-            <Button
-              className='button5 ex-im-btn'
-              onClick={() => setImportOpen(true)}
-              title='Import note'
-              aria-label='Import'
-            >
-              <LuUpload />
-              {width > 768 ? 'Import' : null}
-            </Button>
-            <Button
-              className='button5 ex-im-btn'
-              onClick={exportNote}
-              title='Export note'
-              aria-label='Export'
-            >
-              <LuDownload />
-              {width > 768 ? 'Export' : null}
-            </Button>
-          </HStack>
-          <Button
-            className='button1'
-            variant='solid'
-            onClick={handleEdit}
-            aria-label='Edit note'
-          >
-            {width > 350 ? 'Edit note' : <LuPenLine />}
-          </Button>
-        </HStack>
+        <ViewFooter
+          handleEdit={handleEdit}
+          handleExit={handleExit}
+          setImportOpen={setImportOpen}
+          exportNote={exportNote}
+        />
         <ChangeTitle
           note={note}
           setNote={setNote}
