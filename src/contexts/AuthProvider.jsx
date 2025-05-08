@@ -37,7 +37,7 @@ export function AuthProvider({ children }) {
 
   /**
    * Logs user in
-   * Add token to localStorage
+   * Add token to sessionStorage
    * Creates a cookie to preserve user info until token expires
    * Sets/stores the user's configurations
    * @param {String} email - User email
