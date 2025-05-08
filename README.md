@@ -69,13 +69,24 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 ## Screenshots
 
-![Jotter note](https://iili.io/3waJBJn.jpg)
-![Jotter basic markdown](https://iili.io/3waJ9Dv.jpg)
+### Light theme
+
+![Jotter note light](https://iili.io/3waJBJn.jpg)
+![Jotter basic markdown light](https://iili.io/3waJ9Dv.jpg)
+![Jotter editor light](https://iili.io/3waJFfI.jpg)
+![Jotter dashboard light](https://iili.io/3waHyOJ.jpg)
+![Jotter folder light](https://iili.io/3e1A5Ou.jpg)
+![Jotter login light](https://iili.io/3e1A7Db.jpg)
+![Jotter settings light](https://iili.io/3e1AcWx.jpg)
+
+### Dark theme
+
+![Jotter note dark](https://iili.io/3waJfUX.jpg)
 ![Jotter editor dark](https://iili.io/3waJ2iN.jpg)
-![Jotter dashboard](https://iili.io/3waHyOJ.jpg)
-![Jotter breadcrumbs](https://iili.io/3waJJxR.jpg)
-![Jotter login](https://iili.io/3waJKlt.jpg)
-![Jotter settings](https://iili.io/3waJCRs.jpg)
+![Jotter dashboard dark](https://iili.io/3e1ATU7.jpg)
+![Jotter folder dark](https://iili.io/3e1AAJ9.jpg)
+![Jotter login dark](https://iili.io/3e1ARRe.jpg)
+![Jotter settings dark](https://iili.io/3e1Aaxj.jpg)
 
 ## Changelog
 
