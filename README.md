@@ -25,7 +25,7 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 ## Creator & developer: Jelani R
 
-## Version: 1.2.4
+## Version: 1.2.5
 
 ## Architecture
 
@@ -53,12 +53,12 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 ### Dashboard / Home page
 
-- **ctrl/cmd-h or alt-h:** navigate to root folder
+- **ctrl/cmd-h** or **alt-h:** navigate to root folder
 
 ### View Note
 
-- **ctrl/cmd-x or ctrl/cmd-e or alt-q:** exit note
-- **ctrl/cmd-o or alt-o:** edit note
+- **ctrl/cmd-x** or **ctrl/cmd-e or alt-q:** exit note
+- **ctrl/cmd-o** or **alt-o:** edit note
 
 ### Note Editor
 
@@ -79,6 +79,7 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 ## Changelog
 
+- **1.2.5** (2025-05-07, 9:30pm) - Two users can be logged in concurrently, in two seperate tabs.
 - **1.2.4** (2025-04-28, 8:00pm) - Improved colors in dark mode.
 - **1.2.3** (2025-04-27, 8:50pm) - Users can change their account email and/or password.
 - **1.2.2** (2025-04-16, 4:50pm) - Switched up key press options so none conflicts with editing commands, users can permanently delete their accounts in settings, improved ui, bug fix.
