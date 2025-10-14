@@ -11,15 +11,17 @@ import UpdateAccount from '../modals/UpdateAccount'
 import DeleteAccount from '../modals/DeleteAccount'
 import SettingsNav from '../Navbars/SettingsNav'
 import ExportAllButton from './ExportAllButton'
+import ImportAllButton from './ImportAllButton'
+import Loading from '../Loading'
 import ToggleCard from './ToggleCard'
 import ErrAlert from '../ErrAlert'
 import './Settings.scss'
-import ImportAllButton from './ImportAllButton'
 
 const Settings = () => {
   const configs = useSelector((state) => state.configs.value)
   const localConfigs = getLocalConfigs()
   const [error, setError] = useState('')
+  const [importing, setImporting] = useState(false)
   const [hideWordCount, setHideWordCount] = useState(
     configs?.hideWordCount || localConfigs?.hideWordCount
   )
@@ -89,6 +91,10 @@ const Settings = () => {
     }
   }
 
+  if (importing) {
+    return <Loading />
+  }
+
   return (
     <div className='settings__container'>
       <SettingsNav />
@@ -137,7 +143,7 @@ const Settings = () => {
         <Card.Root size='md' className='settings-card'>
           <Card.Body className='settings-card__body'>
             <Text>Import (zip file)</Text>
-            <ImportAllButton setError={setError} />
+            <ImportAllButton setError={setError} setImporting={setImporting} />
           </Card.Body>
         </Card.Root>
         <Card.Root size='md' className='settings-card'>
