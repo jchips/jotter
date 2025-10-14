@@ -2,10 +2,8 @@ import React, { useState } from 'react'
 import JSZip from 'jszip'
 import api from '@/util/api'
 import { useAuth } from '@/hooks/useAuth'
-import Loading from '../Loading'
 
-const ImportAllButton = ({ setError }) => {
-  const [importing, setImporting] = useState(false)
+const ImportAllButton = ({ setError, setImporting }) => {
   const { user } = useAuth()
 
   const handleImport = async (e) => {
@@ -81,18 +79,12 @@ const ImportAllButton = ({ setError }) => {
           })
         }
       }
-
-      alert('Import successful!')
     } catch (err) {
       console.error('Failed to import:', err)
       setError('Import failed')
     } finally {
       setImporting(false)
     }
-  }
-
-  if (importing) {
-    return <Loading />
   }
 
   return (
