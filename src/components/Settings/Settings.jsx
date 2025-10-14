@@ -1,35 +1,36 @@
-'use client';
+'use client'
 
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Text, Stack, Card, Button } from '@chakra-ui/react';
-import { setConfigs } from '@/reducers';
-import { useAuth } from '@/hooks/useAuth';
-import { getLocalConfigs, setLocalConfigs } from '@/util/configUtil';
-import api from '@/util/api';
-import UpdateAccount from '../modals/UpdateAccount';
-import DeleteAccount from '../modals/DeleteAccount';
-import SettingsNav from '../Navbars/SettingsNav';
-import ExportAllButton from './ExportAllButton';
-import ToggleCard from './ToggleCard';
-import ErrAlert from '../ErrAlert';
-import './Settings.scss';
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Text, Stack, Card, Button } from '@chakra-ui/react'
+import { setConfigs } from '@/reducers'
+import { useAuth } from '@/hooks/useAuth'
+import { getLocalConfigs, setLocalConfigs } from '@/util/configUtil'
+import api from '@/util/api'
+import UpdateAccount from '../modals/UpdateAccount'
+import DeleteAccount from '../modals/DeleteAccount'
+import SettingsNav from '../Navbars/SettingsNav'
+import ExportAllButton from './ExportAllButton'
+import ToggleCard from './ToggleCard'
+import ErrAlert from '../ErrAlert'
+import './Settings.scss'
+import ImportAllButton from './ImportAllButton'
 
 const Settings = () => {
-  const configs = useSelector((state) => state.configs.value);
-  const localConfigs = getLocalConfigs();
-  const [error, setError] = useState('');
+  const configs = useSelector((state) => state.configs.value)
+  const localConfigs = getLocalConfigs()
+  const [error, setError] = useState('')
   const [hideWordCount, setHideWordCount] = useState(
     configs?.hideWordCount || localConfigs?.hideWordCount
-  );
+  )
   const [highlightActiveLine, setHighlightActiveLine] = useState(
     configs?.highlightActiveLine || localConfigs?.highlightActiveLine
-  );
-  const [openUpdateAcct, setOpenUpdateAcct] = useState(false);
-  const [openDeleteAcct, setOpenDeleteAcct] = useState(false);
-  const { user, logout } = useAuth();
-  const dispatch = useDispatch();
-  const themeText = '#646cff';
+  )
+  const [openUpdateAcct, setOpenUpdateAcct] = useState(false)
+  const [openDeleteAcct, setOpenDeleteAcct] = useState(false)
+  const { user, logout } = useAuth()
+  const dispatch = useDispatch()
+  const themeText = '#646cff'
   const toggleOptions = [
     {
       settingState: hideWordCount,
@@ -41,18 +42,18 @@ const Settings = () => {
       settingOption: 'toggleHighLightActiveLine',
       settingText: 'Highlight active line',
     },
-  ];
+  ]
 
   useEffect(() => {
     const fetchConfigs = async () => {
-      let uConfigs = await api.getConfigs();
-      setHideWordCount(uConfigs.data?.hideWordCount);
-      setHighlightActiveLine(uConfigs.data?.highlightActiveLine);
-      dispatch(setConfigs(uConfigs.data));
-      setLocalConfigs(uConfigs.data);
-    };
-    fetchConfigs();
-  }, [dispatch]);
+      let uConfigs = await api.getConfigs()
+      setHideWordCount(uConfigs.data?.hideWordCount)
+      setHighlightActiveLine(uConfigs.data?.highlightActiveLine)
+      dispatch(setConfigs(uConfigs.data))
+      setLocalConfigs(uConfigs.data)
+    }
+    fetchConfigs()
+  }, [dispatch])
 
   /**
    * Adds the new config changes to the database
@@ -60,14 +61,14 @@ const Settings = () => {
    */
   const dbUpdate = async (updates) => {
     try {
-      setError('');
-      let res = await api.updateConfigs(updates);
-      dispatch(setConfigs({ ...res.data, ...updates }));
+      setError('')
+      let res = await api.updateConfigs(updates)
+      dispatch(setConfigs({ ...res.data, ...updates }))
     } catch (err) {
-      setError('Failed to update settings');
-      console.error('Failed to update user configs -', err);
+      setError('Failed to update settings')
+      console.error('Failed to update user configs -', err)
     }
-  };
+  }
 
   /**
    * Updates the configs based on user changes
@@ -78,15 +79,15 @@ const Settings = () => {
   const updateSettings = (setting, settingState) => {
     switch (setting) {
       case 'toggleWordCount': {
-        setHideWordCount(settingState);
-        return dbUpdate({ hideWordCount: settingState });
+        setHideWordCount(settingState)
+        return dbUpdate({ hideWordCount: settingState })
       }
       case 'toggleHighLightActiveLine': {
-        setHighlightActiveLine(settingState);
-        return dbUpdate({ highlightActiveLine: settingState });
+        setHighlightActiveLine(settingState)
+        return dbUpdate({ highlightActiveLine: settingState })
       }
     }
-  };
+  }
 
   return (
     <div className='settings__container'>
@@ -135,6 +136,12 @@ const Settings = () => {
       <Stack align={'center'}>
         <Card.Root size='md' className='settings-card'>
           <Card.Body className='settings-card__body'>
+            <Text>Import (zip file)</Text>
+            <ImportAllButton setError={setError} />
+          </Card.Body>
+        </Card.Root>
+        <Card.Root size='md' className='settings-card'>
+          <Card.Body className='settings-card__body'>
             <Text>Export all notes and folders</Text>
             <ExportAllButton setError={setError} />
           </Card.Body>
@@ -180,7 +187,7 @@ const Settings = () => {
         logout={logout}
       />
     </div>
-  );
-};
+  )
+}
 
-export default Settings;
+export default Settings
