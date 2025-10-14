@@ -4,17 +4,6 @@
 
 Tired of searching for the perfect tool to easily organize your thoughts and ideas? Say hello to **Jotter**, the intuitive note-taking web app that combines the simplicity of Markdown with the power of organization.
 
-**Why Choose Jotter?**
-
-- **Stay Organized Your Way**: Create folders to neatly categorize your notes. Move notes and folders effortlessly to stay on top of your workflow.
-- **Markdown Made Easy**: Use Markdown to format your notes quickly and beautifully, whether it’s for lists, headings, code snippets, and more.
-- **Personalized Accounts**: Sign up and securely log in on browser or mobile device to access your notes anywhere, anytime.
-- **Seamless Note Management**: Create, save, edit, and delete notes and folders with ease.
-- **Adaptive Themes**: Whether your device is set to light or dark mode, **Jotter** adapts to your preferences, keeping your note-taking experience easy on the eyes.
-- **A Minimalist Design**: No clutter, no distractions—just you and your thoughts, perfectly synced.
-
-Whether you're a student, professional, or creative thinker, **Jotter** empowers you to take control of your notes and ideas with precision and style.
-
 Try **Jotter** today and elevate your note-taking game!
 
 TLDR: Jotter is a web app designed for note-taking with Markdown.
@@ -67,7 +56,7 @@ Note: Importing notes is limited to certain browsers. Works on Google Chrome.
 - **ctrl/cmd-s:** save new changes
 - **ctrl/cmd-e:** save and exit note
 - **alt-q:** exit editor without saving
-- All common text editing commands suchs as ctrl/cmd-c for copy, ctrl/cmd-v for paste, and so on.
+- All common text editing commands such as ctrl/cmd-c for copy, ctrl/cmd-v for paste, and so on.
 
 ## Screenshots
 
