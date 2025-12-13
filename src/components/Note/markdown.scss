@@ -104,14 +104,26 @@
   th,
   thead,
   tr {
-    border-color: theme.$markdownBorderColor !important;
-    border-style: solid !important;
-    border-width: 2px !important;
     padding: 0.7rem;
   }
 
   thead {
     font-weight: 700;
+    border-width: 2px 2px 0px 2px;
+  }
+
+  tr {
+    border-color: theme.$markdownBorderColor !important;
+    border-style: solid !important;
+    border-bottom-width: 2px !important;
+  }
+
+  td {
+    border-left-width: 2px;
+  }
+
+  tbody {
+    border-right-width: 2px;
   }
 
   hr {
@@ -121,8 +133,6 @@
 
   blockquote {
     font-style: italic;
-    // background-color: #1f1f23;
-    // border-color: colors.$themePurpleText;
     color: #6a737d;
     padding-left: 1em;
     border-left: 3px solid #dfe2e5;

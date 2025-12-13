@@ -14,7 +14,7 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 
 ## Creator & developer: Jelani R
 
-## Version: 1.3.0
+## Version: 1.3.1
 
 ## Architecture
 
@@ -81,6 +81,7 @@ Note: Importing notes is limited to certain browsers. Works on Google Chrome.
 
 ## Changelog
 
+- **1.3.1** (2025-12-12, 9:20pm) - Improved dark mode colors in editor.
 - **1.3.0** (2025-10-13, 8:40pm) - Users can import zip files that contain folders and markdown (.md) notes.
 - **1.2.5** (2025-05-07, 9:30pm) - Two users can be logged in concurrently, in two seperate tabs.
 - **1.2.4** (2025-04-28, 8:00pm) - Improved colors in dark mode.
