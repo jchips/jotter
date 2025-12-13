@@ -17,6 +17,7 @@ $markdownBorderColor: var(--markdown-border);
 $authBtnBg: var(--auth-btn);
 $dropShadow: var(--icon-drop-shadow);
 $codeBlockBg: var(--code-block-background-color);
+$selectedTextMardownSymbolsColor: var(--selected-text-markdown-symbol);
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -30,6 +31,7 @@ $codeBlockBg: var(--code-block-background-color);
     --auth-btn: #{colors.$darkBgSecondary};
     --icon-drop-shadow: drop-shadow(0 0 2em #646cffaa);
     --code-block-background-color: rgb(245, 242, 240);
+    --selected-text-markdown-symbol: #404740;
   }
 }
 
@@ -45,5 +47,6 @@ $codeBlockBg: var(--code-block-background-color);
     --auth-btn: #{colors.$themePurple};
     --icon-drop-shadow: drop-shadow(0 0);
     --code-block-background-color: #1f1f23;
+    --selected-text-markdown-symbol: #{colors.$darkBorder};
   }
 }

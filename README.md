@@ -57,6 +57,9 @@ Note: Importing notes is limited to certain browsers. Works on Google Chrome.
 - **ctrl/cmd-e:** save and exit note
 - **alt-q:** exit editor without saving
 - All common text editing commands such as ctrl/cmd-c for copy, ctrl/cmd-v for paste, and so on.
+- **ctrl/cmd-b:** toggle bold text
+- **ctrl/cmd-shift-i:** toggle italic text
+- **ctrl/cmd-shift-x:** toggle strikethrough text
 
 ## Screenshots
 
@@ -81,7 +84,7 @@ Note: Importing notes is limited to certain browsers. Works on Google Chrome.
 
 ## Changelog
 
-- **1.3.1** (2025-12-12, 9:20pm) - Improved dark mode colors in editor.
+- **1.3.1** (2025-12-12, 9:20pm) - Improved dark mode colors in editor, added keybinding for bold/italic/strike text in editor.
 - **1.3.0** (2025-10-13, 8:40pm) - Users can import zip files that contain folders and markdown (.md) notes.
 - **1.2.5** (2025-05-07, 9:30pm) - Two users can be logged in concurrently, in two seperate tabs.
 - **1.2.4** (2025-04-28, 8:00pm) - Improved colors in dark mode.

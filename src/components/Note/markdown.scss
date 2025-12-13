@@ -112,6 +112,10 @@
     border-width: 2px 2px 0px 2px;
   }
 
+  th {
+    border-left-width: 2px;
+  }
+
   tr {
     border-color: theme.$markdownBorderColor !important;
     border-style: solid !important;

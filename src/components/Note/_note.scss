@@ -46,6 +46,12 @@
   color: colors.$themePurpleText; // hr and links in editor
 }
 
+.ͼ4 .cm-activeLine {
+  .ͼ5 {
+    color: theme.$selectedTextMardownSymbolsColor; // symbols like ** and ## (active line only)
+  }
+}
+
 .ͼ4 .cm-line {
   caret-color: theme.$textColor !important;
 }
