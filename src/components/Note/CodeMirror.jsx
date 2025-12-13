@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { markdown as md } from '@codemirror/lang-markdown';
 import { EditorView, placeholder, keymap } from '@codemirror/view';
-import { EditorState } from '@codemirror/state';
+import { EditorState, EditorSelection } from '@codemirror/state';
 import { indentWithTab } from '@codemirror/commands';
 import { basicSetup } from '@uiw/codemirror-extensions-basic-setup';
 
@@ -27,7 +27,7 @@ const CodeMirror = ({ value, onChange, placeholderText, ...rest }) => {
               highlightActiveLine: configs?.highlightActiveLine,
             }),
             md(),
-            keymap.of([indentWithTab]),
+            keymap.of([indentWithTab, { key: 'Mod-b', run: toggleBold() }]),
             placeholder(placeholderText),
             EditorView.lineWrapping,
             EditorView.updateListener.of((update) => {
@@ -55,6 +55,43 @@ const CodeMirror = ({ value, onChange, placeholderText, ...rest }) => {
   }, []);
 
   return <div ref={editorRef} className='editor' />;
+};
+
+// Toggle bold text in markdown
+const toggleBold = () => (view) => {
+  const { state } = view;
+  const changes = state.changeByRange((range) => {
+    const { from, to } = range;
+    console.log('state', state);
+    const selectedText = state.doc.slice(from, to).toString();
+    let boldText = state.doc.slice(from - 2, to + 2).toString();
+
+    // Check if selected text is already bold
+    const isBold = boldText.startsWith('**') && boldText.endsWith('**');
+
+    let newText = '';
+    let insertFrom = from;
+    let insertTo = to;
+
+    if (isBold) {
+      insertFrom = from - 2;
+      newText = boldText.slice(2, -2);
+      insertTo = from - 2 + boldText.length;
+    } else {
+      newText = `**${selectedText || 'bold text'}**`;
+    }
+
+    return {
+      changes: { from: insertFrom, to: insertTo, insert: newText },
+      range: EditorSelection.range(
+        insertFrom + (isBold ? 0 : 2),
+        insertFrom + newText.length - (isBold ? 0 : 2)
+      ),
+    };
+  });
+
+  view.dispatch(changes);
+  return true;
 };
 
 export default CodeMirror;
