@@ -1,4 +1,5 @@
 @use '../../assets/sass/theme';
+@use '../../assets/sass/colors';
 
 .markdown-wrapper {
   padding: 20px;
@@ -120,6 +121,8 @@
 
   blockquote {
     font-style: italic;
+    // background-color: #1f1f23;
+    // border-color: colors.$themePurpleText;
     color: #6a737d;
     padding-left: 1em;
     border-left: 3px solid #dfe2e5;
@@ -129,4 +132,21 @@
   a {
     cursor: pointer;
   }
+
+  /* code block */
+  pre div {
+    background-color: theme.$codeBlockBg !important;
+    border-radius: 0.5rem;
+    // border: 1px solid colors.$themePurple; // border color
+
+    code {
+      color: theme.$textColor !important;
+      text-shadow: theme.$backgroundColor 0px 1px !important;
+
+      .token {
+        background: theme.$codeBlockBg !important; // = sign
+      }
+    }
+  }
+
 }
