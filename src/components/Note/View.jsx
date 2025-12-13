@@ -50,6 +50,8 @@ const View = () => {
             ? logUserOut()
             : setError('Failed to open note');
         }
+      } finally {
+        setLoading(false);
       }
     };
     const logUserOut = () => {
@@ -57,7 +59,6 @@ const View = () => {
       logout();
     };
     getNote();
-    setLoading(false);
   }, [noteId, setMarkdown, logout, navigate]);
 
   // Navigates one page back

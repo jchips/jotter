@@ -1,4 +1,5 @@
 @use '../../assets/sass/theme';
+@use '../../assets/sass/colors';
 
 .markdown-wrapper {
   padding: 20px;
@@ -103,14 +104,30 @@
   th,
   thead,
   tr {
-    border-color: theme.$markdownBorderColor !important;
-    border-style: solid !important;
-    border-width: 2px !important;
     padding: 0.7rem;
   }
 
   thead {
     font-weight: 700;
+    border-width: 2px 2px 0px 2px;
+  }
+
+  th {
+    border-left-width: 2px;
+  }
+
+  tr {
+    border-color: theme.$markdownBorderColor !important;
+    border-style: solid !important;
+    border-bottom-width: 2px !important;
+  }
+
+  td {
+    border-left-width: 2px;
+  }
+
+  tbody {
+    border-right-width: 2px;
   }
 
   hr {
@@ -129,4 +146,21 @@
   a {
     cursor: pointer;
   }
+
+  /* code block */
+  pre div {
+    background-color: theme.$codeBlockBg !important;
+    border-radius: 0.5rem;
+    // border: 1px solid colors.$themePurple; // border color
+
+    code {
+      color: theme.$textColor !important;
+      text-shadow: theme.$backgroundColor 0px 1px !important;
+
+      .token {
+        background: theme.$codeBlockBg !important; // = sign
+      }
+    }
+  }
+
 }

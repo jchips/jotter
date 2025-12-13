@@ -12,8 +12,12 @@
   margin-bottom: 70px;
 }
 
+.ͼ1 .cm-cursor {
+  border-left: none; /// cursor color default: 1.2px solid black;
+}
+
 .ͼ1.cm-focused {
-  outline: none;
+  outline: none; // hide editor outline
 }
 
 // Hide gutters
