@@ -1,0 +1,24 @@
+{
+  "short_name": "Jotter",
+  "name": "Jotter",
+  "icons": [
+    {
+      "src": "./jotter-round.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "./jotter-circle.ico",
+      "type": "image/x-icon",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/imgs/appIcon/jphones-dark.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#3b45ff"
+}
