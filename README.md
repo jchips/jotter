@@ -38,7 +38,7 @@ TLDR: Jotter is a web app designed for note-taking with Markdown.
 - Images
 - HTML tags (not supported on mobile)
 
-Note: Importing notes is limited to certain browsers. Works on Google Chrome.
+Note: Importing notes is limited to certain browsers. Works on Google Chrome and Mozilla Firefox.
 
 ## Keypress options
 

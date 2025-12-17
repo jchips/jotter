@@ -19,7 +19,7 @@ const Preview = ({ markdown }) => {
     return markdown
       .split('\n')
       .map((line, index, lines) => {
-        if (line.trim() === '' && lines[index + 1]?.trim() === '') {
+        if (line?.trim() === '' && lines[index + 1]?.trim() === '') {
           return '<br />';
         }
         return line;
