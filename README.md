@@ -2,7 +2,7 @@
 
 <center><img src='./public/jotter-circle.png' alt='Jotter logo' height='50px' width='50px'/></center>
 
-Tired of searching for the perfect tool to easily organize your thoughts and ideas? Say hello to **Jotter**, the intuitive note-taking web app that combines the simplicity of Markdown with the power of organization.
+Tired of searching for the perfect tool to easily organize your thoughts and ideas? Say hello to **Jotter**, the intuitive note-taking web app that combines the simplicity of Markdown with the power of organization. **All notes are encrypted** with server-side encryption.
 
 Try **Jotter** today and elevate your note-taking game!
 
@@ -66,21 +66,22 @@ Note: Importing notes is limited to certain browsers. Works on Google Chrome and
 ### Light theme
 
 ![Jotter note light](https://iili.io/3waJBJn.jpg)
-![Jotter basic markdown light](https://iili.io/3waJ9Dv.jpg)
 ![Jotter editor light](https://iili.io/3waJFfI.jpg)
-![Jotter dashboard light](https://iili.io/3waHyOJ.jpg)
+![Jotter basic markdown light](https://iili.io/f1KSFhx.jpg)
+![Jotter dashboard light](https://iili.io/f1KSdmb.jpg)
 ![Jotter folder light](https://iili.io/3e1A5Ou.jpg)
-![Jotter login light](https://iili.io/3e1A7Db.jpg)
-![Jotter settings light](https://iili.io/3e1AcWx.jpg)
+![Jotter login light](https://iili.io/f1KSo21.jpg)
+![Jotter settings light](https://iili.io/f1KSAhv.jpg)
 
 ### Dark theme
 
 ![Jotter note dark](https://iili.io/3waJfUX.jpg)
-![Jotter editor dark](https://iili.io/3waJ2iN.jpg)
-![Jotter dashboard dark](https://iili.io/3e1ATU7.jpg)
+![Jotter editor dark](https://iili.io/f1KSBEB.jpg)
+![Jotter basic markdown dark](https://iili.io/f1KS3Ij.jpg)
+![Jotter dashboard dark](https://iili.io/f1KSJku.jpg)
 ![Jotter folder dark](https://iili.io/3e1AAJ9.jpg)
-![Jotter login dark](https://iili.io/3e1ARRe.jpg)
-![Jotter settings dark](https://iili.io/3e1Aaxj.jpg)
+![Jotter login dark](https://iili.io/f1KSqBV.jpg)
+![Jotter settings dark](https://iili.io/f1KSuTJ.jpg)
 
 ## Changelog
 
