@@ -13,7 +13,7 @@
       "sizes": "192x192"
     },
     {
-      "src": "/assets/imgs/appIcon/jphones-dark.png",
+      "src": "./jotter-round.png",
       "type": "image/png",
       "sizes": "512x512"
     }
