@@ -18,6 +18,7 @@ $authBtnBg: var(--auth-btn);
 $dropShadow: var(--icon-drop-shadow);
 $codeBlockBg: var(--code-block-background-color);
 $selectedTextMardownSymbolsColor: var(--selected-text-markdown-symbol);
+$savedIndicatorColor: var(--saved-indicator-color);
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -32,6 +33,7 @@ $selectedTextMardownSymbolsColor: var(--selected-text-markdown-symbol);
     --icon-drop-shadow: drop-shadow(0 0 2em #646cffaa);
     --code-block-background-color: rgb(245, 242, 240);
     --selected-text-markdown-symbol: #404740;
+    --saved-indicator-color: #{colors.$themePurple};
   }
 }
 
@@ -48,5 +50,6 @@ $selectedTextMardownSymbolsColor: var(--selected-text-markdown-symbol);
     --icon-drop-shadow: drop-shadow(0 0);
     --code-block-background-color: #1f1f23;
     --selected-text-markdown-symbol: #{colors.$darkBorder};
+    --saved-indicator-color: #{colors.$themePurpleText};
   }
 }

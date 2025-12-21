@@ -1,7 +1,7 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { useSelector } from 'react-redux';
-import { throttle } from 'lodash';
+import { throttle, debounce } from 'lodash';
 import { Button, HStack, Text, Box } from '@chakra-ui/react';
 import { LuSave, LuSquareX } from 'react-icons/lu';
 import CodeMirror from './CodeMirror';
@@ -21,6 +21,7 @@ const Editor = () => {
   const [note, setNote] = useState();
   const [error, setError] = useState('');
   const [words, setWords] = useState(0);
+  const [saved, setSaved] = useState(true);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [openExit, setOpenExit] = useState(false);
@@ -31,6 +32,16 @@ const Editor = () => {
   const previewRef = useRef(null);
   const { width } = useWindowDimensions();
   const configs = useSelector((state) => state.configs.value);
+
+  // not saved indicator
+  const checkSaved = useMemo(
+    () =>
+      debounce((currentMarkdown, savedNote) => {
+        const isSaved = currentMarkdown === savedNote;
+        setSaved(isSaved);
+      }, 100),
+    []
+  );
 
   // fetch the note
   useEffect(() => {
@@ -56,6 +67,19 @@ const Editor = () => {
     getNote();
     setLoading(false);
   }, [noteId, setMarkdown, logout, navigate]);
+
+  // 'not saved' indicator
+  useEffect(() => {
+    if (!note || !markdown) return;
+    setSaved(markdown === note?.content);
+  }, [note, markdown]);
+
+  useEffect(() => {
+    checkSaved(markdown, note?.content);
+    return () => {
+      checkSaved.cancel();
+    };
+  }, [markdown, note, checkSaved]);
 
   // Syncs the editor and preview scrollbars to each other
   const editorRef = useCallback((node) => {
@@ -185,7 +209,12 @@ const Editor = () => {
           Save and exit
         </Button>
         {!configs?.hideWordCount && <Text>{words} words</Text>}
-        <Box style={{ display: 'flex' }}>
+        <Box style={{ display: 'flex', alignItems: 'center' }}>
+          <div>
+            {!saved ? (
+              <Text className='saved-indicator-text'>not saved</Text> // not saved indicator
+            ) : null}
+          </div>
           <Button
             className='button1'
             variant='solid'
