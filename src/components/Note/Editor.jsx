@@ -14,6 +14,7 @@ import api from '@/util/api';
 import Preview from './Preview';
 import Loading from '../Loading';
 import ErrAlert from '../ErrAlert';
+import NotSavedDot from './NotSavedDot';
 import './Editor.scss';
 import './markdown.scss';
 
@@ -212,8 +213,9 @@ const Editor = () => {
         <Box style={{ display: 'flex', alignItems: 'center' }}>
           <div>
             {!saved ? (
-              <Text className='saved-indicator-text'>not saved</Text> // not saved indicator
-            ) : null}
+              <NotSavedDot showDot={!saved} />
+            ) : // <Text className='saved-indicator-text'>not saved</Text> // not saved indicator
+            null}
           </div>
           <Button
             className='button1'
