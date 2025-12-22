@@ -46,7 +46,8 @@
 }
 
 .saved-indicator-text {
-  color: theme.$savedIndicatorColor;
+  // color: theme.$savedIndicatorColor;
+  background-color: theme.$savedIndicatorColor;
 }
 
 .footer {
