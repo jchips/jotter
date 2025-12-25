@@ -17,8 +17,11 @@ import ErrAlert from '../ErrAlert';
 import NotSavedDot from './NotSavedDot';
 import './Editor.scss';
 import './markdown.scss';
+import { getLocalConfigs } from '@/util/configUtil';
 
 const Editor = () => {
+  const configs = useSelector((state) => state.configs.value);
+  const localConfigs = getLocalConfigs();
   const [note, setNote] = useState();
   const [error, setError] = useState('');
   const [words, setWords] = useState(0);
@@ -32,7 +35,7 @@ const Editor = () => {
   const navigate = useNavigate();
   const previewRef = useRef(null);
   const { width } = useWindowDimensions();
-  const configs = useSelector((state) => state.configs.value);
+  const hideWordCount = configs?.hideWordCount || localConfigs?.hideWordCount;
 
   // not saved indicator
   const checkSaved = useMemo(
@@ -209,14 +212,9 @@ const Editor = () => {
         <Button className='button1' variant='solid' onClick={handleSaveAndExit}>
           Save and exit
         </Button>
-        {!configs?.hideWordCount && <Text>{words} words</Text>}
+        {!hideWordCount && <Text>{words} words</Text>}
         <Box style={{ display: 'flex', alignItems: 'center' }}>
-          <div>
-            {!saved ? (
-              <NotSavedDot showDot={!saved} />
-            ) : // <Text className='saved-indicator-text'>not saved</Text> // not saved indicator
-            null}
-          </div>
+          <div>{!saved ? <NotSavedDot showDot={!saved} /> : null}</div>
           <Button
             className='button1'
             variant='solid'
