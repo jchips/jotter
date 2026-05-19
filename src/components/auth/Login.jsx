@@ -43,7 +43,7 @@ const Login = () => {
     try {
       setLoading(true);
       setError('');
-      let res = await login(formData.email, formData.password);
+      let res = await login(formData.email.trim(), formData.password);
       if (res?.response?.data === 'Invalid login') {
         setIsLoggedIn(false);
         setError('Incorrect email or password');
@@ -56,7 +56,7 @@ const Login = () => {
       setError(
         err.message === 'Request failed with status code 403'
           ? 'Incorrect email or password'
-          : 'Sorry, there has been a server error :('
+          : 'Sorry, there has been a server error :(',
       );
       console.error(err);
     } finally {
