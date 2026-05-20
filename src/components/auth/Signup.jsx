@@ -50,8 +50,17 @@ const Signup = () => {
         setLoading(false);
         return setError('Passwords do not match');
       }
+
+      // email address validation
+      const isEmailAddr = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!isEmailAddr.test(formData.email.trim())) {
+        setLoading(false);
+        return setError('Must use a valid email address');
+      }
+
       const signupInfo = {
-        email: formData.email,
+        email: formData.email.trim(),
         password: formData.password,
       };
       let requestUrl = `${import.meta.env.VITE_SERVER}/jotter/signup`;
